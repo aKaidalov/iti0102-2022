@@ -1,2 +1,2 @@
 """Hello World funktsioon."""
-print("Hello, World!")
+print("Hello world!")
