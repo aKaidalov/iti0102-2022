@@ -1,2 +1,2 @@
-"""Hello World funktsioon."""
+"""Hello World function."""
 print("Hello world!")
