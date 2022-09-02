@@ -1,6 +1,7 @@
 """Print Hello."""
+
 # ask for a name
-name = input("What is your name")
+name = input("What is your name? ")
 # ask for first random number
 num1 = int(input(f"Hello, {name}! Enter a random number: "))
 # ask for second random number
