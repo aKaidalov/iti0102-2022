@@ -7,4 +7,4 @@ num1 = int(input(f"Hello, {name}! Enter a random number: "))
 # ask for second random number
 num2 = int(input("Great! Now enter a second random number: "))
 # print out sum
-print(f"{num1} + {num2} is" + str(num1 + num2))
+print(f"{num1} + {num2} is " + str(num1 + num2))
