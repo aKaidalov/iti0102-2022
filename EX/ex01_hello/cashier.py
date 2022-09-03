@@ -3,8 +3,7 @@
 # ask for sum
 amount = int(input("Enter a sum: "))
 coins = 0
-
-# check how many 50 cent coins
+# check how many 50 cent coins in sum
 coins += int(amount / 50)
 # find how many cents left
 modulo = amount % 50
@@ -19,5 +18,5 @@ coins += int(modulo / 5)
 modulo = modulo % 5
 
 coins += int(modulo / 1)
-
+# print out amount of coins needed
 print(f"Amount of coins needed: {coins}")
