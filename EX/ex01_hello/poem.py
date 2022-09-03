@@ -6,7 +6,7 @@ color = input("What color do You prefer? ")
 objects = input("What objects do You want to see in blue? ")
 # ask for activity
 activity = input("What activity do You prefer? ")
-
+# print out poem
 print(f"""\nRoses are {color},  
 {objects} are blue,  
 I love to {activity}  
