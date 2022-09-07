@@ -11,9 +11,9 @@ def school_pressure(ects: int, weeks: int):
     study_hours = ects * 26  # How many hours a student needs to study
     hours_in_weeks = weeks * 7 * 24
     if hours_in_weeks > study_hours:
-        return str(study_hours / weeks)
+        return study_hours / weeks
     else:
-        return "-1"
+        return -1
 
 
 def add_fractions(a: int, b: int, c: int, d: int):
@@ -31,5 +31,5 @@ def add_fractions(a: int, b: int, c: int, d: int):
 
 if __name__ == '__main__':
     print(average(1, 2, 3, 4))
-    print("Weekly you need to spent: " + school_pressure(1, 0) + " hours")
+    print("Weekly you need to spent: " + str(school_pressure(1, 0)) + " hours")
     add_fractions(1, 3, 1, 3)
