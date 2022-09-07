@@ -24,9 +24,11 @@ def school_pressure(ects: int, weeks: int):
 def add_fractions(a: int, b: int, c: int, d: int):
     if (b or d) == 0:
         return print("Can't divide by 0")
-    if b == d:
+    elif b == d:
         numerator = a + c
         denominator = b
+        return print("Answer: " + str(numerator) + "/" + str(denominator))
     else:
         numerator = a * d + c * b
         denominator = b * d
+        return print("Answer: " + str(numerator) + "/" + str(denominator))
