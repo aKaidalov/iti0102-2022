@@ -32,3 +32,9 @@ def add_fractions(a: int, b: int, c: int, d: int):
         numerator = a * d + c * b
         denominator = b * d
         return print("Answer: " + str(numerator) + "/" + str(denominator))
+
+
+if __name__ == '__main__':
+    print(average(1, 2, 3, 4))
+    print("Weekly you need to spent: " + str(school_pressure(1, 0)) + " hours")
+    add_fractions(1, 3, 1, 3)
