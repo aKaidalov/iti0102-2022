@@ -3,7 +3,7 @@
 
 def is_prime_number(number: int):
 
-    if number < 1:
+    if number <= 1:
         print("Number must be > 1.")
         return False
 
@@ -22,6 +22,5 @@ if __name__ == '__main__':
     print(is_prime_number(4))  # -> False
     print(is_prime_number(7))  # -> True
     print(is_prime_number(88))  # -> False
-
     print(is_prime_number(5))  # True
     print(is_prime_number(8))  # False
