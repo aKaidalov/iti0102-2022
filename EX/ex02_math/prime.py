@@ -3,21 +3,16 @@
 
 def is_prime_number(number: int):
 
-    list = [2, 3, 5, 7, 11]
-
-    if number <= 0 or number == 1:
+    if number < 1:
         print("Number must be > 1.")
         return False
 
-    for i in range(len(list)):
-        if number == list[i]:
-            return True
-        modulo = number % list[i]
-        if modulo == 0:
+    for i in range(2, number):
+        modulo = number % i     # Finds modulo
+        if modulo == 0:     # If modulo is 0 then number divides more than by 1 and itself
             return False
 
-    if True:
-        return True
+    return True
 
 
 if __name__ == '__main__':
@@ -28,4 +23,5 @@ if __name__ == '__main__':
     print(is_prime_number(7))  # -> True
     print(is_prime_number(88))  # -> False
 
-    print(is_prime_number(37))
+    print(is_prime_number(5))  # True
+    print(is_prime_number(8))  # False
