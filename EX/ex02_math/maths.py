@@ -17,6 +17,7 @@ def school_pressure(ects: int, weeks: int):
 
 
 def add_fractions(a: int, b: int, c: int, d: int):
+    """Add fractions."""
     if (b or d) == 0:
         return print("Can't divide by 0")
     elif b == d:
