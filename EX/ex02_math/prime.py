@@ -2,7 +2,7 @@
 
 
 def is_prime_number(number: int):
-
+    """Find ptime number."""
     if number <= 1:
         print("Number must be > 1.")
         return False

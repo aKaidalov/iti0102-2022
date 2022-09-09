@@ -106,6 +106,7 @@ def clock(days: int, hours: int, minutes: int, seconds: int):
 
 
 def calculate(num1: int, operand1: int, operand2: int):
+    """Calculate."""
     if num1 == 0:
         return operand1 + operand2
     elif num1 == 1:
