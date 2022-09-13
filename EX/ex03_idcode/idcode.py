@@ -144,11 +144,11 @@ def get_birth_place(birth_number: int) -> str:
         if 21 <= birth_number <= 220 or 471 <= birth_number <= 710:
             return "Tallinn"
         if 221 <= birth_number <= 270:
-            return "Kohtla-Jarve"
+            return "Kohtla-Järve"
         if 371 <= birth_number <= 420:
             return "Narva"
         if 421 <= birth_number <= 470:
-            return "Parnu"
+            return "Pärnu"
         if 711 <= birth_number <= 999:
             return "undefined"
     else:
