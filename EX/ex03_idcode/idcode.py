@@ -69,6 +69,9 @@ def the_first_control_number_algorithm(text: str) -> str:
             return "Needs the second algorithm!"
 
 
+# --------------------------------------------------------------------------------------
+
+
 def is_valid_gender_number(gender_number: int):
     """Check if given value is correct for gender number in ID code."""
     if gender_number < 1 or gender_number > 6:
@@ -107,41 +110,67 @@ def is_valid_birth_number(birth_number: int) -> bool:
     return False
 
 
+# --------------------------------------------------------------------------------------
+
+
+def is_leap_year(year_number: int):
+    """Define the leap year."""
+    if year_number % 400 == 0:
+        return True
+    if year_number % 4 == 0 and not year_number % 100 == 0:
+        return True
+    if year_number % 100 == 0 and year_number % 400 != 0:
+        return False
+    return False
+
+
+def get_full_year(gender_number: int, year_number: int) -> int:
+    """Define the 4-digit year when given person was born."""
+    if gender_number == 1 or gender_number == 2:
+        return 1800 + year_number
+    if gender_number == 3 or gender_number == 4:
+        return 1900 + year_number
+    if gender_number == 5 or gender_number == 6:
+        return 2000 + year_number
+
+
+def get_birth_place(birth_number: int) -> str:
+    """Find the place where the person was born."""
+    if is_valid_birth_number(birth_number) is True:
+        if 1 <= birth_number <= 10:
+            return "Kuressaare"
+        if 11 <= birth_number <= 20:
+            return "Tartu"
+        if 21 <= birth_number <= 220:
+            return "Tallinn"
+        if 221 <= birth_number <= 270:
+            return "Kohtla-Jarve"
+        if 271 <= birth_number <= 370:
+            return "Tartu"
+        if 371 <= birth_number <= 420:
+            return "Narva"
+        if 421 <= birth_number <= 470:
+            return "Parnu"
+        if 471 <= birth_number <= 710:
+            return "Tallinn"
+        if 711 <= birth_number <= 999:
+            return "undefined"
+    else:
+        return "Wrong input!"
+
+
 if __name__ == '__main__':
-    print("\nFind ID code:")
-    print(find_id_code(""))  # -> "Not enough numbers!"
-    print(find_id_code("123456789123456789"))  # -> "Too many numbers!"
-    print(find_id_code("ID code is: 49403136526"))  # -> "49403136526"
-    print(find_id_code("efs4  9   #4aw0h 3r 1a36g5j2!!6-"))  # -> "49403136526"
+    print("\nLeap year:")
+    print(is_leap_year(1804))  # -> True
+    print(is_leap_year(1800))  # -> False
 
-    print(the_first_control_number_algorithm(""))  # -> "Incorrect ID code!"
-    print(the_first_control_number_algorithm("123456789123456789"))  # -> "Incorrect ID code!"
-    print(the_first_control_number_algorithm("ID code is: 49403136526"))  # -> "49403136526"
-    print(the_first_control_number_algorithm("efs4  9   #4aw0h 3r 1a36g5j2!!6-"))  # -> "49403136526"
-    print(the_first_control_number_algorithm("50412057633"))  # -> "50412057633"
-    print(the_first_control_number_algorithm("Peeter's ID is euf50weird2fs0fsk51ef6t0s2yr7fyf4"))  # -> "Needs
-    # the second algorithm!"
+    print("\nGet full year:")
+    print(get_full_year(1, 28))  # -> 1828
+    print(get_full_year(4, 85))  # -> 1985
+    print(get_full_year(5, 1))  # -> 2001
 
-    print("\nGender number:")
-    for i in range(9):
-        print(f"{i} {is_valid_gender_number(i)}")
-        # 0 -> False
-        # 1...6 -> True
-        # 7...8 -> False
-
-    print("\nGet gender:")
-    print(get_gender(2))  # -> "female"
-    print(get_gender(5))  # -> "male"
-
-    print("\nYear number:")
-    print(is_valid_year_number(100))  # -> False
-    print(is_valid_year_number(50))  # -> True
-
-    print("\nMonth number:")
-    print(is_valid_month_number(2))  # -> True
-    print(is_valid_month_number(15))  # -> False
-
-    print("\nBorn order number:")
-    print(is_valid_birth_number(0))  # -> False
-    print(is_valid_birth_number(1))  # -> True
-    print(is_valid_birth_number(850))  # -> True
+    print("\nChecking where the person was born")
+    print(get_birth_place(0))  # -> "Wrong input!"
+    print(get_birth_place(1))  # -> "Kuressaare"
+    print(get_birth_place(273))  # -> "Tartu"
+    print(get_birth_place(220))  # -> "Tallinn"
