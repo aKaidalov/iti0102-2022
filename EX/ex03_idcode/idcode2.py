@@ -10,7 +10,7 @@ def is_valid_gender_number(gender_number: int):
 
 
 def get_gender(gender_number: int):
-    """Determines if gender is male or female."""
+    """Determine if gender is male or female."""
     modulo = gender_number % 2
     if modulo != 0:
         return "male"
