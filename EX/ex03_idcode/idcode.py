@@ -55,7 +55,7 @@ def the_first_control_number_algorithm(text: str) -> str:
         return "Incorrect ID code!"
     else:
         for i in range(9):
-            sum_of_nine += int(new_text[i]) * (i + 1)       # multiplies with its corresponding digit (until 9 digit)
+            sum_of_nine += int(new_text[i]) * (i + 1)       # multiplies with its corresponding digit (until 9 digits)
             if i == 8:
                 sum_of_ten_numbers = sum_of_nine + int(new_text[9])     # multiplies with its 10th digit
 
@@ -65,8 +65,7 @@ def the_first_control_number_algorithm(text: str) -> str:
                 return new_text
             else:
                 return "Needs the second algorithm!"
-        else:
-            return "Needs the second algorithm!"
+        return "Incorrect ID code!"
 
 
 if __name__ == '__main__':
