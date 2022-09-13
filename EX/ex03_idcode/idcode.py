@@ -64,8 +64,9 @@ def the_first_control_number_algorithm(text: str) -> str:
             if remainder == int(new_text[10]):
                 return new_text
             else:
-                return "Needs the second algorithm!"
-        return "Incorrect ID code!"
+                return "Incorrect ID code!"
+        else:
+            return "Needs the second algorithm!"
 
 
 if __name__ == '__main__':
