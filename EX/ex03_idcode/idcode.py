@@ -60,8 +60,11 @@ def the_first_control_number_algorithm(text: str) -> str:
                 sum_of_ten_numbers = sum_of_nine + int(new_text[9])     # multiplies with its 10th digit
 
         remainder = sum_of_ten_numbers % 11
-        if remainder < 10 and remainder == int(new_text[10]):
-            return new_text
+        if remainder < 10:
+            if remainder == int(new_text[10]):
+                return new_text
+            else:
+                return "Needs the second algorithm!"
         else:
             return "Needs the second algorithm!"
 
