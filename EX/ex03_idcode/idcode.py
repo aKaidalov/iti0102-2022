@@ -161,11 +161,11 @@ def is_valid_control_number(id_code: str) -> bool:
     if the_first_control_number_algorithm(id_code) == "Incorrect ID code!":
         return False
     elif the_first_control_number_algorithm(id_code) == "Needs the second algorithm!":
-        for i in range(3, 10):
-            sum_of_seven2 += int(id_code[i]) * i       # multiplies with its corresponding digit (until 7 digits)
+        for i in range(7):
+            sum_of_seven2 += int(id_code[i + 3]) * (i + 3)    # multiplies with its corresponding digit (until 7 digits)
             if i == 9:
-                for iteration in range(1, 4):
-                    sum_of_three2 += int(id_code[iteration])     # multiplies last 3 digits
+                for iteration in range(7, 10):
+                    sum_of_three2 += int(id_code[iteration - 6]) * (iteration - 6)    # multiplies last 3 digits
         sum_of_ten_numbers2 = sum_of_seven2 + sum_of_three2
         remainder2 = sum_of_ten_numbers2 % 11
         if remainder2 < 10 and remainder2 == int(id_code[10]):
@@ -195,8 +195,9 @@ if __name__ == '__main__':
     print("\nControl number:")
     print(is_valid_control_number("49808270244"))  # -> True
     print(is_valid_control_number("60109200187"))  # -> False, it must be 6
-    print(is_valid_control_number("Peeter's ID is euf50weird2fs0fsk51ef6t0s2yr7fyf4"))  # -> "Needs
-    # the second algorithm!"50205160274
+    print(is_valid_control_number("50205160274"))  # -> "Needs
+    # the second algorithm!"(Ne proverjaet ljuboi string tk vernut'
+    # pervaja f moshet libo needs... libo otvet, libo oshibku)
 
     print("\nDay number:")
     print(is_valid_day_number(4, 5, 12, 25))  # -> True
