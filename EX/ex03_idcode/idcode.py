@@ -76,11 +76,10 @@ if __name__ == '__main__':
     print(find_id_code("ID code is: 49403136526"))  # -> "49403136526"
     print(find_id_code("efs4  9   #4aw0h 3r 1a36g5j2!!6-"))  # -> "49403136526"
 
-    print("\n")
     print(the_first_control_number_algorithm(""))  # -> "Incorrect ID code!"
     print(the_first_control_number_algorithm("123456789123456789"))  # -> "Incorrect ID code!"
     print(the_first_control_number_algorithm("ID code is: 49403136526"))  # -> "49403136526"
     print(the_first_control_number_algorithm("efs4  9   #4aw0h 3r 1a36g5j2!!6-"))  # -> "49403136526"
     print(the_first_control_number_algorithm("50412057633"))  # -> "50412057633"
     print(the_first_control_number_algorithm("Peeter's ID is euf50weird2fs0fsk51ef6t0s2yr7fyf4"))  # -> "Needs
-    # the second algorithm!"
+    # the second algorithm!"Copy
