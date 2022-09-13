@@ -139,20 +139,16 @@ def get_birth_place(birth_number: int) -> str:
     if is_valid_birth_number(birth_number) is True:
         if 1 <= birth_number <= 10:
             return "Kuressaare"
-        if 11 <= birth_number <= 20:
+        if 11 <= birth_number <= 20 or 271 <= birth_number <= 370:
             return "Tartu"
-        if 21 <= birth_number <= 220:
+        if 21 <= birth_number <= 220 or 471 <= birth_number <= 710:
             return "Tallinn"
         if 221 <= birth_number <= 270:
             return "Kohtla-Jarve"
-        if 271 <= birth_number <= 370:
-            return "Tartu"
         if 371 <= birth_number <= 420:
             return "Narva"
         if 421 <= birth_number <= 470:
             return "Parnu"
-        if 471 <= birth_number <= 710:
-            return "Tallinn"
         if 711 <= birth_number <= 999:
             return "undefined"
     else:
