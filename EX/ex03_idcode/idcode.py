@@ -136,7 +136,7 @@ def get_full_year(gender_number: int, year_number: int) -> int:
 
 def get_birth_place(birth_number: int) -> str:
     """Find the place where the person was born."""
-    if is_valid_birth_number(birth_number) is True:
+    if is_valid_birth_number(birth_number):
         if 1 <= birth_number <= 10:
             return "Kuressaare"
         if 11 <= birth_number <= 20 or 271 <= birth_number <= 370:
@@ -223,7 +223,34 @@ def is_id_valid(id_code: str) -> bool:
 
 def get_data_from_id(id_code: str) -> str:
     """Get possible information about the person."""
-    # Write your code here
+    if is_id_valid(id_code):
+        year_number, month_number, day_number,  birth_number, gender_number, gender, location = "", "", "", "", 0, "", ""
+        for index in range(len(id_code)):
+            if index == 0:
+                gender_number = int(id_code[index])
+            if index == 1 or index == 2:
+                year_number += id_code[index]
+            if index == 3 or index == 4:
+                month_number += id_code[index]
+            if index == 5 or index == 6:
+                day_number += id_code[index]
+            if index == 7 or index == 8 or index == 9:
+                birth_number += id_code[index]
+
+        gender = get_gender(gender_number)
+        year_number = int(year_number)
+        ful_year = str(get_full_year(gender_number, year_number))
+        birth_number = int(birth_number)
+
+        if is_valid_birth_number(birth_number):
+            location = get_birth_place(birth_number)
+
+        return f"This is a {gender} born on {day_number}.{month_number}.{ful_year} in {location}"
+    else:
+        return "Given invalid ID code!"
+
+
+
 
 
 if __name__ == '__main__':
@@ -254,7 +281,8 @@ if __name__ == '__main__':
     print("\nFull message:")
     print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998 in Tallinn."
     print(get_data_from_id("60109200187"))  # -> "Given invalid ID code!"
+    print(get_data_from_id("50204073724"))
 
-    # print("\nTest now your own ID code:")
-    # personal_id = input()  # type your own id in command prompt
-    # print(is_id_valid(personal_id))  # -> True
+    print("\nTest now your own ID code:")
+    personal_id = input()  # type your own id in command prompt
+    print(is_id_valid(personal_id))  # -> True
