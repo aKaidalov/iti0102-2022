@@ -8,7 +8,7 @@ def find_id_code(text: str) -> str:
     counter = 0
     for element in text:
         new_element = ord(element)  # Gives an integer meaning from ASCII
-        if 47 < new_element:        # Controls if new_element is from 0 to 9
+        if 47 < new_element:  # Controls if new_element is from 0 to 9
             if new_element < 58:
                 new_text += element  # If element suits to program than it gives element's meaning to the new variable
                 counter += 1
@@ -55,9 +55,9 @@ def the_first_control_number_algorithm(text: str) -> str:
         return "Incorrect ID code!"
     else:
         for i in range(9):
-            sum_of_nine += int(new_text[i]) * (i + 1)       # multiplies with its corresponding digit (until 9 digits)
+            sum_of_nine += int(new_text[i]) * (i + 1)  # multiplies with its corresponding digit (until 9 digits)
             if i == 8:
-                sum_of_ten_numbers = sum_of_nine + int(new_text[9])     # multiplies with its 10th digit
+                sum_of_ten_numbers = sum_of_nine + int(new_text[9])  # multiplies with its 10th digit
 
         remainder = sum_of_ten_numbers % 11
         if remainder < 10:
@@ -162,10 +162,10 @@ def is_valid_control_number(id_code: str) -> bool:
         return False
     elif the_first_control_number_algorithm(id_code) == "Needs the second algorithm!":
         for i in range(7):
-            sum_of_seven2 += int(id_code[i + 3]) * (i + 3)    # multiplies with its corresponding digit (until 7 digits)
+            sum_of_seven2 += int(id_code[i + 3]) * (i + 3)  # multiplies with its corresponding digit (until 7 digits)
             if i == 9:
                 for iteration in range(7, 10):
-                    sum_of_three2 += int(id_code[iteration - 6]) * (iteration - 6)    # multiplies last 3 digits
+                    sum_of_three2 += int(id_code[iteration - 6]) * (iteration - 6)  # multiplies last 3 digits
         sum_of_ten_numbers2 = sum_of_seven2 + sum_of_three2
         remainder2 = sum_of_ten_numbers2 % 11
         if remainder2 < 10 and remainder2 == int(id_code[10]):
@@ -178,17 +178,19 @@ def is_valid_control_number(id_code: str) -> bool:
 
 def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
     """Check if given value is correct for day number in ID code."""
-    if is_valid_gender_number(gender_number) is True and is_valid_year_number(year_number) is True and is_valid_month_number(month_number) is True:
-        days_in_month_30 = [1, 3, 5, 7, 8, 10, 12]
-        days_in_month_31 = [4, 6, 9, 11]
-        for element in range(len(days_in_month_30)):
-            if month_number == days_in_month_30[element] and 0 < day_number < 32:
-                return True
+    if (is_valid_gender_number(gender_number)       # Line checks if all the numbers are correct.
+            and is_valid_year_number(year_number)
+            and is_valid_month_number( month_number)):
+        days_in_month_31 = [1, 3, 5, 7, 8, 10, 12]
+        days_in_month_30 = [4, 6, 9, 11]
         for element in range(len(days_in_month_31)):
-            if month_number == days_in_month_31[element] and 0 < day_number < 31:
+            if month_number == days_in_month_31[element] and 0 < day_number < 32:
+                return True
+        for element in range(len(days_in_month_30)):
+            if month_number == days_in_month_30[element] and 0 < day_number < 31:
                 return True
         year_in_4_numbers = get_full_year(gender_number, year_number)
-        if is_leap_year(year_in_4_numbers) is True and 0 < day_number < 30:
+        if is_leap_year(year_in_4_numbers) and 0 < day_number < 30:
             return True
         else:
             if 0 < day_number < 29:
