@@ -178,9 +178,8 @@ def is_valid_control_number(id_code: str) -> bool:
 
 def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
     """Check if given value is correct for day number in ID code."""
-    if (is_valid_gender_number(gender_number)       # Line checks if all the numbers are correct.
-            and is_valid_year_number(year_number)
-            and is_valid_month_number( month_number)):
+    if is_valid_gender_number(gender_number) and is_valid_year_number(year_number) and is_valid_month_number(month_number):
+        # Previous line checks if all the numbers are correct.
         days_in_month_31 = [1, 3, 5, 7, 8, 10, 12]
         days_in_month_30 = [4, 6, 9, 11]
         for element in range(len(days_in_month_31)):
