@@ -178,12 +178,24 @@ def is_valid_control_number(id_code: str) -> bool:
 
 def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
     """Check if given value is correct for day number in ID code."""
-    if is_valid_gender_number(gender_number) is True:
+    if is_valid_gender_number(gender_number) is True and is_valid_year_number(year_number) is True and is_valid_month_number(month_number) is True:
+        days_in_month_30 = [1, 3, 5, 7, 8, 10, 12]
+        days_in_month_31 = [4, 6, 9, 11]
+        for element in range(len(days_in_month_30)):
+            if month_number == days_in_month_30[element] and 0 < day_number < 32:
+                return True
+        for element in range(len(days_in_month_31)):
+            if month_number == days_in_month_31[element] and 0 < day_number < 31:
+                return True
         year_in_4_numbers = get_full_year(gender_number, year_number)
-        if is_leap_year(year_in_4_numbers) is True:
-            days_in_february = 29
-
-
+        if is_leap_year(year_in_4_numbers) is True and 0 < day_number < 30:
+            return True
+        else:
+            if 0 < day_number < 29:
+                return True
+            return False
+    else:
+        return False
 
 
 def is_id_valid(id_code: str) -> bool:
