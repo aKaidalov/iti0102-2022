@@ -152,10 +152,10 @@ def is_valid_control_number(id_code: str) -> bool:
         control_number = sum_of_ten_numbers2 % 11
         if control_number >= 10:
             control_number = 0
-        if control_number == int(id_code[10]):
-            return True
-        else:
-            return False
+        if control_number < 10:
+            if control_number == int(id_code[10]):
+                return True
+        return False
     else:
         return False
 
@@ -168,20 +168,14 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
         days_in_month_31 = [1, 3, 5, 7, 8, 10, 12]
         days_in_month_30 = [4, 6, 9, 11]
         for element in days_in_month_31:
-            if month_number == element:
-                if 0 < day_number < 32:
-                    return True
-                return False
-        for element in days_in_month_30:
-            if month_number == element:
-                if 0 < day_number < 31:
-                    return True
-                return False
-        year_in_4_numbers = get_full_year(gender_number, year_number)
-        if is_leap_year(year_in_4_numbers):
-            if 0 < day_number < 30:
+            if month_number == element and 0 < day_number < 32:
                 return True
-            return False
+        for element in days_in_month_30:
+            if month_number == element and 0 < day_number < 31:
+                return True
+        year_in_4_numbers = get_full_year(gender_number, year_number)
+        if is_leap_year(year_in_4_numbers) and 0 < day_number < 30:
+            return True
         else:
             if 0 < day_number < 29:
                 return True
