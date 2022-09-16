@@ -41,11 +41,9 @@ def the_first_control_number_algorithm(text: str) -> str:
     :param text: string
     :return: string
     """
-    new_text = find_id_code(text)
-    if new_text == "Too many numbers!" or new_text == "Not enough numbers!":
-        return "Incorrect ID code!"
+    new_text: str = ""
     counter, sum_of_nine, sum_of_ten_numbers = 0, 0, 0
-    for element in new_text:
+    for element in text:
         new_element = ord(element)
         if 47 < new_element:
             if new_element < 58:
