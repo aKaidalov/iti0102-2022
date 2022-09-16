@@ -240,7 +240,7 @@ def get_data_from_id(id_code: str) -> str:
         else:
             return "Given invalid ID code!"
         day_number, month_number, ful_year = str(day_number), str(month_number), str(ful_year)
-        return f"This is a {gender} born on {day_number}.{month_number}.{ful_year} in {location}"
+        return f"This is a {gender} born on {day_number}.{month_number}.{ful_year} in {location}."
     else:
         return "Given invalid ID code!"
 
