@@ -41,9 +41,9 @@ def the_first_control_number_algorithm(text: str) -> str:
     :param text: string
     :return: string
     """
-    new_text: str = ""
+    new_text = find_id_code(text)
     counter, sum_of_nine, sum_of_ten_numbers = 0, 0, 0
-    for element in text:
+    for element in new_text:
         new_element = ord(element)
         if 47 < new_element:
             if new_element < 58:
@@ -180,6 +180,7 @@ def is_valid_control_number(id_code: str) -> bool:
         return True
 
 
+# Mb gde to zdes' oshibka
 def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
     """Check if given value is correct for day number in ID code."""
     if is_valid_gender_number(gender_number) and is_valid_year_number(year_number) and is_valid_month_number(month_number):
@@ -189,13 +190,9 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
         for element in range(len(days_in_month_31)):
             if month_number == days_in_month_31[element] and 0 < day_number < 32:
                 return True
-            else:
-                return False
         for element in range(len(days_in_month_30)):
             if month_number == days_in_month_30[element] and 0 < day_number < 31:
                 return True
-            else:
-                return False
         year_in_4_numbers = get_full_year(gender_number, year_number)
         if is_leap_year(year_in_4_numbers) and 0 < day_number < 30:
             return True
