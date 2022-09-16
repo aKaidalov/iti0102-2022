@@ -41,7 +41,7 @@ def the_first_control_number_algorithm(text: str) -> str:
     :param text: string
     :return: string
     """
-    new_text: str = ""
+    new_text = find_id_code(text)
     counter, sum_of_nine, sum_of_ten_numbers = 0, 0, 0
     for element in text:
         new_element = ord(element)
@@ -281,7 +281,7 @@ if __name__ == '__main__':
     print("\nFull message:")
     print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998 in Tallinn."
     print(get_data_from_id("60109200187"))  # -> "Given invalid ID code!"
-    print(get_data_from_id("50204073724"))
+    print(get_data_from_id("50305067016"))
 
     print("\nTest now your own ID code:")
     personal_id = input()  # type your own id in command prompt
