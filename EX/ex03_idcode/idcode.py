@@ -144,7 +144,7 @@ def is_valid_control_number(id_code: str) -> bool:
         return True
     elif the_first_control_number_algorithm(id_code) == "Needs the second algorithm!":
         for i in range(7):
-            sum_of_seven2 += int(id_code[i + 3]) * (i + 3)  # multiplies with its corresponding digit (until 7 digits)
+            sum_of_seven2 += int(id_code[i]) * (i + 3)  # multiplies with its corresponding digit (until 7 digits)
             if i == 9:
                 for iteration in range(7, 10):
                     sum_of_three2 += int(id_code[iteration - 6]) * (iteration - 6)  # multiplies last 3 digits
