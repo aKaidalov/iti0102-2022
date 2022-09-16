@@ -168,14 +168,23 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
         days_in_month_31 = [1, 3, 5, 7, 8, 10, 12]
         days_in_month_30 = [4, 6, 9, 11]
         for element in range(len(days_in_month_31)):
-            if month_number == days_in_month_31[element] and 0 < day_number < 32:
-                return True
+            if month_number == days_in_month_31[element]:
+                if 0 < day_number < 32:
+                    return True
+                else:
+                    return False
         for element in range(len(days_in_month_30)):
-            if month_number == days_in_month_30[element] and 0 < day_number < 31:
-                return True
+            if month_number == days_in_month_30[element]:
+                if 0 < day_number < 31:
+                    return True
+                else:
+                    return False
         year_in_4_numbers = get_full_year(gender_number, year_number)
-        if is_leap_year(year_in_4_numbers) and 0 < day_number < 30:
-            return True
+        if is_leap_year(year_in_4_numbers):
+            if 0 < day_number < 30:
+                return True
+            else:
+                return False
         else:
             if 0 < day_number < 29:
                 return True
