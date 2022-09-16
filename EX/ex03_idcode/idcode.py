@@ -186,7 +186,7 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
 def is_id_valid(id_code: str) -> bool:
     """Check if given ID code is valid and return the result (True or False)."""
     if is_valid_control_number(id_code):
-        year_number, month_number, day_number, gender_number = "", "", "", 0
+        year_number, month_number, day_number, gender_number, birth_number = "", "", "", 0, ""
         for index in range(len(id_code)):
             if index == 0:
                 gender_number = int(id_code[index])
@@ -196,11 +196,19 @@ def is_id_valid(id_code: str) -> bool:
                 month_number += id_code[index]
             if index == 5 or index == 6:
                 day_number += id_code[index]
+            if index == 7 or index == 8 or index == 9:
+                birth_number += id_code[index]
+
+
         year_number = int(year_number)
         month_number = int(month_number)
         day_number = int(day_number)
-        if is_valid_day_number(gender_number, year_number, month_number, day_number):
-            return True
+        birth_number = int(birth_number)
+        if is_valid_birth_number(birth_number):
+            if is_valid_day_number(gender_number, year_number, month_number, day_number):
+                return True
+            else:
+                return False
         else:
             return False
     else:
@@ -260,8 +268,9 @@ if __name__ == '__main__':
     print(is_valid_day_number(4, 15, 9, 31))  # -> False (September contains max 30 days)
 
     print("\nOverall ID check::")
-    print(is_id_valid("49808270244"))  # -> True
-    print(is_id_valid("12345678901"))  # -> False
+    # print(is_id_valid("49808270244"))  # -> True
+    # print(is_id_valid("12345678901"))  # -> False
+    print(is_id_valid("50101100008"))      # ->is False
 
     print("\nFull message:")
     print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998 in Tallinn."
