@@ -149,12 +149,11 @@ def is_valid_control_number(id_code: str) -> bool:
                 for iteration in range(7, 10):
                     sum_of_three2 += int(id_code[iteration - 6]) * (iteration - 6)  # multiplies last 3 digits
         sum_of_ten_numbers2 = sum_of_seven2 + sum_of_three2
-        remainder2 = sum_of_ten_numbers2 % 11
-        if remainder2 < 10:
-            if remainder2 == int(id_code[10]):
-                return True
-            else:
-                return False
+        control_number = sum_of_ten_numbers2 % 11
+        if control_number >= 10:
+            control_number = 0
+        if control_number == int(id_code[10]):
+            return True
         else:
             return False
     else:
