@@ -49,11 +49,7 @@ def the_first_control_number_algorithm(text: str) -> str:
             if new_element < 58:
                 new_text += element
                 counter += 1
-    if counter > 11:
-        return "Incorrect ID code!"
-    elif counter < 11:
-        return "Incorrect ID code!"
-    else:
+    if counter == 11:
         for i in range(9):
             sum_of_nine += int(new_text[i]) * (i + 1)  # multiplies with its corresponding digit (until 9 digits)
             if i == 8:
@@ -67,6 +63,8 @@ def the_first_control_number_algorithm(text: str) -> str:
                 return "Incorrect ID code!"
         else:
             return "Needs the second algorithm!"
+    else:
+        return "Incorrect ID code!"
 
 
 # --------------------------------------------------------------------------------------
