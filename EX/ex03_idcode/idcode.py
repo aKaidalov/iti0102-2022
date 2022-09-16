@@ -152,9 +152,8 @@ def is_valid_control_number(id_code: str) -> bool:
         control_number = sum_of_ten_numbers2 % 11
         if control_number >= 10:
             control_number = 0
-        if control_number < 10:
-            if control_number == int(id_code[10]):
-                return True
+        if control_number == int(id_code[10]):
+            return True
         return False
     else:
         return False
