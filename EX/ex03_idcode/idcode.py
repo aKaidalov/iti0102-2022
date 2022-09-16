@@ -155,20 +155,24 @@ def get_birth_place(birth_number: int) -> str:
         return "Wrong input!"
 
 
+# --------------------------------------------------------------------------------------
+
+
 def is_valid_control_number(id_code: str) -> bool:
     """Check if given value is correct for control number in ID code."""
+    new_id_code = find_id_code(id_code)
     sum_of_seven2, sum_of_ten_numbers2, sum_of_three2 = 0, 0, 0
-    if the_first_control_number_algorithm(id_code) == "Incorrect ID code!":
+    if the_first_control_number_algorithm(new_id_code) == "Incorrect ID code!":
         return False
-    elif the_first_control_number_algorithm(id_code) == "Needs the second algorithm!":
+    elif the_first_control_number_algorithm(new_id_code) == "Needs the second algorithm!":
         for i in range(7):
-            sum_of_seven2 += int(id_code[i + 3]) * (i + 3)  # multiplies with its corresponding digit (until 7 digits)
+            sum_of_seven2 += int(new_id_code[i + 3]) * (i + 3)  # multiplies with its corresponding digit (until 7 digits)
             if i == 9:
                 for iteration in range(7, 10):
-                    sum_of_three2 += int(id_code[iteration - 6]) * (iteration - 6)  # multiplies last 3 digits
+                    sum_of_three2 += int(new_id_code[iteration - 6]) * (iteration - 6)  # multiplies last 3 digits
         sum_of_ten_numbers2 = sum_of_seven2 + sum_of_three2
         remainder2 = sum_of_ten_numbers2 % 11
-        if remainder2 < 10 and remainder2 == int(id_code[10]):
+        if remainder2 < 10 and remainder2 == int(new_id_code[10]):
             return True
         else:
             return False
@@ -201,18 +205,17 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
 
 def is_id_valid(id_code: str) -> bool:
     """Check if given ID code is valid and return the result (True or False)."""
-    new_id_code = find_id_code(id_code)
-    if is_valid_control_number(new_id_code):
+    if is_valid_control_number(id_code):
         year_number, month_number, day_number, gender_number = "", "", "", 0
-        for index in range(len(new_id_code)):
+        for index in range(len(id_code)):
             if index == 0:
-                gender_number = int(new_id_code[index])
+                gender_number = int(id_code[index])
             if index == 1 or index == 2:
-                year_number += new_id_code[index]
+                year_number += id_code[index]
             if index == 3 or index == 4:
-                month_number += new_id_code[index]
+                month_number += id_code[index]
             if index == 5 or index == 6:
-                day_number += new_id_code[index]
+                day_number += id_code[index]
         year_number = int(year_number)
         month_number = int(month_number)
         day_number = int(day_number)
@@ -279,7 +282,7 @@ if __name__ == '__main__':
     print("\nFull message:")
     print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998 in Tallinn."
     print(get_data_from_id("60109200187"))  # -> "Given invalid ID code!"
-    print(get_data_from_id("50305067016"))
+    print(get_data_from_id("50204073724"))
 
     print("\nTest now your own ID code:")
     personal_id = input()  # type your own id in command prompt
