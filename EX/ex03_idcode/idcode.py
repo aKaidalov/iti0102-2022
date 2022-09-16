@@ -41,29 +41,28 @@ def the_first_control_number_algorithm(text: str) -> str:
     :param text: string
     :return: string
     """
-    new_text2 = find_id_code(text)
+    new_text: str = ""
     counter, sum_of_nine, sum_of_ten_numbers = 0, 0, 0
     for element in text:
         new_element = ord(element)
-        if 47 < new_element < 58:
-            new_text2 += element
-            counter += 1
-        else:
-            return "Incorrect ID code!"
+        if 47 < new_element:
+            if new_element < 58:
+                new_text += element
+                counter += 1
     if counter > 11:
         return "Incorrect ID code!"
     elif counter < 11:
         return "Incorrect ID code!"
     else:
         for i in range(9):
-            sum_of_nine += int(new_text2[i]) * (i + 1)  # multiplies with its corresponding digit (until 9 digits)
+            sum_of_nine += int(new_text[i]) * (i + 1)  # multiplies with its corresponding digit (until 9 digits)
             if i == 8:
-                sum_of_ten_numbers = sum_of_nine + int(new_text2[9])  # multiplies with its 10th digit
+                sum_of_ten_numbers = sum_of_nine + int(new_text[9])  # multiplies with its 10th digit
 
         remainder = sum_of_ten_numbers % 11
         if remainder < 10:
-            if remainder == int(new_text2[10]):
-                return new_text2
+            if remainder == int(new_text[10]):
+                return new_text
             else:
                 return "Incorrect ID code!"
         else:
