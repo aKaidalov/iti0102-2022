@@ -204,6 +204,8 @@ def is_id_valid(id_code: str) -> bool:
             return True
         else:
             return False
+    else:
+        return False
 
 
 def get_data_from_id(id_code: str) -> str:
