@@ -159,78 +159,78 @@ def is_valid_control_number(id_code: str) -> bool:
 
 
 # Mb gde to zdes' oshibka
-def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
-    """Check if given value is correct for day number in ID code."""
-    if is_valid_gender_number(gender_number) and is_valid_year_number(year_number) and is_valid_month_number(month_number):
-        # Previous line checks if all the numbers are correct.
-        days_in_month_31 = [1, 3, 5, 7, 8, 10, 12]
-        days_in_month_30 = [4, 6, 9, 11]
-        for element in range(len(days_in_month_31)):
-            if month_number == days_in_month_31[element] and 0 < day_number < 32:
-                return True
-        for element in range(len(days_in_month_30)):
-            if month_number == days_in_month_30[element] and 0 < day_number < 31:
-                return True
-        year_in_4_numbers = get_full_year(gender_number, year_number)
-        if is_leap_year(year_in_4_numbers) and 0 < day_number < 30:
-            return True
-        else:
-            if 0 < day_number < 29:
-                return True
-            return False
-    else:
-        return False
-
-
-def is_id_valid(id_code: str) -> bool:
-    """Check if given ID code is valid and return the result (True or False)."""
-    if is_valid_control_number(id_code):
-        year_number, month_number, day_number, gender_number = "", "", "", 0
-        for index in range(len(id_code)):
-            if index == 0:
-                gender_number = int(id_code[index])
-            if index == 1 or index == 2:
-                year_number += id_code[index]
-            if index == 3 or index == 4:
-                month_number += id_code[index]
-            if index == 5 or index == 6:
-                day_number += id_code[index]
-        year_number = int(year_number)
-        month_number = int(month_number)
-        day_number = int(day_number)
-        if is_valid_day_number(gender_number, year_number, month_number, day_number):
-            return True
-        else:
-            return False
-
-
-def get_data_from_id(id_code: str) -> str:
-    """Get possible information about the person."""
-    if is_id_valid(id_code):
-        year_number, month_number, day_number, birth_number, gender_number, gender, location = "", "", "", "", 0, "", ""
-        for index in range(len(id_code)):
-            if index == 0:
-                gender_number = int(id_code[index])
-            if index == 1 or index == 2:
-                year_number += id_code[index]
-            if index == 3 or index == 4:
-                month_number += id_code[index]
-            if index == 5 or index == 6:
-                day_number += id_code[index]
-            if index == 7 or index == 8 or index == 9:
-                birth_number += id_code[index]
-
-        gender = get_gender(gender_number)
-        year_number = int(year_number)
-        ful_year = str(get_full_year(gender_number, year_number))
-        birth_number = int(birth_number)
-
-        if is_valid_birth_number(birth_number):
-            location = get_birth_place(birth_number)
-
-        return f"This is a {gender} born on {day_number}.{month_number}.{ful_year} in {location}"
-    else:
-        return "Given invalid ID code!"
+# def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
+#     """Check if given value is correct for day number in ID code."""
+#     if is_valid_gender_number(gender_number) and is_valid_year_number(year_number) and is_valid_month_number(month_number):
+#         # Previous line checks if all the numbers are correct.
+#         days_in_month_31 = [1, 3, 5, 7, 8, 10, 12]
+#         days_in_month_30 = [4, 6, 9, 11]
+#         for element in range(len(days_in_month_31)):
+#             if month_number == days_in_month_31[element] and 0 < day_number < 32:
+#                 return True
+#         for element in range(len(days_in_month_30)):
+#             if month_number == days_in_month_30[element] and 0 < day_number < 31:
+#                 return True
+#         year_in_4_numbers = get_full_year(gender_number, year_number)
+#         if is_leap_year(year_in_4_numbers) and 0 < day_number < 30:
+#             return True
+#         else:
+#             if 0 < day_number < 29:
+#                 return True
+#             return False
+#     else:
+#         return False
+#
+#
+# def is_id_valid(id_code: str) -> bool:
+#     """Check if given ID code is valid and return the result (True or False)."""
+#     if is_valid_control_number(id_code):
+#         year_number, month_number, day_number, gender_number = "", "", "", 0
+#         for index in range(len(id_code)):
+#             if index == 0:
+#                 gender_number = int(id_code[index])
+#             if index == 1 or index == 2:
+#                 year_number += id_code[index]
+#             if index == 3 or index == 4:
+#                 month_number += id_code[index]
+#             if index == 5 or index == 6:
+#                 day_number += id_code[index]
+#         year_number = int(year_number)
+#         month_number = int(month_number)
+#         day_number = int(day_number)
+#         if is_valid_day_number(gender_number, year_number, month_number, day_number):
+#             return True
+#         else:
+#             return False
+#
+#
+# def get_data_from_id(id_code: str) -> str:
+#     """Get possible information about the person."""
+#     if is_id_valid(id_code):
+#         year_number, month_number, day_number, birth_number, gender_number, gender, location = "", "", "", "", 0, "", ""
+#         for index in range(len(id_code)):
+#             if index == 0:
+#                 gender_number = int(id_code[index])
+#             if index == 1 or index == 2:
+#                 year_number += id_code[index]
+#             if index == 3 or index == 4:
+#                 month_number += id_code[index]
+#             if index == 5 or index == 6:
+#                 day_number += id_code[index]
+#             if index == 7 or index == 8 or index == 9:
+#                 birth_number += id_code[index]
+#
+#         gender = get_gender(gender_number)
+#         year_number = int(year_number)
+#         ful_year = str(get_full_year(gender_number, year_number))
+#         birth_number = int(birth_number)
+#
+#         if is_valid_birth_number(birth_number):
+#             location = get_birth_place(birth_number)
+#
+#         return f"This is a {gender} born on {day_number}.{month_number}.{ful_year} in {location}"
+#     else:
+#         return "Given invalid ID code!"
 
 
 if __name__ == '__main__':
