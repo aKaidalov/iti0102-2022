@@ -199,7 +199,6 @@ def is_id_valid(id_code: str) -> bool:
             if index == 7 or index == 8 or index == 9:
                 birth_number += id_code[index]
 
-
         year_number = int(year_number)
         month_number = int(month_number)
         day_number = int(day_number)
@@ -240,7 +239,7 @@ def get_data_from_id(id_code: str) -> str:
             location = get_birth_place(birth_number)
         else:
             return "Given invalid ID code!"
-
+        day_number, month_number, ful_year = str(day_number), str(month_number), str(ful_year)
         return f"This is a {gender} born on {day_number}.{month_number}.{ful_year} in {location}"
     else:
         return "Given invalid ID code!"
@@ -275,7 +274,7 @@ if __name__ == '__main__':
     print("\nFull message:")
     print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998 in Tallinn."
     print(get_data_from_id("60109200187"))  # -> "Given invalid ID code!"
-    print(get_data_from_id("50204073724"))
+    print(get_data_from_id("60109200186"))
 
     print("\nTest now your own ID code:")
     personal_id = input()  # type your own id in command prompt
