@@ -140,8 +140,8 @@ def get_birth_place(birth_number: int) -> str:
 def is_valid_control_number(id_code: str) -> bool:
     """Check if given value is correct for control number in ID code."""
     sum_of_seven2, sum_of_ten_numbers2, sum_of_three2 = 0, 0, 0
-    if the_first_control_number_algorithm(id_code) == "Incorrect ID code!":
-        return False
+    if the_first_control_number_algorithm(id_code) == id_code:
+        return True
     elif the_first_control_number_algorithm(id_code) == "Needs the second algorithm!":
         for i in range(7):
             sum_of_seven2 += int(id_code[i + 3]) * (i + 3)  # multiplies with its corresponding digit (until 7 digits)
@@ -157,7 +157,7 @@ def is_valid_control_number(id_code: str) -> bool:
         else:
             return False
     else:
-        return True
+        return False
 
 
 # Mb gde to zdes' oshibka
