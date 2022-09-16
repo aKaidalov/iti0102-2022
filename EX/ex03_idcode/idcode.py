@@ -45,10 +45,11 @@ def the_first_control_number_algorithm(text: str) -> str:
     counter, sum_of_nine, sum_of_ten_numbers = 0, 0, 0
     for element in text:
         new_element = ord(element)
-        if 47 < new_element:
-            if new_element < 58:
-                new_text2 += element
-                counter += 1
+        if 47 < new_element < 58:
+            new_text2 += element
+            counter += 1
+        else:
+            return "Incorrect ID code!"
     if counter > 11:
         return "Incorrect ID code!"
     elif counter < 11:
