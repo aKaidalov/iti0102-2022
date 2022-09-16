@@ -21,34 +21,14 @@ def find_id_code(text: str) -> str:
 
 
 def the_first_control_number_algorithm(text: str) -> str:
-    """
-    Check if given value is correct for control number in ID code only with the first algorithm.
-
-    The first algorithm can be calculated with ID code's first 10 numbers.
-    Each number must be multiplied with its corresponding digit
-    (in this task, corresponding digits are: 1 2 3 4 5 6 7 8 9 1), after which all the values are summarized
-    and divided by 11. The remainder of calculation should be the control number.
-
-    If the remainder is less than 10 and equal to the last number of ID code,
-    then that's the correct control number and the function should return the ID code.
-    Otherwise, the control number is either incorrect or the second algorithm should be used.
-    In this case, return "Needs the second algorithm!".
-
-    If the string contains more or less than 11 numbers, return "Incorrect ID code!".
-    In other case use the previous algorithm to get the code number out of the string
-    and find out, whether its control number is correct.
-
-    :param text: string
-    :return: string
-    """
+    """Check if given value is correct for control number in ID code only with the first algorithm."""
     new_text: str = ""
     counter, sum_of_nine, sum_of_ten_numbers = 0, 0, 0
     for element in text:
         new_element = ord(element)
-        if 47 < new_element:
-            if new_element < 58:
-                new_text += element
-                counter += 1
+        if 47 < new_element < 58:
+            new_text += element
+            counter += 1
     if counter == 11:
         for i in range(9):
             sum_of_nine += int(new_text[i]) * (i + 1)  # multiplies with its corresponding digit (until 9 digits)
