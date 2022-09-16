@@ -201,17 +201,18 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
 
 def is_id_valid(id_code: str) -> bool:
     """Check if given ID code is valid and return the result (True or False)."""
-    if is_valid_control_number(id_code):
+    new_id_code = find_id_code(id_code)
+    if is_valid_control_number(new_id_code):
         year_number, month_number, day_number, gender_number = "", "", "", 0
-        for index in range(len(id_code)):
+        for index in range(len(new_id_code)):
             if index == 0:
-                gender_number = int(id_code[index])
+                gender_number = int(new_id_code[index])
             if index == 1 or index == 2:
-                year_number += id_code[index]
+                year_number += new_id_code[index]
             if index == 3 or index == 4:
-                month_number += id_code[index]
+                month_number += new_id_code[index]
             if index == 5 or index == 6:
-                day_number += id_code[index]
+                day_number += new_id_code[index]
         year_number = int(year_number)
         month_number = int(month_number)
         day_number = int(day_number)
@@ -223,20 +224,19 @@ def is_id_valid(id_code: str) -> bool:
 
 def get_data_from_id(id_code: str) -> str:
     """Get possible information about the person."""
-    new_id_code = find_id_code(id_code)
-    if is_id_valid(new_id_code):
+    if is_id_valid(id_code):
         year_number, month_number, day_number, birth_number, gender_number, gender, location = "", "", "", "", 0, "", ""
-        for index in range(len(new_id_code)):
+        for index in range(len(id_code)):
             if index == 0:
-                gender_number = int(new_id_code[index])
+                gender_number = int(id_code[index])
             if index == 1 or index == 2:
-                year_number += new_id_code[index]
+                year_number += id_code[index]
             if index == 3 or index == 4:
-                month_number += new_id_code[index]
+                month_number += id_code[index]
             if index == 5 or index == 6:
-                day_number += new_id_code[index]
+                day_number += id_code[index]
             if index == 7 or index == 8 or index == 9:
-                birth_number += new_id_code[index]
+                birth_number += id_code[index]
 
         gender = get_gender(gender_number)
         year_number = int(year_number)
