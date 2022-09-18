@@ -167,7 +167,7 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
         days_in_month_31 = [1, 3, 5, 7, 8, 10, 12]
         days_in_month_30 = [4, 6, 9, 11]
         if month_number in days_in_month_31 and 0 < day_number < 32:
-            return True
+            return True     # Esli day_number = 32? Prosmatrivaet vse if i togda return v else vozrachaet false?
         if month_number in days_in_month_30 and 0 < day_number < 31:
             return True
         if is_leap_year(get_full_year(gender_number, year_number)) and 0 < day_number < 30:
