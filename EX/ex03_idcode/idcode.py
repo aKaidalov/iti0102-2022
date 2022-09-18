@@ -194,23 +194,11 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
 def is_id_valid(id_code: str) -> bool:
     """Check if given ID code is valid and return the result (True or False)."""
     if is_valid_control_number(id_code):
-        year_number, month_number, day_number, gender_number, birth_number = "", "", "", 0, ""
-        for index in range(len(id_code)):
-            if index == 0:
-                gender_number = int(id_code[index])
-            if index == 1 or index == 2:
-                year_number += id_code[index]
-            if index == 3 or index == 4:
-                month_number += id_code[index]
-            if index == 5 or index == 6:
-                day_number += id_code[index]
-            if index == 7 or index == 8 or index == 9:
-                birth_number += id_code[index]
-
-        year_number = int(year_number)
-        month_number = int(month_number)
-        day_number = int(day_number)
-        birth_number = int(birth_number)
+        gender_number = int(id_code[0])
+        year_number = int(id_code[1:3])
+        month_number = int(id_code[3:5])
+        day_number = int(id_code[5:7])
+        birth_number = int(id_code[7:10])
         if is_valid_birth_number(birth_number):
             if is_valid_day_number(gender_number, year_number, month_number, day_number):
                 return True
@@ -220,6 +208,24 @@ def is_id_valid(id_code: str) -> bool:
             return False
     else:
         return False
+
+        # year_number, month_number, day_number, gender_number, birth_number = "", "", "", 0, ""
+        # for index in range(len(id_code)):
+        #     if index == 0:
+        #         gender_number = int(id_code[index])
+        #     if index == 1 or index == 2:
+        #         year_number += id_code[index]
+        #     if index == 3 or index == 4:
+        #         month_number += id_code[index]
+        #     if index == 5 or index == 6:
+        #         day_number += id_code[index]
+        #     if index == 7 or index == 8 or index == 9:
+        #         birth_number += id_code[index]
+        #
+        # year_number = int(year_number)
+        # month_number = int(month_number)
+        # day_number = int(day_number)
+        # birth_number = int(birth_number)
 
 
 def get_data_from_id(id_code: str) -> str:
