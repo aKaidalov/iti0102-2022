@@ -186,6 +186,8 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
     #     if month_number == element and 0 < day_number < 31:
     #         return True
     # year_in_4_numbers = get_full_year(gender_number, year_number)
+    # if is_leap_year(year_in_4_numbers) and 0 < day_number < 30:
+    #   return True
     # ...
 
 
