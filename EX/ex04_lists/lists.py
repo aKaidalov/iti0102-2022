@@ -89,28 +89,28 @@ def car_models(all_cars: str) -> list:
 
 def search_by_make(all_cars: str) -> list:
     """Find makes in list."""
-    if all_cars == "":
-        return []
-    all_cars_in_list = list_of_cars(all_cars)
-    all_makes_in_list = car_makes(all_cars)
-    find_make = input("What car make do you want to find? ")
-    founded_cars = []
-    for element in all_makes_in_list:
-        if find_make.capitalize() in element.capitalize():
-            for car in all_cars_in_list:
-                if find_make.capitalize() in car.capitalize():
-                    founded_cars += [car]
-    return founded_cars
-    #
     # if all_cars == "":
     #     return []
     # all_cars_in_list = list_of_cars(all_cars)
+    # all_makes_in_list = car_makes(all_cars)
     # find_make = input("What car make do you want to find? ")
     # founded_cars = []
-    # for element in all_cars_in_list:
+    # for element in all_makes_in_list:
     #     if find_make.capitalize() in element.capitalize():
-    #         founded_cars += [element]
+    #         for car in all_cars_in_list:
+    #             if find_make.capitalize() in car.capitalize():
+    #                 founded_cars += [car]
     # return founded_cars
+    #
+    if all_cars == "":
+        return []
+    all_cars_in_list = list_of_cars(all_cars)
+    find_make = input("What car make do you want to find? ")
+    founded_cars = []
+    for element in all_cars_in_list:
+        if find_make.capitalize() in element.capitalize():
+            founded_cars += [element]
+    return founded_cars
 
 
 def search_by_model(all_cars: str) -> list:
