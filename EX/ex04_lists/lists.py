@@ -102,6 +102,7 @@ def search_by_model(all_cars: str, model: str) -> list:
         element = element.capitalize()
         if element.endswith(model.capitalize()):
             for car in all_cars_in_list:
+                car = car.capitalize()
                 if car.endswith(model.capitalize()):
                     founded_cars += [car]
     return founded_cars
