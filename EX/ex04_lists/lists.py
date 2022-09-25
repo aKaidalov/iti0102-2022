@@ -10,8 +10,6 @@ def list_of_cars(all_cars: str) -> list:
 
     "Audi A4,Skoda Superb,Audi A4" => ["Audi A4", "Skoda Superb", "Audi A4"]
     """
-    if all_cars == "":
-        return []
     make_and_model = ""
     all_cars_in_list = []
     cars_in_letters = []
