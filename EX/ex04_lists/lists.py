@@ -117,7 +117,6 @@ def search_by_model(all_cars: str, model: str) -> list:
     return found_cars
 
 
-
 if __name__ == '__main__':
     print(list_of_cars("Audi A4,Skoda Superb,Audi A4"))  # ["Audi A4", "Skoda Superb", "Audi A4"]
     print(car_makes("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5"))
