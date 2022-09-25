@@ -37,8 +37,6 @@ def car_makes(all_cars: str) -> list:
 
     "Audi A4,Skoda Superb,Audi A4" => ["Audi", "Skoda"]
     """
-    if all_cars == "":
-        return []
     all_cars_in_list = list_of_cars(all_cars)
     car_makes_in_list = []
     some_make = ""
