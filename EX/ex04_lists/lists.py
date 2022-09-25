@@ -99,6 +99,7 @@ def search_by_model(all_cars: str, model: str) -> list:
     all_cars_in_list = list_of_cars(all_cars)
     all_models_in_list = car_models(all_cars)
     for element in all_models_in_list:
+        element = element.capitalize()
         if element.endswith(model.capitalize()):
             for car in all_cars_in_list:
                 if car.endswith(model.capitalize()):
