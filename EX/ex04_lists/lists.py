@@ -111,9 +111,8 @@ def search_by_model(all_cars: str, model: str) -> list:
         for el in element.split(" "):
             if model.capitalize() == el.capitalize():
                 for car in all_cars_in_list:
-                    for c in car.split(" "):
-                        if element == c.capitalize():
-                            found_cars += [car]
+                    if element in car:
+                        found_cars += [car]
     return found_cars
 
 
@@ -129,4 +128,4 @@ if __name__ == '__main__':
     print(car_models("Audi A4,Skoda Superb,Audi A4,Audi A6,Tesla Model S"))  # ["A4", "Superb", "A6"]
 
     print(search_by_make("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5", "skoda"))
-    print(search_by_model("Audi A4,Audi a4 2021,Audi A40,Audi A4", "a4"))
+    print(search_by_model("Audi A4,Audi a4 2021,Audi A40,Audi A4,Audi a4 2021", "a4"))
