@@ -87,46 +87,21 @@ def car_models(all_cars: str) -> list:
     return car_models_in_list
 
 
-def search_by_make(all_cars: str) -> list:
+def search_by_make(all_cars: str, make: str) -> list:
     """Find makes in list."""
-    # if all_cars == "":
-    #     return []
-    # all_cars_in_list = list_of_cars(all_cars)
-    # all_makes_in_list = car_makes(all_cars)
-    # find_make = input("What car make do you want to find? ")
-    # founded_cars = []
-    # for element in all_makes_in_list:
-    #     if find_make.capitalize() in element.capitalize():
-    #         for car in all_cars_in_list:
-    #             if find_make.capitalize() in car.capitalize():
-    #                 founded_cars += [car]
-    # return founded_cars
-    #
     if all_cars == "":
         return []
     all_cars_in_list = list_of_cars(all_cars)
-    find_make = input("What car make do you want to find? ")
     founded_cars = []
     for element in all_cars_in_list:
-        if find_make.capitalize() in element.capitalize():
+        if make.capitalize() in element.capitalize():
             founded_cars += [element]
     return founded_cars
 
 
 def search_by_model(all_cars: str) -> list:
     """Find models in list."""
-    if all_cars == "":
-        return []
-    all_cars_in_list = list_of_cars(all_cars)
-    all_models_in_list = car_models(all_cars)
-    find_model = input("What car model do you want to find? ")
-    founded_cars = []
-    for element in all_models_in_list:
-        if find_model == element:
-            for car in all_cars_in_list:
-                if find_model in car:
-                    founded_cars += [car]
-    return founded_cars
+
 
 
 if __name__ == '__main__':
@@ -140,5 +115,5 @@ if __name__ == '__main__':
 
     print(car_models("Audi A4,Skoda Superb,Audi A4,Audi A6,Tesla Model S"))  # ["A4", "Superb", "A6"]
 
-    print(search_by_make("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5"))
+    print(search_by_make("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5", "skoda"))
     print(search_by_model("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5"))
