@@ -92,16 +92,17 @@ def search_by_make(all_cars: str, make: str) -> list:
             founded_cars += [element]
     return founded_cars
 
-
+# element.endswith(model.capitalize()): model.capitalize() in element:
+# car.endswith(model.capitalize()):
 def search_by_model(all_cars: str, model: str) -> list:
     """Find models in list."""
     founded_cars = []
     all_cars_in_list = list_of_cars(all_cars)
     all_models_in_list = car_models(all_cars)
     for element in all_models_in_list:
-        if element.endswith(model.capitalize()):
+        if model.capitalize() == element.capitalize():
             for car in all_cars_in_list:
-                if car.endswith(model.capitalize()):
+                if element.capitalize() in car:
                     founded_cars += [car]
     return founded_cars
 
@@ -118,4 +119,4 @@ if __name__ == '__main__':
     print(car_models("Audi A4,Skoda Superb,Audi A4,Audi A6,Tesla Model S"))  # ["A4", "Superb", "A6"]
 
     print(search_by_make("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5", "skoda"))
-    print(search_by_model("Audi A4,Skoda Super,BMW 530,Tesla Model S", "bmw"))
+    print(search_by_model("Audi A4,Skoda Super,BMW 530,Tesla Model S", "530"))
