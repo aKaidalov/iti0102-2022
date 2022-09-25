@@ -72,8 +72,6 @@ def car_models(all_cars: str) -> list:
 
     "Audi A4,Skoda Superb,Audi A4,Audi A6" => ["A4", "Superb", "A6"]
     """
-    if all_cars == "":
-        return []
     all_cars_in_list = list_of_cars(all_cars)
     car_models_in_list = []
     some_model = ""
@@ -116,4 +114,4 @@ if __name__ == '__main__':
     print(car_models("Audi A4,Skoda Superb,Audi A4,Audi A6,Tesla Model S"))  # ["A4", "Superb", "A6"]
 
     print(search_by_make("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5", "skoda"))
-    print(search_by_model("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5"))
+    print(search_by_model("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5", "a4"))
