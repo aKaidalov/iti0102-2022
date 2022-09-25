@@ -89,8 +89,6 @@ def car_models(all_cars: str) -> list:
 
 def search_by_make(all_cars: str, make: str) -> list:
     """Find makes in list."""
-    if all_cars == "":
-        return []
     all_cars_in_list = list_of_cars(all_cars)
     founded_cars = []
     for element in all_cars_in_list:
@@ -99,9 +97,11 @@ def search_by_make(all_cars: str, make: str) -> list:
     return founded_cars
 
 
-def search_by_model(all_cars: str) -> list:
-    """Find models in list."""
-
+# def search_by_model(all_cars: str, model: str) -> list:
+#     """Find models in list."""
+#     founded_cars = []
+#
+#     return founded_cars
 
 
 if __name__ == '__main__':
