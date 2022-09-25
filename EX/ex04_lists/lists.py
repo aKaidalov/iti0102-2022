@@ -102,15 +102,20 @@ def search_by_make(all_cars: str, make: str) -> list:
 
 def search_by_model(all_cars: str, model: str) -> list:
     """Find models in list."""
-    founded_cars = []
+    found_cars = []
     all_cars_in_list = list_of_cars(all_cars)
+    all_models_in_list = car_models(all_cars)
     if " " in model:
         return []
-    for element in all_cars_in_list:
+    for element in all_models_in_list:
         for el in element.split(" "):
             if model.capitalize() == el.capitalize():
-                founded_cars.append(element)
-    return founded_cars
+                for car in all_cars_in_list:
+                    for c in car.split(" "):
+                        if element == c.capitalize():
+                            found_cars += [car]
+    return found_cars
+
 
 
 if __name__ == '__main__':
