@@ -101,11 +101,16 @@ def search_by_model(all_cars: str, model: str) -> list:
     founded_cars = []
     all_cars_in_list = list_of_cars(all_cars)
     all_models_in_list = car_models(all_cars)
+    some_model = ""
     for i in range(len(model)):
         if model[i] == " ":
             return []
     for element in all_models_in_list:
-        if model.capitalize() == element.capitalize():
+        for i in range(len(element)):
+            if element[i] == " ":
+                some_model = element[:i]
+                break
+        if some_model.capitalize() in element.capitalize():
             for car in all_cars_in_list:
                 if element.capitalize() in car:
                     founded_cars += [car]
