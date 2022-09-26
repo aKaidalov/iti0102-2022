@@ -104,8 +104,6 @@ def search_by_model(all_cars: str, model: str) -> list:
     """Find models in list."""
     found_cars = []
     all_cars_in_list = list_of_cars(all_cars)
-    if " " in model:
-        return []
     for element in all_cars_in_list:
         for el in element.split(" "):
             if model.capitalize() == el.capitalize() and element.index(el) != 0:
