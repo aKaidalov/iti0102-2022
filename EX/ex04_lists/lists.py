@@ -130,6 +130,7 @@ def car_make_and_models(all_cars: str) -> list:
     makes_list = car_makes(all_cars)
     specific_models_list = []
     final_list = []
+    some_model = ""
     for make in makes_list:
         for car in cars_list:
             if make in car:
