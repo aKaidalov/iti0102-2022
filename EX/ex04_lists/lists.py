@@ -111,16 +111,45 @@ def search_by_model(all_cars: str, model: str) -> list:
     return found_cars
 
 
+def car_make_and_models(all_cars: str) -> list:
+    """
+    Create a list of structured information about makes and models.
+
+    For each different car make in the input string an element is created in the output list.
+    The element itself is a list, where the first position is the name of the make (string),
+    the second element is a list of models for the given make (list of strings).
+
+    No duplicate makes or models should be in the output.
+
+    The order of the makes and models should be the same os in the input list (first appearance).
+
+    "Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon Lux,Skoda Superb,Skoda Superb,BMW x5" =>
+    [['Audi', ['A4']], ['Skoda', ['Super', 'Octavia', 'Superb']], ['BMW', ['530', 'x5']], ['Seat', ['Leon Lux']]]
+    """
+    cars_list = list_of_cars(all_cars)
+    makes_list = car_makes(all_cars)
+    specific_models_list = []
+    final_list = []
+    for make in makes_list:
+        for car in cars_list:
+            if make in car:
+                for i in range(len(car)):
+                    if car[i] == " ":
+                        some_model = car[i + 1:]
+                        break
+                if some_model not in specific_models_list:
+                    specific_models_list.append(some_model)
+        make_and_models_list = [make, specific_models_list]
+        final_list.append(make_and_models_list)
+        specific_models_list = []
+    return final_list
+
+
 if __name__ == '__main__':
-    print(list_of_cars("Audi A4,Skoda Superb,Audi A4"))  # ["Audi A4", "Skoda Superb", "Audi A4"]
-    print(car_makes("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5"))
-    # ['Audi', 'Skoda', 'BMW', 'Seat']
-
-    print(car_makes("Mazda 6,Mazda 6,Mazda 6,Mazda 6"))  # ['Mazda']
-
-    print(car_makes(""))  # []
-
-    print(car_models("Audi A4,Skoda Superb,Audi A4,Audi A6,Tesla Model S"))  # ["A4", "Superb", "A6"]
-
-    print(search_by_make("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon,Skoda Superb,Skoda Superb,BMW x5", "skoda"))
     print(search_by_model("Audi A4,Audi a4 2021,Audi A40,Audi A4,Audi a4 2021", "a4"))
+
+    print(car_make_and_models("Audi A4,Skoda Super,Skoda Octavia,BMW 530,Seat Leon lux,Skoda Superb,Skoda Superb,BMW x5"))
+    # [['Audi', ['A4']], ['Skoda', ['Super', 'Octavia', 'Superb']], ['BMW', ['530', 'x5']], ['Seat', ['Leon']]]
+
+    print(car_make_and_models("Mazda 6,Mazda 6,Mazda 6,Mazda 6"))  # [['Mazda', ['6']]]
+    print(car_make_and_models(""))  # []
