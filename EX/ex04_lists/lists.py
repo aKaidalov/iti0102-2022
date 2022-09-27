@@ -211,7 +211,13 @@ def car_list_as_string(cars: list) -> str:
     [['Audi', ['A4']], ['Skoda', ['Superb']]] =>
     "Audi A4,Skoda Superb"
     """
-
+    final_str = ""
+    for car in cars:
+        make = car[0]
+        for model in car[1]:
+            make_and_model = f"{make} {model},"
+            final_str += make_and_model
+    return final_str[:-1]
 
 
 if __name__ == '__main__':
