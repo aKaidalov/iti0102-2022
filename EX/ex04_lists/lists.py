@@ -146,6 +146,43 @@ def car_make_and_models(all_cars: str) -> list:
     return final_list
 
 
+def add_cars(car_list: list, all_cars: str) -> list:
+    """
+    Add cars from the list into the existing car list.
+
+    The first parameter is in the same format as the output of the previous function.
+    The second parameter is a string of comma separated cars (as in all the previous functions).
+    The task is to add cars from the string into the list.
+
+    Hint: This and car_make_and_models are very similar functions. Try to use one inside another.
+
+    [['Audi', ['A4']], ['Skoda', ['Superb']]]
+    and
+    "Audi A6,BMW A B C,Audi A4"
+
+    =>
+
+    [['Audi', ['A4', 'A6']], ['Skoda', ['Superb']], ['BMW', ['A B C']]]
+    """
+    new_list = car_make_and_models(all_cars)
+    makes_and_models = car_list
+    # new_makes_and_models = []
+    # new_models = []
+    old_car_makes = []
+    for old_car in makes_and_models:
+        old_car_makes += old_car[0]
+    for old_car in makes_and_models:  # smotrim takieze element6, no iz gotovogo lista
+        for new_car in new_list:        # smotrim element lista [ , []] sdelannogo iz str
+            if new_car[0] in old_car_makes:       # proverjaem, est li marka iz novogo lista v starom(gotovom)
+                if new_car[0] not in makes_and_models:      # est' li model v liste, kootor6i budem vozvraschat'
+                    for new_car_model in new_car[1]:    # smotrim vse modeli iz novogo lista dlja konkretnoi marki
+                        if new_car_model not in old_car[0]:  # esli model' marki iz starogo lista != novoi modeli
+                            old_car[1].append(new_car_model)
+            else:
+                makes_and_models.append(new_car)
+    return makes_and_models
+
+
 if __name__ == '__main__':
     print(search_by_model("Audi A4,Audi a4 2021,Audi A40,Audi A4,Audi a4 2021", "a4"))
 
@@ -154,3 +191,6 @@ if __name__ == '__main__':
 
     print(car_make_and_models("Mazda 6,Mazda 6,Mazda 6,Mazda 6"))  # [['Mazda', ['6']]]
     print(car_make_and_models(""))  # []
+
+    print(add_cars([['Audi', ['A4']], ['Skoda', ['Superb']]], "Audi A6,BMW A B C,Audi A4"))
+    # [['Audi', ['A4', 'A6']], ['Skoda', ['Superb']], ['BMW', ['A B C']]]
