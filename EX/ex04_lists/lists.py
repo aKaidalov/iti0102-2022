@@ -168,22 +168,24 @@ def add_cars(car_list: list, all_cars: str) -> list:
 
     [['Audi', ['A4', 'A6']], ['Skoda', ['Superb']], ['BMW', ['A B C']]]
     """
-    all_cars_list = car_make_and_models(all_cars)
-    if len(car_list) != 0:
-        cars = []
-        for element in range(len(car_list)):
-            cars.append(car_list[element][0])
-        for car1 in all_cars_list:
-            if car1[0] in cars:
-                element = cars.index(car1[0])
-                for model1 in car1[1]:
-                    if model1 not in car_list[element][1]:
-                        car_list[element][1].append(model1)
-            else:
-                car_list.append(car1)
-    else:
-        car_list = all_cars_list
-    return car_list
+    new_list = car_make_and_models(all_cars)
+    makes_and_models = car_list
+    old_car_makes = []
+    old_car_models = []
+
+    for old_car in makes_and_models:
+        old_car_makes.append(old_car[0])
+        for old_car_model in old_car[1]:
+            old_car_models.append(old_car_model)
+    for new_car in new_list:  # smotrim element lista [ , []] sdelannogo iz str
+        if new_car[0] in old_car_makes:  # proverjaem, est li marka iz novogo lista v starom(gotovom)
+            element = old_car_makes.index(new_car[0])
+            for new_car_model in new_car[1]:  # smotrim vse modeli iz novogo lista dlja konkretnoi marki
+                if new_car_model not in old_car_models:  # esli model' marki iz starogo lista != novoi modeli.
+                    makes_and_models[element][1].append(new_car_model)
+        else:
+            makes_and_models.append(new_car)
+    return makes_and_models
 
 
 def number_of_cars(all_cars: str) -> list:
@@ -194,13 +196,18 @@ def number_of_cars(all_cars: str) -> list:
     Each tuple is in the form: (make_name: str, quantity: int).
     The order of the tuples (makes) is the same as the first appearance in the list.
     """
-    new_list = []
-    car_make = car_makes(all_cars)
-    for make in car_make:
-        make_count = all_cars.count(make)
-        tuple_make = (make), (make_count)
-        new_list.append(tuple_make)
-    return new_list
+    new_all_cars = all_cars.split(",")
+    list = []
+    final_list = []
+    for car in new_all_cars:
+        car = car.split(" ")
+        if car[0] not in list:
+            list.append(car[0])
+    for make in list:
+        count = all_cars.count(make)
+        makes_in_tuple = make, count
+        final_list.append(makes_in_tuple)
+    return final_list
 
 
 def car_list_as_string(cars: list) -> str:
