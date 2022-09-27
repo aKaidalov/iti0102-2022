@@ -180,7 +180,7 @@ def add_cars(car_list: list, all_cars: str) -> list:
     for new_car in new_list:        # smotrim element lista [ , []] sdelannogo iz str
         if new_car[0] in old_car_makes:       # proverjaem, est li marka iz novogo lista v starom(gotovom)
             for new_car_model in new_car[1]:    # smotrim vse modeli iz novogo lista dlja konkretnoi marki
-                if new_car_model not in old_car_models:  # esli model' marki iz starogo lista != novoi modeli
+                if new_car_model not in old_car_models:  # esli model' marki iz starogo lista != novoi modeli.
                     makes_and_models[0][1].append(new_car_model)
         else:
             makes_and_models.append(new_car)
