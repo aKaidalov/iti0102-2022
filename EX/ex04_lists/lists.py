@@ -166,20 +166,21 @@ def add_cars(car_list: list, all_cars: str) -> list:
     """
     new_list = car_make_and_models(all_cars)
     makes_and_models = car_list
-    # new_makes_and_models = []
-    # new_models = []
     old_car_makes = []
+    old_car_models = []
     for old_car in makes_and_models:
-        old_car_makes += old_car[0]
+        old_car_makes.append(old_car[0])
+        for old_car_model in old_car[1]:
+            old_car_models.append(old_car_model)
     for old_car in makes_and_models:  # smotrim takieze element6, no iz gotovogo lista
         for new_car in new_list:        # smotrim element lista [ , []] sdelannogo iz str
             if new_car[0] in old_car_makes:       # proverjaem, est li marka iz novogo lista v starom(gotovom)
-                if new_car[0] not in makes_and_models:      # est' li model v liste, kootor6i budem vozvraschat'
-                    for new_car_model in new_car[1]:    # smotrim vse modeli iz novogo lista dlja konkretnoi marki
-                        if new_car_model not in old_car[0]:  # esli model' marki iz starogo lista != novoi modeli
-                            old_car[1].append(new_car_model)
+                for new_car_model in new_car[1]:    # smotrim vse modeli iz novogo lista dlja konkretnoi marki
+                    if new_car_model not in old_car_models:  # esli model' marki iz starogo lista != novoi modeli
+                        old_car[1].append(new_car_model)
             else:
                 makes_and_models.append(new_car)
+        break
     return makes_and_models
 
 
