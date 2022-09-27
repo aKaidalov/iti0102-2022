@@ -197,16 +197,19 @@ def number_of_cars(all_cars: str) -> list:
     The order of the tuples (makes) is the same as the first appearance in the list.
     """
     new_all_cars = all_cars.split(",")
-    list = []
     final_list = []
-    for car in new_all_cars:
-        car = car.split(" ")
-        if car[0] not in list:
-            list.append(car[0])
-    for make in list:
-        count = all_cars.count(make)
-        makes_in_tuple = make, count
-        final_list.append(makes_in_tuple)
+    list = []
+    if all_cars != '':
+        for car in new_all_cars:
+            car = car.split(" ")
+            if car[0] not in list:
+                list.append(car[0])
+        for make in list:
+            count = all_cars.count(make)
+            makes_in_tuple = make, count
+            final_list.append(makes_in_tuple)
+    else:
+        return []
     return final_list
 
 
