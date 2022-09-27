@@ -172,6 +172,7 @@ def add_cars(car_list: list, all_cars: str) -> list:
     makes_and_models = car_list
     old_car_makes = []
     old_car_models = []
+    index = 0
 
     for old_car in makes_and_models:
         old_car_makes.append(old_car[0])
@@ -181,9 +182,10 @@ def add_cars(car_list: list, all_cars: str) -> list:
         if new_car[0] in old_car_makes:       # proverjaem, est li marka iz novogo lista v starom(gotovom)
             for new_car_model in new_car[1]:    # smotrim vse modeli iz novogo lista dlja konkretnoi marki
                 if new_car_model not in old_car_models:  # esli model' marki iz starogo lista != novoi modeli.
-                    makes_and_models[0][1].append(new_car_model)
+                    makes_and_models[index][1].append(new_car_model)
         else:
             makes_and_models.append(new_car)
+            index += 1
     return makes_and_models
 
 
@@ -196,5 +198,5 @@ if __name__ == '__main__':
     print(car_make_and_models("Mazda 6,Mazda 6,Mazda 6,Mazda 6"))  # [['Mazda', ['6']]]
     print(car_make_and_models(""))  # []
 
-    print(add_cars([['Audi', ['A4']], ['Skoda', ['Superb']]], "Audi A6,BMW A B C,Audi A4"))
+    print(add_cars([['Audi', ['A4']], ['Skoda', ['Superb']]], "Audi A6,BMW A B C,Audi A4,Skoda Leon lux,Skoda Leon xul"))
     # [['Audi', ['A4', 'A6']], ['Skoda', ['Superb']], ['BMW', ['A B C']]]
