@@ -186,6 +186,34 @@ def add_cars(car_list: list, all_cars: str) -> list:
     return car_list
 
 
+def number_of_cars(all_cars: str) -> list:
+    """
+    Create a list of tuples with make quantities.
+    The result is a list of tuples.
+    Each tuple is in the form: (make_name: str, quantity: int).
+    The order of the tuples (makes) is the same as the first appearance in the list.
+    """
+    new_list = []
+    car_make = car_makes(all_cars)
+    for make in car_make:
+        make_count = all_cars.count(make)
+        tuple_make = (make), (make_count)
+        new_list.append(tuple_make)
+    return new_list
+
+
+def car_list_as_string(cars: list) -> str:
+    """
+    Create a list of cars.
+
+    The input list is in the same format as the result of car_make_and_models function.
+    The order of the elements in the string is the same as in the list.
+    [['Audi', ['A4']], ['Skoda', ['Superb']]] =>
+    "Audi A4,Skoda Superb"
+    """
+
+
+
 if __name__ == '__main__':
     # print(search_by_model("Audi A4,Audi a4 2021,Audi A40,Audi A4,Audi a4 2021", "a4"))
     #
@@ -197,3 +225,9 @@ if __name__ == '__main__':
 
     print(add_cars([['Audi', ['A4']], ['Skoda', ['Superb']]], "Audi A6,BMW A B C,Audi A4,Skoda Leon lux,Skoda Leon xul"))
     # [['Audi', ['A4', 'A6']], ['Skoda', ['Superb']], ['BMW', ['A B C']]]
+    print(number_of_cars("Audi A4,Skoda Superb,Seat Leon,Audi A6"))  # [('Audi', 2), ('Skoda', 1), ('Seat', 1)]
+    print(number_of_cars("Mazda 6,Mazda 6,Mazda 6,Mazda 6"))  # [('Mazda', 4)]
+
+    print(number_of_cars(""))  # []
+
+    print(car_list_as_string([['Audi', ['A4']], ['Skoda', ['Superb']]]))  # "Audi A4,Skoda Superb"
