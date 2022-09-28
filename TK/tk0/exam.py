@@ -17,8 +17,11 @@ def workday_count(days: int) -> int:
     :param days: given number of days
     :return: workdays in given days
     """
+    weeks = int(days / 7)
+    return days - weeks * 2
 
 
+print(workday_count(15))
 def sorta_sum(a: int, b: int) -> int:
     """
     Given 2 ints, a and b, return their sum.
