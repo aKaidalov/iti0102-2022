@@ -17,15 +17,7 @@ def workday_count(days: int) -> int:
     :param days: given number of days
     :return: workdays in given days
     """
-    workdays = 0
-    if days < 6:
-        workdays = days
-    else:
-        if days == 6:
-            workdays = 5
-        elif days % 7 == 0 or days % 7 == 6:
-            workdays += 1
-    return workdays
+
 
 
 def sorta_sum(a: int, b: int) -> int:
@@ -62,7 +54,8 @@ def extra_end(s: str) -> str:
     :param s: Input string
     :return: 3 copies of last 2 chars.
     """
-    pass
+    new_s = s[-2:]
+    return new_s * 3
 
 
 def last_indices_elements_sum(nums: list) -> int:
