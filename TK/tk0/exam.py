@@ -18,10 +18,14 @@ def workday_count(days: int) -> int:
     :return: workdays in given days
     """
     weeks = days // 7
-    return days - weeks * 2
+    left_days = days % 7
+    if left_days < 5:
+        workdays = 5 * weeks + left_days
+    else:
+        workdays = 5 * weeks + 5
+    return workdays
 
 
-print(workday_count(15))
 def sorta_sum(a: int, b: int) -> int:
     """
     Given 2 ints, a and b, return their sum.
