@@ -18,7 +18,14 @@ def workday_count(days: int) -> int:
     :return: workdays in given days
     """
     workdays = 0
-
+    if days < 6:
+        workdays = days
+    else:
+        if days == 6:
+            workdays = 5
+        elif days % 7 == 0 or days % 7 == 6:
+            workdays += 1
+    return workdays
 
 
 def sorta_sum(a: int, b: int) -> int:
