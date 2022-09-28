@@ -122,4 +122,10 @@ def divisions(numbers: list) -> int:
     :param numbers: List of integers
     :return: Amount of pairs
     """
-    return 0
+    counter = 0
+    for element in numbers:
+        for el in numbers:
+            if element != el:
+                if el % element == 0:
+                    counter += 1
+    return counter
