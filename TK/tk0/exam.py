@@ -1,4 +1,5 @@
 """Example TK."""
+import p as p
 
 
 def workday_count(days: int) -> int:
@@ -19,7 +20,7 @@ def workday_count(days: int) -> int:
     """
 
 
-
+p
 def sorta_sum(a: int, b: int) -> int:
     """
     Given 2 ints, a and b, return their sum.
@@ -38,7 +39,7 @@ def sorta_sum(a: int, b: int) -> int:
     if 10 <= sum <= 19:
         sum = 20
         return sum
-    return  sum
+    return sum
 
 
 def extra_end(s: str) -> str:
@@ -78,7 +79,22 @@ def last_indices_elements_sum(nums: list) -> int:
     :param nums: List of non-negative integers.
     :return: Sum of elements at indices of last two elements.
     """
-    pass
+    index_a = nums[-1]
+    index_b = nums[-2]
+    if index_a < len(nums) and index_b < len(nums):
+        a = nums[index_a]
+        b = nums[index_b]
+        return a + b
+    elif index_a < len(nums) <= index_b:
+        a = nums[index_a]
+        b = 0
+        return a + b
+    elif index_b < len(nums) <= index_a:
+        a = 0
+        b = nums[index_b]
+        return a + b
+    else:
+        return 0
 
 
 def divisions(numbers: list) -> int:
