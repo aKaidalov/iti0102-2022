@@ -1,5 +1,4 @@
 """Example TK."""
-import p as p
 
 
 def workday_count(days: int) -> int:
@@ -20,7 +19,6 @@ def workday_count(days: int) -> int:
     """
 
 
-p
 def sorta_sum(a: int, b: int) -> int:
     """
     Given 2 ints, a and b, return their sum.
