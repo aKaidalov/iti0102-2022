@@ -18,10 +18,7 @@ def workday_count(days: int) -> int:
     :return: workdays in given days
     """
     workdays = 0
-    for day in range(days):
-        if day % 7 != 0 or day % 7 != 6:
-            workdays += 1
-    return workdays
+
 
 
 def sorta_sum(a: int, b: int) -> int:
@@ -38,7 +35,11 @@ def sorta_sum(a: int, b: int) -> int:
     :param b: Integer
     :return: Sum or 20
     """
-    pass
+    sum = a + b
+    if 10 <= sum <= 19:
+        sum = 20
+        return sum
+    return  sum
 
 
 def extra_end(s: str) -> str:
