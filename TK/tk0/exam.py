@@ -17,7 +17,7 @@ def workday_count(days: int) -> int:
     :param days: given number of days
     :return: workdays in given days
     """
-    weeks = int(days / 7)
+    weeks = days // 7
     return days - weeks * 2
 
 
