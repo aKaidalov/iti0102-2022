@@ -126,14 +126,17 @@ def remove_in_middle(text, to_remove):
     """
     quantity = text.count(to_remove)
     new_list = []
-    if quantity > 2:
-        list = text.split(to_remove)
-        list.insert(1, to_remove)
-        list.insert(-1, to_remove)
-        for element in list:
-            if element != '':
-                new_list.append(element)
-        new_text = "".join(new_list)
+    if to_remove != "":
+        if quantity > 2:
+            list = text.split(to_remove)
+            list.insert(1, to_remove)
+            list.insert(-1, to_remove)
+            for element in list:
+                if element != '':
+                    new_list.append(element)
+            new_text = "".join(new_list)
+        else:
+            return text
     else:
         return text
     return new_text
