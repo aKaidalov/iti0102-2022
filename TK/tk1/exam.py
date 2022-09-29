@@ -1,5 +1,6 @@
 """TK1."""
 
+
 def format_time(minutes: int) -> str:
     """
     Given minutes as an int, return correctly formatted time in hours and minutes.
@@ -49,7 +50,21 @@ def caught_speeding(speed, is_birthday):
     :param is_birthday: Whether it is your birthday (boolean).
     :return: Which category speeding ticket you would get (0, 1, 2).
     """
-    pass
+    if is_birthday:
+        if speed < 66:
+            result = 0
+        elif 65 < speed < 86:
+            result = 1
+        else:
+            result = 2
+    else:
+        if speed < 61:
+            result = 0
+        elif 60 < speed < 81:
+            result = 1
+        else:
+            result = 2
+    return result
 
 
 def first_half(text: str) -> str:
