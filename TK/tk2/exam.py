@@ -77,7 +77,6 @@ def non_decreasing_list(nums: list) -> bool:
     :param nums:
     :return:
     """
-
     for element in range(1, len(nums)):
         if nums[element] < nums[element - 1]:
             return False
