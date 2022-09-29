@@ -103,10 +103,3 @@ def max_duplicate(nums: list) -> int | None:
             return element
         else:
             nums.remove(element)
-
-print(
-    max_duplicate([1, 2, 3]),
-    max_duplicate([1, 2, 2]),
-    max_duplicate([1, 2, 2, 1, 1]),
-    max_duplicate([1, 2, 2, 1, 1,1, 2, 2, 1, 1,1, 2, 2, 1, 1,1, 2, 2, 1, 1,1, 2, 2, 1, 1,3]),
-)
