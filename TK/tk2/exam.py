@@ -101,6 +101,7 @@ def max_duplicate(nums: list) -> int | None:
         max_element = max(unique_nums_in_list)
         quantity = nums.count(max_element)
         if quantity == 1:
-            del element
+            unique_nums_in_list.remove(element)
         else:
             return max_element
+print(max_duplicate([1, 2, 3]))
