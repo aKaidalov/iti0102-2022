@@ -77,7 +77,8 @@ def first_half(text: str) -> str:
     first_half('HelloThere') => 'Hello'
     first_half('abcdef') => 'abc'
     """
-    pass
+    len_of_first_half = len(text) // 2
+    return text[:len_of_first_half]
 
 
 def num_as_index(nums: list) -> int:
