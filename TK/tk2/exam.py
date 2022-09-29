@@ -43,6 +43,7 @@ def lucky_guess(n: int) -> bool:
         if "5" in n or "6" in n:
             return False
         return True
+    return False
 
 
 def without_end(s: str) -> str:
