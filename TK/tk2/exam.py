@@ -1,5 +1,6 @@
 """TK2."""
 
+
 def middle_value(a: int, b: int, c: int) -> int:
     """
     Return the middle value out of three values.
@@ -107,4 +108,3 @@ def max_duplicate(nums: list) -> int | None:
             if new_element > element:
                 largest_element = element
     return largest_element
-print(max_duplicate([1, 2, 2, 1, 1]))
