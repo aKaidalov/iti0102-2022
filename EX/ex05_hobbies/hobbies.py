@@ -191,7 +191,10 @@ def find_people_with_hobbies(data: str, hobbies: list) -> set:
             names_in_hobby = set(dic[hobby])
             names_list.append(names_in_hobby)
 
-    return names_list[0] | names_list[1]
+    if len(names_list) < 2:
+        return names_list[0]
+    else:
+        return names_list[0] | names_list[1]
 
 
 def find_two_people_with_most_common_hobbies(data: str) -> tuple:
