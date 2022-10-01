@@ -13,15 +13,12 @@ def create_dictionary(data: str) -> dict:
     dic = {}
     split_data = data.split("\n")
     for element in split_data:
+        set_of_hobbies = set()
         name_and_hobby = element.split(":")
-        if name_and_hobby[0] in dic:
-            hobbies = dic[name_and_hobby[0]]
-            if name_and_hobby[1] not in hobbies:
-                hobbies.append(name_and_hobby[1])
-                del dic[name_and_hobby[0]]
-                dic[name_and_hobby[0]] = hobbies
-        else:
-            dic[name_and_hobby[0]] = [name_and_hobby[1]]
+        for el in split_data:
+            if name_and_hobby[0] in el:
+                set_of_hobbies.add(el[len(name_and_hobby[0]) + 1:])     # First position([0]) is right, because len = 4,
+        dic[name_and_hobby[0]] = set_of_hobbies                         # but ":" on pos 3 (0123) + 1 (+1 = char after :)
     return dic
 
 
@@ -60,5 +57,5 @@ if __name__ == '__main__':
     print("\n")
     print(sort_dictionary({"b": [], "a": [], "c": []}))
     print(sort_dictionary({"": ["a", "f", "d"]}))
-    print(sort_dictionary({"b":["d", "a"], "a":["c", "f"]}))
+    print(sort_dictionary({"b": ["d", "a"], "a": ["c", "f"]}))
     print(sort_dictionary({"Jack": ["swimming", "hiking"], "Charlie": ["games", "yoga"]}))
