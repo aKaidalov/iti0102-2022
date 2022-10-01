@@ -191,9 +191,9 @@ def find_people_with_hobbies(data: str, hobbies: list) -> set:
             names_in_hobby = set(dic[hobby])
             names_list.append(names_in_hobby)
 
-    if len(names_list) < 2:
+    if len(names_list) == 1:
         return names_list[0]
-    else:
+    elif len(names_list) == 2:
         return names_list[0] | names_list[1]
 
 
@@ -297,8 +297,7 @@ if __name__ == '__main__':
     assert len(sort_result) == 10
     assert sort_result[0][0] == 'Alfred'
     assert len(sort_result[0][1]) == 7
-    assert sort_result[-1] == (
-    'Wendy', ('fishing', 'fitness', 'football', 'gaming', 'photography', 'puzzles', 'shopping', 'sport', 'theatre'))
+    assert sort_result[-1] == ('Wendy', ('fishing', 'fitness', 'football', 'gaming', 'photography', 'puzzles', 'shopping', 'sport', 'theatre'))
     # if you see this line below, then everything seems to be ok!
     print("sorting works!")
 
