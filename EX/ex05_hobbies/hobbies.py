@@ -191,9 +191,9 @@ def find_people_with_hobbies(data: str, hobbies: list) -> set:
             names_in_hobby = set(dic[hobby])
             names_list.append(names_in_hobby)
 
-    if len(names_list) == 1:
+    if len(names_list) < 2:
         return names_list[0]
-    elif len(names_list) == 2:
+    elif len(names_list) >= 2:
         return names_list[0] | names_list[1]
 
 
