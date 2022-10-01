@@ -238,8 +238,12 @@ def find_two_people_with_most_common_hobbies(data: str) -> tuple:
             for j in range(1, len(names)):
                 common = set(hobbies_list[j - 1]) & set(hobbies_list[j])
                 diff = set(hobbies_list[j - 1]) ^ set(hobbies_list[j])
-                ratio = len(common) / len(diff)
-                new_dic[str(ratio)] = tuple([names[j - 1], names[j]])
+                if diff != 0:
+                    ratio = len(common) / len(diff)
+                    new_dic[str(ratio)] = tuple([names[j - 1], names[j]])
+                else:
+                    ratio = len(common)
+                    new_dic[str(ratio)] = tuple([names[j - 1], names[j]])
 
         best_ratio = max(new_dic)
         return new_dic[best_ratio]
