@@ -186,7 +186,7 @@ def find_people_with_hobbies(data: str, hobbies: list) -> set:
     dic = create_dictionary_with_hobbies(data)
     names_list = []
 
-    for hobby in hobbies:
+    for hobby in hobbies:   #
         if hobby in dic.keys():
             names_in_hobby = set(dic[hobby])
             names_list.append(names_in_hobby)
