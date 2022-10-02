@@ -17,7 +17,8 @@ def create_dictionary(data: str) -> dict:
         set_of_hobbies = set()
         name_and_hobby = element.split(":")
         for el in split_data:
-            if name_and_hobby[0] in el:
+            split_el = el.split(":")
+            if name_and_hobby[0] == split_el[0]:
                 set_of_hobbies.add(el[len(name_and_hobby[0]) + 1:])     # First position([0]) is right, because len = 4,
         dic[name_and_hobby[0]] = set_of_hobbies                         # but ":" on pos 3 (0123) + 1 (+1 = char after :)
 
@@ -261,17 +262,17 @@ def find_two_people_with_most_common_hobbies(data: str) -> tuple:
 
 
 if __name__ == '__main__':
-    # sample_data = """Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"""
-    # dic = create_dictionary(sample_data)
-    # print("shopping" in dic["Wendy"])  # -> True
-    # print("fitness" in dic["Sophie"])  # -> False
-    # print("gaming" in dic["Peter"])  # -> True
-    # print(len(dic["Jack"]))  # ->  12
-    # print(len(dic["Carmen"]))  # -> 10
-    # print(len(dic["Molly"]))  # -> 5
-    # print(len(dic["Sophie"]))  # -> 7
-    # print("\n")
-    #
+    sample_data = """Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"""
+    dic = create_dictionary(sample_data)
+    print("shopping" in dic["Wendy"])  # -> True
+    print("fitness" in dic["Sophie"])  # -> False
+    print("gaming" in dic["Peter"])  # -> True
+    print(len(dic["Jack"]))  # ->  12
+    print(len(dic["Carmen"]))  # -> 10
+    print(len(dic["Molly"]))  # -> 5
+    print(len(dic["Sophie"]))  # -> 7
+    print("\n")
+
     # print(sort_dictionary({"b": [], "a": [], "c": []}))
     # print(sort_dictionary({"": ["a", "f", "d"]}))
     # print(sort_dictionary({"b": ["d", "a"], "a": ["c", "f"]}))
@@ -316,5 +317,5 @@ if __name__ == '__main__':
         ["running", "dancing"]
     ))  # {"John", "Mary", "Jack"}
 
-    sample_data = 'name2:hobby3\nname6:hobby3\nname2:hobby5\nname5:hobby1\nname4:hobby2\nname3:hobby7\nname5:hobby3\nname1:hobby7\nname0:hobby2\nname1:hobby1\nname3:hobby7\nname6:hobby3'
+    sample_data = 'name2:hobby3\nname10:hobby3\nname10:hobby3\nname4:hobby1\nname6:hobby2\nname9:hobby2\nname4:hobby1\nname6:hobby0\nnam...by2\nname10:hobby0\nname10:hobby0\nname6:hobby0\nname10:hobby0\nname4:hobby0\nname7:hobby4\nname1:hobby3\nname7:hobby1'
     print(find_two_people_with_most_common_hobbies(sample_data))
