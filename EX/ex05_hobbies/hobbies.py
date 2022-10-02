@@ -185,25 +185,10 @@ def find_people_with_hobbies(data: str, hobbies: list) -> set:
         {"John", "Mary", "Jack"}
     """
     dic = create_dictionary_with_hobbies(data)
-    names_list = []
-    union = set()
-
-    for hobby in hobbies:
-        if hobby in dic.keys():
-            names_in_hobby = set(dic[hobby])
-            names_list.append(names_in_hobby)
-    if len(names_list) != 0:
-        if len(names_list) == 1:
-            return names_list[0]
-        else:
-            for i in range(1, len(names_list)):
-                if i == 1:
-                    union = names_list[i - 1] | names_list[i]
-                else:
-                    union = union | names_list[i]
-            return union
-    else:
-        return set()
+    res = set()
+    for key in hobbies:
+        res.update(dic.get(key))
+    return res
 
 
 def find_two_people_with_most_common_hobbies(data: str) -> tuple:
