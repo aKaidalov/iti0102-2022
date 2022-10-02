@@ -201,6 +201,8 @@ def find_people_with_hobbies(data: str, hobbies: list) -> set:
                 else:
                     union = union | names_list[i]
             return union
+    else:
+        return set()
 
 
 def find_two_people_with_most_common_hobbies(data: str) -> tuple:
