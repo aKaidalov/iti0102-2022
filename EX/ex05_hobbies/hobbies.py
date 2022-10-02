@@ -187,7 +187,7 @@ def find_people_with_hobbies(data: str, hobbies: list) -> set:
     names_list = []
     union = set()
 
-    for hobby in hobbies:   #
+    for hobby in hobbies:
         if hobby in dic.keys():
             names_in_hobby = set(dic[hobby])
             names_list.append(names_in_hobby)
@@ -249,7 +249,7 @@ def find_two_people_with_most_common_hobbies(data: str) -> tuple:
             for j in range(1, len(names)):
                 common = set(hobbies_list[j - 1]) & set(hobbies_list[j])
                 diff = set(hobbies_list[j - 1]) ^ set(hobbies_list[j])
-                if diff != 0:
+                if diff != set():
                     ratio = len(common) / len(diff)
                     new_dic[str(ratio)] = tuple([names[j - 1], names[j]])
                 else:
@@ -316,5 +316,5 @@ if __name__ == '__main__':
         ["running", "dancing"]
     ))  # {"John", "Mary", "Jack"}
 
-    sample_data = """John:running\nJohn:walking\nMary:dancing\nMary:running\nNora:running\nNora:singing\nNora:dancing"""
-    print(find_two_people_with_most_common_hobbies(sample_data))  # ('Mary', 'Nora')
+    sample_data = """John:running\nJohn:walking\nMary:walking\nMary:running\nNora:running\nNora:singing\nNora:dancing"""
+    print(find_two_people_with_most_common_hobbies(sample_data))
