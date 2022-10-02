@@ -251,10 +251,11 @@ def find_two_people_with_most_common_hobbies(data: str) -> tuple:
                 diff = set(hobbies_list[i]) ^ set(hobbies_list[j])
                 if diff != set():
                     ratio = len(common) / len(diff)
-                    new_dic[str(ratio)] = tuple([names[i], names[j]])
+                    if str(round(ratio, 1)) not in new_dic:
+                        new_dic[str(round(ratio, 1))] = tuple([names[i], names[j]])
                 else:
                     ratio = len(common)
-                    new_dic[str(ratio)] = tuple([names[i], names[j]])
+                    new_dic[str(float(ratio))] = tuple([names[i], names[j]])
 
         best_ratio = max(new_dic)
         return new_dic[best_ratio]
@@ -316,5 +317,6 @@ if __name__ == '__main__':
         ["running", "dancing"]
     ))  # {"John", "Mary", "Jack"}
 
-    sample_data = """John:running\nJohn:walking\nMary:walking\nMary:running\nNora:running\nNora:singing\nNora:dancing"""
+    sample_data = """name1:hobby4\nname0:hobby4\nname2:hobby6\nname7:hobby8\nname0:hobby1\nname2:hobby8\nname0:hobby0\nname2:hobby6\nname6:hobby4\nname4:hobby6\nname7:hobby2"""
     print(find_two_people_with_most_common_hobbies(sample_data))
+
