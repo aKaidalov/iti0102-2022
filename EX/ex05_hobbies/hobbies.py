@@ -10,33 +10,33 @@ def create_dictionary(data: str) -> dict:
     :param data: given string from database
     :return: dictionary where keys are people and values are lists of hobbies
     """
-    # dic = {}
-    # split_data = data.split("\n")
-    #
-    # for element in split_data:
-    #     set_of_hobbies = set()
-    #     name_and_hobby = element.split(":")
-    #     for el in split_data:
-    #         split_el = el.split(":")
-    #         if name_and_hobby[0] == split_el[0]:
-    #             set_of_hobbies.add(el[len(name_and_hobby[0]) + 1:])     # First position([0]) is right, because len = 4,
-    #     dic[name_and_hobby[0]] = set_of_hobbies                         # but ":" on pos 3 (0123) + 1 (+1 = char after :)
-    #
-    # return dic
-    #
     dic = {}
     split_data = data.split("\n")
+
     for element in split_data:
+        set_of_hobbies = set()
         name_and_hobby = element.split(":")
-        if name_and_hobby[0] in dic:
-            hobbies = dic[name_and_hobby[0]]
-            if name_and_hobby[1] not in hobbies:
-                hobbies.append(name_and_hobby[1])
-                del dic[name_and_hobby[0]]
-                dic[name_and_hobby[0]] = hobbies
-        else:
-            dic[name_and_hobby[0]] = [name_and_hobby[1]]
+        for el in split_data:
+            split_el = el.split(":")
+            if name_and_hobby[0] == split_el[0]:
+                set_of_hobbies.add(el[len(name_and_hobby[0]) + 1:])     # First position([0]) is right, because len = 4,
+        dic[name_and_hobby[0]] = set_of_hobbies                         # but ":" on pos 3 (0123) + 1 (+1 = char after :)
+
     return dic
+    #
+    # dic = {}
+    # split_data = data.split("\n")
+    # for element in split_data:
+    #     name_and_hobby = element.split(":")
+    #     if name_and_hobby[0] in dic:
+    #         hobbies = dic[name_and_hobby[0]]
+    #         if name_and_hobby[1] not in hobbies:
+    #             hobbies.append(name_and_hobby[1])
+    #             del dic[name_and_hobby[0]]
+    #             dic[name_and_hobby[0]] = hobbies
+    #     else:
+    #         dic[name_and_hobby[0]] = [name_and_hobby[1]]
+    # return dic
 
 
 def sort_dictionary(dic: dict) -> dict:
@@ -252,7 +252,7 @@ def find_two_people_with_most_common_hobbies(data: str) -> tuple:
                 diff = set(hobbies_list[i]) ^ set(hobbies_list[j])
                 if diff != set():
                     ratio = len(common) / len(diff)
-                    new_dic[round(ratio, 1)] = tuple([names[i], names[j]])
+                    new_dic[ratio] = tuple([names[i], names[j]])
                 else:
                     ratio = len(common) / 0.1
                     new_dic[ratio] = tuple([names[i], names[j]])
@@ -310,16 +310,16 @@ if __name__ == '__main__':
     # # if you see this line below, then everything seems to be ok!
     # print("sorting works!")
 
-    sample_data = "\n".join(f"name{i}:hobby{j}" for i in range(500) for j in range(100))
-    from datetime import datetime
-    date1 = datetime.now()
-    print(create_dictionary(sample_data), ["hobby56", "hobby77", "hobby99"]) == {f"name{i}" for i in range(500)}
-    date2 = datetime.now()
-    print(date2 - date1)
+    # sample_data = "\n".join(f"name{i}:hobby{j}" for i in range(500) for j in range(100))
+    # from datetime import datetime
+    # date1 = datetime.now()
+    # print(create_dictionary(sample_data), ["hobby56", "hobby77", "hobby99"]) == {f"name{i}" for i in range(500)}
+    # date2 = datetime.now()
+    # print(date2 - date1)
     # print(find_people_with_hobbies(
     #     "John:running\nMary:running\nJohn:dancing\nJack:dancing\nJack:painting\nSmith:painting",
     #     ["running", "dancing"]
     # ))  # {"John", "Mary", "Jack"}
 
-    # sample_data = 'name3:hobby8\nname0:hobby10\nname2:hobby10\nname0:hobby0\nname3:hobby13\nname0:hobby9\nname2:hobby3\nname1:hobby6\nna...y11\nname2:hobby0\nname0:hobby12\nname0:hobby4\nname0:hobby13\nname4:hobby6\nname1:hobby10\nname1:hobby8\nname3:hobby5'
-    # print(find_two_people_with_most_common_hobbies(sample_data))
+    sample_data = "name1:hobby0\nname3:hobby7\nname5:hobby3\nname0:hobby1\nname0:hobby0\nname2:hobby4\nname3:hobby8\nname0:hobby11\nname4:hobby0\nname4:hobby4\nname0:hobby7\nname5:hobby3\nname4:hobby4\nname2:hobby11\nname1:hobby0\nname4:hobby11\nname3:hobby8\nname1:hobby4\nname0:hobby9\nname0:hobby8\nname3:hobby1\nname1:hobby0\nname2:hobby7\nname0:hobby6\nname1:hobby7\nname5:hobby7\nname1:hobby10\nname4:hobby6\nname1:hobby0\nname3:hobby5\nname3:hobby7\nname3:hobby9\nname5:hobby2\nname1:hobby3\nname0:hobby11\nname4:hobby5\nname5:hobby5\nname1:hobby11\nname3:hobby8\nname5:hobby7\nname1:hobby7\nname3:hobby4\nname4:hobby1\nname3:hobby8\nname2:hobby6\nname2:hobby4\nname5:hobby6\nname5:hobby5\nname4:hobby4"
+    print(find_two_people_with_most_common_hobbies(sample_data))
