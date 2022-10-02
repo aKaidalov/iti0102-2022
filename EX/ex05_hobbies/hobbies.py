@@ -316,5 +316,5 @@ if __name__ == '__main__':
         ["running", "dancing"]
     ))  # {"John", "Mary", "Jack"}
 
-    sample_data = 'name2:hobby8\nname7:hobby6\nname3:hobby3\nname4:hobby4\nname5:hobby8\nname6:hobby6\nname7:hobby4\nname2:hobby6\nname7:hobby4\nname6:hobby8\nname1:hobby4\nname6:hobby3'
+    sample_data = 'name2:hobby3\nname6:hobby3\nname2:hobby5\nname5:hobby1\nname4:hobby2\nname3:hobby7\nname5:hobby3\nname1:hobby7\nname0:hobby2\nname1:hobby1\nname3:hobby7\nname6:hobby3'
     print(find_two_people_with_most_common_hobbies(sample_data))
