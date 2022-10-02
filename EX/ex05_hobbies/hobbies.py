@@ -191,7 +191,7 @@ def find_people_with_hobbies(data: str, hobbies: list) -> set:
     for key in hobbies:
         if key in dic:
             res.update(dic.get(key))
-    return res
+    return res  #
 
 
 def find_two_people_with_most_common_hobbies(data: str) -> tuple:
