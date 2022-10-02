@@ -84,7 +84,7 @@ def create_dictionary_with_hobbies(data: str) -> dict:
         elif name_and_hobby[0] not in dic[name_and_hobby[1]]:
             dic[name_and_hobby[1]].append(name_and_hobby[0])
 
-    return dic
+    return sort_dictionary(dic)
 
 
 # -----------------------------------------------------------------------
