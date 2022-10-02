@@ -186,8 +186,11 @@ def find_people_with_hobbies(data: str, hobbies: list) -> set:
     """
     dic = create_dictionary_with_hobbies(data)
     res = set()
+    if len(dic) == 0 or len(hobbies) == 0:
+        return res
     for key in hobbies:
-        res.update(dic.get(key))
+        if key in dic:
+            res.update(dic.get(key))
     return res
 
 
