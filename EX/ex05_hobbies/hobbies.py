@@ -10,33 +10,33 @@ def create_dictionary(data: str) -> dict:
     :param data: given string from database
     :return: dictionary where keys are people and values are lists of hobbies
     """
-    dic = {}
-    split_data = data.split("\n")
-
-    for element in split_data:
-        set_of_hobbies = set()
-        name_and_hobby = element.split(":")
-        for el in split_data:
-            split_el = el.split(":")
-            if name_and_hobby[0] == split_el[0]:
-                set_of_hobbies.add(el[len(name_and_hobby[0]) + 1:])     # First position([0]) is right, because len = 4,
-        dic[name_and_hobby[0]] = set_of_hobbies                         # but ":" on pos 3 (0123) + 1 (+1 = char after :)
-
-    return dic
-    #
     # dic = {}
     # split_data = data.split("\n")
+    #
     # for element in split_data:
+    #     set_of_hobbies = set()
     #     name_and_hobby = element.split(":")
-    #     if name_and_hobby[0] in dic:
-    #         hobbies = dic[name_and_hobby[0]]
-    #         if name_and_hobby[1] not in hobbies:
-    #             hobbies.append(name_and_hobby[1])
-    #             del dic[name_and_hobby[0]]
-    #             dic[name_and_hobby[0]] = hobbies
-    #     else:
-    #         dic[name_and_hobby[0]] = [name_and_hobby[1]]
+    #     for el in split_data:
+    #         split_el = el.split(":")
+    #         if name_and_hobby[0] == split_el[0]:
+    #             set_of_hobbies.add(el[len(name_and_hobby[0]) + 1:])     # First position([0]) is right, because len = 4,
+    #     dic[name_and_hobby[0]] = set_of_hobbies                         # but ":" on pos 3 (0123) + 1 (+1 = char after :)
+    #
     # return dic
+    #
+    dic = {}
+    split_data = data.split("\n")
+    for element in split_data:
+        name_and_hobby = element.split(":")
+        if name_and_hobby[0] in dic:
+            hobbies = dic[name_and_hobby[0]]
+            if name_and_hobby[1] not in hobbies:
+                hobbies.append(name_and_hobby[1])
+                del dic[name_and_hobby[0]]
+                dic[name_and_hobby[0]] = hobbies
+        else:
+            dic[name_and_hobby[0]] = [name_and_hobby[1]]
+    return dic
 
 
 def sort_dictionary(dic: dict) -> dict:
@@ -262,16 +262,16 @@ def find_two_people_with_most_common_hobbies(data: str) -> tuple:
 
 
 if __name__ == '__main__':
-    sample_data = """Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"""
-    dic = create_dictionary(sample_data)
-    print("shopping" in dic["Wendy"])  # -> True
-    print("fitness" in dic["Sophie"])  # -> False
-    print("gaming" in dic["Peter"])  # -> True
-    print(len(dic["Jack"]))  # ->  12
-    print(len(dic["Carmen"]))  # -> 10
-    print(len(dic["Molly"]))  # -> 5
-    print(len(dic["Sophie"]))  # -> 7
-    print("\n")
+    # sample_data = """Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"""
+    # dic = create_dictionary(sample_data)
+    # print("shopping" in dic["Wendy"])  # -> True
+    # print("fitness" in dic["Sophie"])  # -> False
+    # print("gaming" in dic["Peter"])  # -> True
+    # print(len(dic["Jack"]))  # ->  12
+    # print(len(dic["Carmen"]))  # -> 10
+    # print(len(dic["Molly"]))  # -> 5
+    # print(len(dic["Sophie"]))  # -> 7
+    # print("\n")
 
     # print(sort_dictionary({"b": [], "a": [], "c": []}))
     # print(sort_dictionary({"": ["a", "f", "d"]}))
@@ -296,26 +296,30 @@ if __name__ == '__main__':
     # print(len(dic["Molly"]))  # -> 5
     # print(len(dic["Sophie"]))  # -> 7
     # print(find_least_popular_hobbies(sample_data))  # -> ['dance', 'flowers', 'puzzles', 'tennis']
-    print("\n")
+    # print("\n")
+    #
+    # sample_data = """Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"""
+    #
+    # sort_result = sort_names_and_hobbies(sample_data)
+    # # if the condition after assert is False, error will be thrown
+    # assert isinstance(sort_result, tuple)
+    # assert len(sort_result) == 10
+    # assert sort_result[0][0] == 'Alfred'
+    # assert len(sort_result[0][1]) == 7
+    # assert sort_result[-1] == ('Wendy', ('fishing', 'fitness', 'football', 'gaming', 'photography', 'puzzles', 'shopping', 'sport', 'theatre'))
+    # # if you see this line below, then everything seems to be ok!
+    # print("sorting works!")
 
-    sample_data = """Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"""
+    sample_data = "Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"
+    from datetime import datetime
+    date1 = datetime.now()
+    print(create_dictionary(sample_data), ["gaming", "sport"])
+    date2 = datetime.now()
+    print(date2 - date1)
+    # print(find_people_with_hobbies(
+    #     "John:running\nMary:running\nJohn:dancing\nJack:dancing\nJack:painting\nSmith:painting",
+    #     ["running", "dancing"]
+    # ))  # {"John", "Mary", "Jack"}
 
-    sort_result = sort_names_and_hobbies(sample_data)
-    # if the condition after assert is False, error will be thrown
-    assert isinstance(sort_result, tuple)
-    assert len(sort_result) == 10
-    assert sort_result[0][0] == 'Alfred'
-    assert len(sort_result[0][1]) == 7
-    assert sort_result[-1] == ('Wendy', ('fishing', 'fitness', 'football', 'gaming', 'photography', 'puzzles', 'shopping', 'sport', 'theatre'))
-    # if you see this line below, then everything seems to be ok!
-    print("sorting works!")
-
-    sample_data = """Jack:painting\nPeter:painting\nJack:running\nMary:running\nSmith:walking"""
-    print(find_people_with_hobbies(sample_data, ["running", "painting"]))
-    print(find_people_with_hobbies(
-        "John:running\nMary:running\nJohn:dancing\nJack:dancing\nJack:painting\nSmith:painting",
-        ["running", "dancing"]
-    ))  # {"John", "Mary", "Jack"}
-
-    sample_data = 'name2:hobby3\nname10:hobby3\nname10:hobby3\nname4:hobby1\nname6:hobby2\nname9:hobby2\nname4:hobby1\nname6:hobby0\nnam...by2\nname10:hobby0\nname10:hobby0\nname6:hobby0\nname10:hobby0\nname4:hobby0\nname7:hobby4\nname1:hobby3\nname7:hobby1'
-    print(find_two_people_with_most_common_hobbies(sample_data))
+    # sample_data = 'name3:hobby8\nname0:hobby10\nname2:hobby10\nname0:hobby0\nname3:hobby13\nname0:hobby9\nname2:hobby3\nname1:hobby6\nna...y11\nname2:hobby0\nname0:hobby12\nname0:hobby4\nname0:hobby13\nname4:hobby6\nname1:hobby10\nname1:hobby8\nname3:hobby5'
+    # print(find_two_people_with_most_common_hobbies(sample_data))
