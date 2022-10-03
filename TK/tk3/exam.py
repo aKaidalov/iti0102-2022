@@ -41,6 +41,8 @@ def alarm_clock(day: int, vacation: bool) -> str:
     """
     if day in range(5) and not vacation:
         return "08:00"
+    elif day in range(5) and vacation:
+        return "10:00"
     elif (day == 5 or day == 6) and not vacation:
         return "10:00"
     else:
