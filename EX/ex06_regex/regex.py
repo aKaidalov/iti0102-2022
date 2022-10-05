@@ -133,7 +133,10 @@ def find_phone_numbers(text: str) -> dict:
     dic = {}
     for phone in re.finditer(r"(\+\d{3})?\s?(\d{7,8})", text):
         if not phone.group(1):
-            dic[""] = [phone.group(2)]
+            if "" not in dic:
+                dic[""] = [phone.group(2)]
+            else:
+                dic[""].append(phone.group(2))
         elif phone.group(1) not in dic:
             dic[phone.group(1)] = [phone.group(2)]
         else:
