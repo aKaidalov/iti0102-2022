@@ -50,9 +50,7 @@ class Entry:
         This method assists in comparing two different objects.
         This method is perfect. Don't touch it.
         """
-        return self.first_name == other.first_name and self.last_name == other.last_name and \
-               self.id_code == other.id_code and self.phone_number == other.phone_number and \
-               self.date_of_birth == other.date_of_birth and self.address == other.address
+        return self.first_name == other.first_name and self.last_name == other.last_name and self.id_code == other.id_code and self.phone_number == other.phone_number and self.date_of_birth == other.date_of_birth and self.address == other.address
 
 
 def parse(row: str) -> Entry:
@@ -62,9 +60,7 @@ def parse(row: str) -> Entry:
     :param row: String representation of the data.
     :return: Entry object with filled values
     """
-    info = re.search(
-        r"(([A-ZÕÜÄÖ][a-zõüäö]+) *([A-ZÕÜÄÖ][a-zõüäö]+))?(\d{11})((\+\d{3})?\s?(\d{7,8}))?(\d{2}-\d{2}-\d{4})?(?<=\d)(.*)?",
-        row)
+    info = re.search(r"(([A-ZÕÜÄÖ]\w+) *([A-ZÕÜÄÖ]\w+))?(\d{11})((\+\d{3})?\s?(\d{7,8}))?(\d{2}-\d{2}-\d{4})?(?<=\d)(.*)?", row)
     first_name = info.group(2)
     last_name = info.group(3)
     id_code = info.group(4)
