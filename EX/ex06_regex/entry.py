@@ -25,10 +25,10 @@ class Entry:
         If the object doesn't have date of birth given, return None.
         :return:
         """
-        # birthday = re.search(r"(\d{2})-(\d{2})-(\d{4})", self)
-        # day, month, year = birthday.group(1), birthday.group(2), birthday.group(3)
-        # return f"Day: {day}, Month: {month}, Year: {year}"
-        pass
+        if self.date_of_birth is not None:
+            birthday = re.search(r"(\d{2})-(\d{2})-(\d{4})", self.date_of_birth)
+            day, month, year = birthday.group(1), birthday.group(2), birthday.group(3)
+            return f"Day: {day}, Month: {month}, Year: {year}"
 
     def __repr__(self) -> str:
         """
@@ -50,7 +50,9 @@ class Entry:
         This method assists in comparing two different objects.
         This method is perfect. Don't touch it.
         """
-        return self.first_name == other.first_name and self.last_name == other.last_name and self.id_code == other.id_code and self.phone_number == other.phone_number and self.date_of_birth == other.date_of_birth and self.address == other.address
+        return self.first_name == other.first_name and self.last_name == other.last_name and \
+               self.id_code == other.id_code and self.phone_number == other.phone_number and \
+               self.date_of_birth == other.date_of_birth and self.address == other.address
 
 
 def parse(row: str) -> Entry:
