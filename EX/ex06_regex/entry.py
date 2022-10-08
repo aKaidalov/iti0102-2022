@@ -60,7 +60,9 @@ def parse(row: str) -> Entry:
     :param row: String representation of the data.
     :return: Entry object with filled values
     """
-    info = re.search(r"(([A-ZÕÜÄÖ]\w+) *([A-ZÕÜÄÖ]\w+))?(\d{11})((\+\d{3})?\s?(\d{7,8}))?(\d{2}-\d{2}-\d{4})?(?<=\d)(.*)?", row)
+    info = re.search(
+        r"(([A-ZÕÜÄÖ][a-zõüäö]+) *([A-ZÕÜÄÖ][a-zõüäö]+))?(\d{11})((\+\d{3})?\s?(\d{7,8}))?(\d{2}-\d{2}-\d{4})?(?<=\d)(.*)?",
+        row)
     first_name = info.group(2)
     last_name = info.group(3)
     id_code = info.group(4)
