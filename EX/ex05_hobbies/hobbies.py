@@ -247,27 +247,31 @@ def find_two_people_with_most_common_hobbies(data: str) -> tuple:
         best_ratio = max(new_dic)
         return new_dic[best_ratio]
 
+def sorted_sorted ():
+    people = {3: "Jim", 2: "Jack", 4: "Jane", 1: "Jill"}
+    print(dict(sorted(people.items())))
 
-if __name__ == '__main__':
-    sample_data = """Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"""
-    dic = create_dictionary(sample_data)
-    print("shopping" in dic["Wendy"])  # -> True
-    print("fitness" in dic["Sophie"])  # -> False
-    print("gaming" in dic["Peter"])  # -> True
-    print(len(dic["Jack"]))  # ->  12
-    print(len(dic["Carmen"]))  # -> 10
-    print(len(dic["Molly"]))  # -> 5
-    print(len(dic["Sophie"]))  # -> 7
-    print("\n")
-
-    print(sort_dictionary({"b": [], "a": [], "c": []}))
-    print(sort_dictionary({"": ["a", "f", "d"]}))
-    print(sort_dictionary({"b": ["d", "a"], "a": ["c", "f"]}))
-    print(sort_dictionary({"Jack": ["swimming", "hiking"], "Charlie": ["games", "yoga"]}))
-    print("\n")
-
-    print(create_dictionary_with_hobbies(sample_data))
-    print("\n")
+sorted_sorted()
+# if __name__ == '__main__':
+    # sample_data = """Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"""
+    # dic = create_dictionary(sample_data)
+    # print("shopping" in dic["Wendy"])  # -> True
+    # print("fitness" in dic["Sophie"])  # -> False
+    # print("gaming" in dic["Peter"])  # -> True
+    # print(len(dic["Jack"]))  # ->  12
+    # print(len(dic["Carmen"]))  # -> 10
+    # print(len(dic["Molly"]))  # -> 5
+    # print(len(dic["Sophie"]))  # -> 7
+    # print("\n")
+    #
+    # print(sort_dictionary({"b": [], "a": [], "c": []}))
+    # print(sort_dictionary({"": ["a", "f", "d"]}))
+    # print(sort_dictionary({"b": ["d", "a"], "a": ["c", "f"]}))
+    # print(sort_dictionary({"Jack": ["swimming", "hiking"], "Charlie": ["games", "yoga"]}))
+    # print("\n")
+    #
+    # print(create_dictionary_with_hobbies(sample_data))
+    # print("\n")
 
     # sample_data = """Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"""
     # print(find_people_with_most_hobbies(sample_data))  # -> ['Jack']
@@ -308,5 +312,5 @@ if __name__ == '__main__':
     #     ["running", "dancing"]
     # ))  # {"John", "Mary", "Jack"}
 
-    sample_data = "name1:hobby0\nname3:hobby7\nname5:hobby3\nname0:hobby1\nname0:hobby0\nname2:hobby4\nname3:hobby8\nname0:hobby11\nname4:hobby0\nname4:hobby4\nname0:hobby7\nname5:hobby3\nname4:hobby4\nname2:hobby11\nname1:hobby0\nname4:hobby11\nname3:hobby8\nname1:hobby4\nname0:hobby9\nname0:hobby8\nname3:hobby1\nname1:hobby0\nname2:hobby7\nname0:hobby6\nname1:hobby7\nname5:hobby7\nname1:hobby10\nname4:hobby6\nname1:hobby0\nname3:hobby5\nname3:hobby7\nname3:hobby9\nname5:hobby2\nname1:hobby3\nname0:hobby11\nname4:hobby5\nname5:hobby5\nname1:hobby11\nname3:hobby8\nname5:hobby7\nname1:hobby7\nname3:hobby4\nname4:hobby1\nname3:hobby8\nname2:hobby6\nname2:hobby4\nname5:hobby6\nname5:hobby5\nname4:hobby4"
-    print(find_two_people_with_most_common_hobbies(sample_data))
+    # sample_data = "name1:hobby0\nname3:hobby7\nname5:hobby3\nname0:hobby1\nname0:hobby0\nname2:hobby4\nname3:hobby8\nname0:hobby11\nname4:hobby0\nname4:hobby4\nname0:hobby7\nname5:hobby3\nname4:hobby4\nname2:hobby11\nname1:hobby0\nname4:hobby11\nname3:hobby8\nname1:hobby4\nname0:hobby9\nname0:hobby8\nname3:hobby1\nname1:hobby0\nname2:hobby7\nname0:hobby6\nname1:hobby7\nname5:hobby7\nname1:hobby10\nname4:hobby6\nname1:hobby0\nname3:hobby5\nname3:hobby7\nname3:hobby9\nname5:hobby2\nname1:hobby3\nname0:hobby11\nname4:hobby5\nname5:hobby5\nname1:hobby11\nname3:hobby8\nname5:hobby7\nname1:hobby7\nname3:hobby4\nname4:hobby1\nname3:hobby8\nname2:hobby6\nname2:hobby4\nname5:hobby6\nname5:hobby5\nname4:hobby4"
+    # print(find_two_people_with_most_common_hobbies(sample_data))
