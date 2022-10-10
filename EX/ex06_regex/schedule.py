@@ -41,6 +41,29 @@ def get_info_sorted(input_string: str):
     return modified_dic
 
 
+def get_table_sizes(dic: dict):
+    """Get the maximum sizes for table."""
+    time_width = 0
+    entries_width = 0
+    values = dic.values()
+    for v in values:
+        if time_width < len(v):
+            time_width = len(v)
+    for value in values:
+        length = ",".join(value)
+        if entries_width < len(length):
+            entries_width = len(length)
+    return time_width, entries_width        # tuple()
+
+
+def create_table(dic: dict, time_width: int, entries_width: int):
+    """Create table."""
+    line_width = 1 + (time_width + 2) + 1 + (entries_width + 2) + 1
+    for element in dic:
+
+
+
+
 def create_schedule_file(input_filename: str, output_filename: str) -> None:
     """Create schedule file from the given input file."""
     pass
@@ -48,9 +71,14 @@ def create_schedule_file(input_filename: str, output_filename: str) -> None:
 
 def create_schedule_string(input_string: str):      # -> str: Ubral dlja proverki
     """Create schedule string from the given input string."""
-    return get_info_sorted(input_string)
+    dic = get_info_sorted(input_string)
+    width = get_table_sizes(dic)
+    time_max_width = width[0]
+    entries_max_width = width[1]
+    return
 
 
 if __name__ == '__main__':
-    print(create_schedule_string("wat 13:00 wat 10:00 teine tekst 11:0 23-59 canuseminustherege pikktekst 08:04 Lorem  21:59 nopoint 18:19 Donec 18.1 ds 09:01 Lorem 0:0 Lorem 8:1 Lorem 8:3 Lorem 20:1 Lorem 20:0 Lorem 18:18 Lorem"))
+    print(create_schedule_string("wat 13:00 wat 10:00 teine tekst 11:0 23-59 canuseminustherege pikktekst 08:04 Lorem  21:59 nopoint 18:19 Donec 18.1 ds 09:01 Lorem 0!0 Lorem 8:1 Lorem 8:3 Lorem 20:1 Lorem 20:0 Lorem 18:18 Lorem"))
+    print(create_schedule_string("wat 11:00 teine tekst 11:0 jah ei 10:00 pikktekst "))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
