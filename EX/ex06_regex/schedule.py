@@ -5,7 +5,7 @@ import re
 def get_formatted_time(input_string: str):
     """Format 24 hour time to the 12 hour time."""
     dic = {}
-    for match in re.finditer(r"(?<=\s)(\d{1,2})\D(\d{1,2})\s+([A-Za-z]+)", input_string):
+    for match in re.finditer(r"(?<=\s)(\d{1,2})\D(\d{1,2})\s+([A-Za-z]*)", input_string):
         hours, minutes = int(match.group(1)), int(match.group(2))
         if 0 <= hours < 24 and 0 <= minutes < 60:
             if hours < 12:
@@ -60,33 +60,44 @@ def create_table(dic: dict, time_width: int, entries_width: int):
     """Create table."""
     final_string = ""
     line_width = 1 + (time_width + 2) + 1 + (entries_width + 2) + 1
-    count, empty_str = 0, ""
+    empty_str = ""
     final_string += f"{empty_str:{'-'}^{line_width}}\n"
     final_string += f"| {'time':{' '}>{time_width}} | {'entries':{' '}<{entries_width}} |\n"
     final_string += f"{empty_str:{'-'}^{line_width}}\n"
     for element in dic:
         value = ",".join(dic[element])
-        final_string += f"| {element:{' '}>{time_width}} | {value:{' '}<{entries_width}} |\n"
+        if value != '':
+            final_string += f"| {element:{' '}>{time_width}} | {value:{' '}<{entries_width}} |\n"
+        else:
+            final_string += f"{empty_str:{'-'}^{line_width}}\n"
+            final_string += f"| {'No entries found':{' '}^{line_width - 4}} |\n"
+            final_string += f"{empty_str:{'-'}^{line_width}}\n"
     final_string += f"{empty_str:{'-'}^{line_width}}"
     return final_string
 
 
 def create_schedule_file(input_filename: str, output_filename: str) -> None:
     """Create schedule file from the given input file."""
-    pass
+    with open(f"{input_filename}.txt", encoding="utf-8") as file:
+        input_string = file.read()
+    dic = get_info_sorted(input_string)
+    width = get_table_sizes(dic)
+    time_max_width, entries_max_width = width[0], width[1]
+    string = create_table(dic, time_max_width, entries_max_width)
+    with open(f"{output_filename}.txt", "w") as file:
+        file.write(string)
 
 
-def create_schedule_string(input_string: str):      # -> str: Ubral dlja proverki
+def create_schedule_string(input_string: str) -> str:
     """Create schedule string from the given input string."""
     dic = get_info_sorted(input_string)
     width = get_table_sizes(dic)
-    time_max_width = width[0]
-    entries_max_width = width[1]
+    time_max_width, entries_max_width = width[0], width[1]
     string = create_table(dic, time_max_width, entries_max_width)
     return string
 
 
 if __name__ == '__main__':
-    print(create_schedule_string("wat 13:00 wat 10:00 teine tekst 11:0 23-59 canuseminustherege pikktekst 08:04 Lorem  21:59 nopoint 18:19 Donec 18.1 ds 09:01 Lorem 0!0 Lorem 8:1 Lorem 8:3 Lorem 20:1 Lorem 20:0 Lorem 18:18 Lorem"))
+    print(create_schedule_string("wat 13:00 wat 10:00 teine tekst 11:0 23-59 canusemigrbibrt pikktekst 08:04 Lorem  21:59 nopoint 18:19 Donec 18.1 ds 09:01 Lorem 0!0 Lorem 8:1 Lorem 8:3 Lorem 20:1 Lorem 20:0 Lorem 18:18 Lorem"))
     print(create_schedule_string("wat 11:00 teine tekst 11:0 jah ei 10:00 pikktekst "))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
