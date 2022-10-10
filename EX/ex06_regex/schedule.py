@@ -13,9 +13,7 @@ def get_formatted_time(input_string: str):
             else:
                 hours -= 12
                 option = "PM"
-            if minutes < 10:
-                minutes = f"{minutes:02}"       # adds 0, so we get single minutes as 00...09
-            time = tuple([hours, int(minutes), f"{option}"])
+            time = tuple([hours, minutes, f"{option}"])         # tuple for adding "time" as a key value
             if time not in dic:
                 dic[time] = [match.group(3)]
             else:
@@ -26,24 +24,20 @@ def get_formatted_time(input_string: str):
 def get_info_sorted(input_string: str):
     """Sort all the info."""
     dic = get_formatted_time(input_string)
-    new_dic = sorted(dic, key=lambda key: (key[2], key[0], key[1]))
+    new_dic = sorted(dic, key=lambda key: (key[2], key[0], key[1]))     # sort by AM then hours and minutes
     list_to_join = []
     modified_dic = {}
     for element in new_dic:
-        if element[0] < 10:
-            new_element_0 = f"{element[0]:02}"
-        else:
-            new_element_0 = str(element[0])
-        list_to_join.append(new_element_0)
+        list_to_join.append(str(element[0]))
         if element[1] < 10:
-            new_element_1 = f"{element[1]:02}"
+            new_element_1 = f"{element[1]:02}"      # change hours format int -> str. Add 0, so we get single minutes as 00...09
         else:
             new_element_1 = str(element[1])
         list_to_join.append(new_element_1)
-        time = ":".join(list_to_join)
-        new_key = time + " " + element[2]
+        time = ":".join(list_to_join)       # get "11:00"
+        new_key = time + " " + element[2]       # get "11:00 PM"
         modified_dic[new_key] = dic[element]
-        list_to_join = []
+        list_to_join = []       # prepare list for new iteration
     return modified_dic
 
 
