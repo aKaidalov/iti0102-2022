@@ -5,7 +5,7 @@ import re
 def get_formatted_time(input_string: str):
     """Format 24 hour time to the 12 hour time."""
     dic = {}
-    for match in re.finditer(r"(?<=\s)(\d{1,2})\D(\d{1,2})\s+([A-Za-z]*)", input_string):
+    for match in re.finditer(r"(?<=\s)(\d{1,2})\D(\d{1,2})\s?([A-Za-z]*)", input_string):
         hours, minutes = int(match.group(1)), int(match.group(2))
         if 0 <= hours < 24 and 0 <= minutes < 60:
             if hours < 12:
@@ -15,9 +15,10 @@ def get_formatted_time(input_string: str):
                 option = "PM"
             time = tuple([hours, minutes, f"{option}"])         # tuple for adding "time" as a key value
             if time not in dic:
-                dic[time] = [match.group(3)]
+                dic[time] = [match.group(3).casefold()]
             else:
-                dic[time].append(match.group(3))
+                if match.group(3).casefold() not in dic[time]:
+                    dic[time].append(match.group(3).casefold())
     return dic
 
 
@@ -50,29 +51,34 @@ def get_table_sizes(dic: dict):
         if time_width < len(key):
             time_width = len(key)
     for value in values:
-        length = ",".join(value)
+        length = ", ".join(value)
         if entries_width < len(length):
             entries_width = len(length)
+    if entries_width < 7:
+        entries_width = 7
     return time_width, entries_width        # tuple()
 
 
 def create_table(dic: dict, time_width: int, entries_width: int):
     """Create table."""
     final_string = ""
-    line_width = 1 + (time_width + 2) + 1 + (entries_width + 2) + 1
-    empty_str = ""
-    final_string += f"{empty_str:{'-'}^{line_width}}\n"
-    final_string += f"| {'time':{' '}>{time_width}} | {'entries':{' '}<{entries_width}} |\n"
-    final_string += f"{empty_str:{'-'}^{line_width}}\n"
-    for element in dic:
-        value = ",".join(dic[element])
-        if value != '':
-            final_string += f"| {element:{' '}>{time_width}} | {value:{' '}<{entries_width}} |\n"
-        else:
-            final_string += f"{empty_str:{'-'}^{line_width}}\n"
-            final_string += f"| {'No entries found':{' '}^{line_width - 4}} |\n"
-            final_string += f"{empty_str:{'-'}^{line_width}}\n"
-    final_string += f"{empty_str:{'-'}^{line_width}}"
+    if entries_width != 0:
+        line_width = 1 + (time_width + 2) + 1 + (entries_width + 2) + 1
+        empty_str = ""
+        final_string += f"{empty_str:{'-'}^{line_width}}\n"
+        final_string += f"| {'time':{' '}>{time_width}} | {'entries':{' '}<{entries_width}} |\n"
+        final_string += f"{empty_str:{'-'}^{line_width}}\n"
+        for element in dic:
+            value = ", ".join(dic[element])
+            if value != "":
+                final_string += f"| {element:{' '}>{time_width}} | {value:{' '}<{entries_width}} |\n"
+        final_string += f"{empty_str:{'-'}^{line_width}}"
+    else:
+        final_string += "--------------------\n"
+        final_string += "|  time | entries  |\n"
+        final_string += "--------------------\n"
+        final_string += "| No entries found |\n"
+        final_string += "--------------------\n"
     return final_string
 
 
@@ -98,6 +104,7 @@ def create_schedule_string(input_string: str) -> str:
 
 
 if __name__ == '__main__':
-    print(create_schedule_string("wat 13:00 wat 10:00 teine tekst 11:0 23-59 canusemigrbibrt pikktekst 08:04 Lorem  21:59 nopoint 18:19 Donec 18.1 ds 09:01 Lorem 0!0 Lorem 8:1 Lorem 8:3 Lorem 20:1 Lorem 20:0 Lorem 18:18 Lorem"))
+    print(create_schedule_string("wat 13:00 wat 10:00 teine tekst 11:0 23-59  pikktekst 08:04 Lorem  21:59 nopoint 18:19 Donec 18.1 ds 09:01 Lorem 0!0 Lorem 0!0 Lorem 8:1 Lorem 8:3 Lorem 20:1 Lorem 20:0 Lorem 18:18 Lorem"))
     print(create_schedule_string("wat 11:00 teine tekst 11:0 jah ei 10:00 pikktekst "))
+    print(create_schedule_string("wat teine tekst jah ei pikktekst 10:0 abc"))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
