@@ -109,5 +109,4 @@ def create_schedule_string(input_string: str) -> str:
 if __name__ == '__main__':
     print(create_schedule_string("wat 13:00 wat 10:00 teine tekst 11:0 23-59  pikktekst 08:04 Lorem  21:59 nopoint 18:19 Donec 18.1 ds 09:01 Lorem 0!0 Lorem 0!0 Lorem 8:1 Lorem 8:3 Lorem 20:1 Lorem 20:0 Lorem 18:18 Lorem"))
     print(create_schedule_string("wat 11:00 teine tekst 11:0 jah ei 10:00 pikktekst "))
-    print(create_schedule_string("x 12:59 heroes of might and magic 3 12:21 macaroni and 12:21 cheese 12:00 lunch during midday"))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
