@@ -84,7 +84,7 @@ def create_schedule_file(input_filename: str, output_filename: str) -> None:
     width = get_table_sizes(dic)
     time_max_width, entries_max_width = width[0], width[1]
     string = create_table(dic, time_max_width, entries_max_width)
-    with open(f"{output_filename}.txt", "w") as file:
+    with open(f"{output_filename}.txt", "w", encoding="utf-8") as file:
         file.write(string)
 
 
