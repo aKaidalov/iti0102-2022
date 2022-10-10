@@ -46,9 +46,9 @@ def get_table_sizes(dic: dict):
     time_width = 0
     entries_width = 0
     values = dic.values()
-    for v in values:
-        if time_width < len(v):
-            time_width = len(v)
+    for key in dic:
+        if time_width < len(key):
+            time_width = len(key)
     for value in values:
         length = ",".join(value)
         if entries_width < len(length):
@@ -58,10 +58,17 @@ def get_table_sizes(dic: dict):
 
 def create_table(dic: dict, time_width: int, entries_width: int):
     """Create table."""
+    final_string = ""
     line_width = 1 + (time_width + 2) + 1 + (entries_width + 2) + 1
+    count, empty_str = 0, ""
+    final_string += f"{empty_str:{'-'}^{line_width}}\n"
+    final_string += f"| {'time':{' '}>{time_width}} | {'entries':{' '}<{entries_width}} |\n"
+    final_string += f"{empty_str:{'-'}^{line_width}}\n"
     for element in dic:
-
-
+        value = ",".join(dic[element])
+        final_string += f"| {element:{' '}>{time_width}} | {value:{' '}<{entries_width}} |\n"
+    final_string += f"{empty_str:{'-'}^{line_width}}"
+    return final_string
 
 
 def create_schedule_file(input_filename: str, output_filename: str) -> None:
@@ -75,7 +82,8 @@ def create_schedule_string(input_string: str):      # -> str: Ubral dlja proverk
     width = get_table_sizes(dic)
     time_max_width = width[0]
     entries_max_width = width[1]
-    return
+    string = create_table(dic, time_max_width, entries_max_width)
+    return string
 
 
 if __name__ == '__main__':
