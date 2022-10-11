@@ -10,8 +10,6 @@ def get_formatted_time(input_string: str):
         if 0 <= hours < 24 and 0 <= minutes < 60:
             if hours < 12:
                 option = "AM"
-                if hours == 0:      # so we get 12:.. instead of 0:..
-                    hours = 12
             else:
                 if hours != 12:     # prevent getting 0 as answer if time is 12 (midday)
                     hours -= 12
@@ -32,7 +30,10 @@ def get_info_sorted(input_string: str):
     list_to_join = []
     modified_dic = {}
     for element in new_dic:
-        list_to_join.append(str(element[0]))
+        if element[0] == 0:  # so we get 12:.. instead of 0:..
+            list_to_join.append("12")
+        else:
+            list_to_join.append(str(element[0]))
         if element[1] < 10:
             new_element_1 = f"{element[1]:02}"      # change hours format int -> str. Add 0, so we get single minutes as 00...09
         else:
@@ -107,6 +108,8 @@ def create_schedule_string(input_string: str) -> str:
 
 
 if __name__ == '__main__':
-    print(create_schedule_string("wat 13:00 wat 10:00 teine tekst 11:0 23-59  pikktekst 08:04 Lorem  21:59 nopoint 18:19 Donec 18.1 ds 09:01 Lorem 0!0 Lorem 0!0 Lorem 8:1 Lorem 8:3 Lorem 20:1 Lorem 20:0 Lorem 18:18 Lorem"))
+    print(create_schedule_string("wat 13:00 wat 10:00 teine 12:34 teine tekst 11:0 23-59  pikktekst 08:04 Lorem  21:59 nopoint 18:19 Donec 18.1 ds 09:01 Lorem 0!0 Lorem 0!0 Lorem 8:1 Lorem 8:3 Lorem 20:1 Lorem 20:0 Lorem 18:18 Lorem"))
     print(create_schedule_string("wat 11:00 teine tekst 11:0 jah ei 10:00 pikktekst "))
+    print(create_schedule_string("s 11:34 12:45 .  15:03 correct 11:12"))
+    print(create_schedule_string("start efgveiyl ccxypzs tzxvjykde ckbeozifyr txnqdfykad fxfwut dnuyiba 20B05   VAzPDxk ycqed nrasmb ixyhkaheiw 21?25   vAzpDxk fluukxwlbz okhuqoqts diaugkjbz 01A26 vBxyhpK olzikybv isvmj 0:2  CRMwbcAnw wzonq xkocyzd tbfucg qljbaexaqe ffpzm hgmtgf scwrwxtuyn zxnnghi 16=21    QcCRnuEwL rfwuumc 10!38 VAzpdXK mlata ijwvtq 11-42    VbxYhPK kxqmijjmt trqywl yndyruxny qkpkbple jycbf dkyrpghegw tfzejp qiyqlxl 16A27  qcCrnUewL 09!55 CRmWbcANw dgtrl bazmctbx dqqtspqmpc rsccghv hrmuiisi oosagc qzdwduqys dvqtxg ordizhkiqi 23?44  vBxYhPk ukiszjwel gujxipeuu 11a08  sSvkC fgwdkrovq khdqudtwtt xccvfw pvqrlhy rkcqigxx neqkykikir 04b15   CrmWBcANW laozyk sukdmonpk 15?52   QDVgPgbhfb mxlznz qlehj fpgvaittb fifnronrjw hoiixjnpv qyexm orjxmy opwdgxait -1a28  vbxyHPK wgezjlqya trkjut xbzbshhw ykakm mlvjqfd nrclpkh xvpojg zjmrsxfgdo trmsw 13B20  fNyOsB ggslfcadd fsveswow hurxho yqlojo 25a20    iaXAdUyRf"))
     create_schedule_file("schedule_input.txt", "schedule_output.txt")
