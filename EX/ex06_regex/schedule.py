@@ -31,7 +31,7 @@ def get_info_sorted(input_string: str):
         if element[0] == 0:  # so we get 12:.. instead of 0:..
             list_to_join.append("12")
         else:
-            if element[0] > 12:  # prevent getting 0 as answer if time is 12 (midday)
+            if element[0] > 12:  # finds pm version of time
                 new_hour = element[0] - 12
                 list_to_join.append(str(new_hour))
             else:
