@@ -11,8 +11,6 @@ def get_formatted_time(input_string: str):
             if hours < 12:
                 option = "AM"
             else:
-                if hours != 12:     # prevent getting 0 as answer if time is 12 (midday)
-                    hours -= 12
                 option = "PM"
             time = tuple([hours, minutes, f"{option}"])         # tuple for adding "time" as a key value
             if time not in dic:
@@ -33,7 +31,11 @@ def get_info_sorted(input_string: str):
         if element[0] == 0:  # so we get 12:.. instead of 0:..
             list_to_join.append("12")
         else:
-            list_to_join.append(str(element[0]))
+            if element[0] > 12:  # prevent getting 0 as answer if time is 12 (midday)
+                new_hour = element[0] - 12
+                list_to_join.append(str(new_hour))
+            else:
+                list_to_join.append(str(element[0]))
         if element[1] < 10:
             new_element_1 = f"{element[1]:02}"      # change hours format int -> str. Add 0, so we get single minutes as 00...09
         else:
@@ -52,8 +54,10 @@ def get_table_sizes(dic: dict):
     entries_width = 0
     values = dic.values()
     for key in dic:
-        if time_width < len(key):
-            time_width = len(key)
+        value = ", ".join(dic[key])
+        if value != "":
+            if time_width < len(key):
+                time_width = len(key)
     for value in values:
         length = ", ".join(value)
         if entries_width < len(length):
