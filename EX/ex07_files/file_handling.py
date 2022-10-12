@@ -23,7 +23,7 @@ def read_file_contents_to_list(filename: str) -> list:
     Each line from the file should be a separate element.
     The order of the list should be the same as in the file.
 
-    List elements should not contain new line (\n).
+    List elements should not contain new line.
 
     :param filename: File to read.
     :return: List of lines.
@@ -63,8 +63,9 @@ def read_csv_file(filename: str) -> list:
         csv_reader = csv.reader(csv_file, delimiter=',')
         list = []
         for row in csv_reader:
+            new_row = []
             for element in row:
-                new_row = element.strip("\n")
+                new_row.append(element.strip("\n"))
             list.append(new_row)
         return list
 
@@ -171,4 +172,4 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
 
 
 if __name__ == '__main__':
-    print(read_file_contents_to_list("filename.txt"))
+    print(read_csv_file("filename.txt"))
