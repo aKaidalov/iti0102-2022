@@ -60,7 +60,7 @@ def read_csv_file(filename: str) -> list:
     :return: List of lists.
     """
     with open(filename) as csv_file:
-        csv_reader = csv.reader(csv_file, delimetr=',')
+        csv_reader = csv.reader(csv_file, delimiter=',')
         list = []
         for row in csv_reader:
             for element in row:
