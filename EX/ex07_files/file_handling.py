@@ -1,3 +1,7 @@
+"""Files."""
+import csv
+
+
 def read_file_contents(filename: str) -> str:
     """
     Read file contents into string.
@@ -53,7 +57,12 @@ def read_csv_file(filename: str) -> list:
     :param filename: File to read.
     :return: List of lists.
     """
-    pass
+    with open(filename) as csv_file:
+        csv_reader = csv.reader(csv_file, delimetr=',')
+        list = []
+        for row in csv_reader:
+            list.append(row)
+        return list
 
 
 def write_contents_to_file(filename: str, contents: str) -> None:
