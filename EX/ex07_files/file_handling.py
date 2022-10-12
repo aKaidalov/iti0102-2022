@@ -5,6 +5,7 @@ import csv
 def read_file_contents(filename: str) -> str:
     """
     Read file contents into string.
+
     In this exercise, we can assume the file exists.
 
     :param filename: File to read.
@@ -61,6 +62,8 @@ def read_csv_file(filename: str) -> list:
         csv_reader = csv.reader(csv_file, delimetr=',')
         list = []
         for row in csv_reader:
+            for element in row:
+                element.strip("\n")
             list.append(row)
         return list
 
