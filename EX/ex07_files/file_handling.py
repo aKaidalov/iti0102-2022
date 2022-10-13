@@ -132,6 +132,19 @@ def write_csv_file(filename: str, data: list) -> None:
             csv_writer.writerow(row)
 
 
+def read_csv_file_for_last_function(filename: str, delimiter: str) -> list:
+    """Read CSV file into list of rows."""
+    with open(filename) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=delimiter)
+        list = []
+        for row in csv_reader:
+            new_row = []
+            for element in row:
+                new_row.append(element.strip("\n"))
+            list.append(new_row)
+        return list
+
+
 def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv_output_filename: str) -> None:
     """
     Merge information from two files into one CSV file.
@@ -177,9 +190,16 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     :param csv_output_filename: Output CSV-file with names, towns and dates.
     :return: None
     """
-    pass
+    names_and_dates_list = read_csv_file_for_last_function(dates_filename, ':')
+    names_and_towns_list = read_csv_file_for_last_function(towns_filename, ':')
+    data = []
+    for name_and_date in names_and_dates_list:
+        for name_and_town in names_and_towns_list:
+            if name_and_date[0] == name_and_town[0]:
+                row = [name_and_date[0], name_and_town[1], name_and_date[1]]
+                data.append(row)
 
 
 if __name__ == '__main__':
     data = [["name", "age"], ["john", "11"], ["mary", "15"]]
-    print(write_csv_file("filename.txt", data))
+    print(read_csv_file("filename.txt"))
