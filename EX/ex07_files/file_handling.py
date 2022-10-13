@@ -99,7 +99,7 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     """
     with open(filename, "w", newline='') as csv_file:
         for row in lines:
-            csv_file.writelines(row)
+            csv_file.writelines(row + '\n')
 
 
 def write_csv_file(filename: str, data: list) -> None:
