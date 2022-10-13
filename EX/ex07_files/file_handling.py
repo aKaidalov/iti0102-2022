@@ -80,7 +80,8 @@ def write_contents_to_file(filename: str, contents: str) -> None:
     :param contents: Content to write to.
     :return: None
     """
-    pass
+    with open(filename, "w") as csv_file:
+        csv_file.write(contents)
 
 
 def write_lines_to_file(filename: str, lines: list) -> None:
