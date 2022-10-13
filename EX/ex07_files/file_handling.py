@@ -99,7 +99,7 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     """
     with open(filename, "w") as file:
         for row in lines:
-            if lines.index(row) == -1:
+            if lines.index(row) == len(lines) - 1:
                 file.writelines(row)
             else:
                 file.writelines(row + '\n')
