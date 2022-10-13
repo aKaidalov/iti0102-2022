@@ -130,9 +130,9 @@ def write_csv_file(filename: str, data: list) -> None:
         csv_writer = csv.writer(csv_file, delimiter=',')
         for row in data:
             if data.index(row) == len(data) - 1:
-                csv_writer.writelines(row)
+                csv_writer.writerow(row)
             else:
-                csv_writer.writelines(row + '\n')
+                csv_writer.writerow(row + '\n')
 
 
 def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv_output_filename: str) -> None:
