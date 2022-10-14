@@ -311,8 +311,9 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     :param data: List of dictionaries to write to the file.
     :return: None
     """
-    if data == [{}]:
+    if data != []:
         result = []
+        inner_list = []
         # make header
         header = set()
         for element in data:
@@ -325,11 +326,11 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
         # sort data
         for dict in data:
             inner_list = []
-        for element in header_list:
-            if element in dict:
-                inner_list.append(dict[element])
-            else:
-                inner_list.append("")
+            for element in header_list:
+                if element in dict:
+                    inner_list.append(dict[element])
+                else:
+                    inner_list.append("")
         result.append(inner_list)
         # write to csv file
         write_csv_file(filename, result)
