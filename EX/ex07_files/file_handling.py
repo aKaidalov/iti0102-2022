@@ -231,8 +231,8 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
 def read_csv_file_into_list_of_dicts(filename: str) -> list:
     """
     Read csv file into list of dictionaries.
-    Header line will be used for dict keys.
 
+    Header line will be used for dict keys.
     Each line after header line will result in a dict inside the result list.
     Every line contains the same number of fields.
 
@@ -267,10 +267,8 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
             for el in row:
                 dic[header[row.index(el)]] = el
             list.append(dic)
+            dic = {}
     return list
-
-
-
 
 
 def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
@@ -312,7 +310,6 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     :param data: List of dictionaries to write to the file.
     :return: None
     """
-
 
 
 if __name__ == '__main__':
