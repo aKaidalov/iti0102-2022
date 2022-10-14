@@ -210,7 +210,6 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
             name_and_town[1] = "-"
         if name_and_town[0] in dic:
             dic[name_and_town[0]].insert(0, name_and_town[1])
-            break
         else:       # if person has only town
             dic[name_and_town[0]] = [name_and_town[1], "-"]
     # Add all dict values to list.
