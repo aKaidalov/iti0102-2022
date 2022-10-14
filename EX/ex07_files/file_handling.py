@@ -210,7 +210,8 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
             if name_and_town[0] == person[0]:
                 person.insert(1, name_and_town[1])
             else:
-                list.append(name_and_town)
+                row = [name_and_town[0], name_and_town[1], "-"]
+                list.append(row)
 
     write_csv_file_for_last_function(csv_output_filename, list)
 
