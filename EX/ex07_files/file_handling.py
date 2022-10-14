@@ -139,7 +139,7 @@ def read_csv_file_for_last_function(filename: str, delimiter: str) -> list:
         return list
 
 
-def write_csv_file_for_last_function(filename: str, data: list) -> list:
+def write_csv_file_for_last_function(filename: str, data: list):
     """Write data into CSV file."""
     first_row = ["name", "town", "date"]
     with open(filename, "w", newline='') as csv_file:
@@ -258,14 +258,17 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
     :param filename: CSV-file to read.
     :return: List of dictionaries where keys are taken from the header.
     """
-    # dic = {}
-    # with open(filename) as csv_file:
-    #     header = csv_file.readline().split(",")
-    #     for element in header:
-    #         dic[element] = []
-    #     csv_reader = csv.reader(csv_file, delimiter=',')
-    #     for row in csv_reader:
-    #         for el in row:
+    list = []
+    dic = {}
+    with open(filename) as csv_file:
+        header = csv_file.readline().strip("\n").split(",")     # Take a first line as a keys value
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:      # Starts from second row, because the first line was already taken
+            for el in row:
+                dic[header[row.index(el)]] = el
+            list.append(dic)
+    return list
+
 
 
 
@@ -315,4 +318,5 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
 if __name__ == '__main__':
     # data = [["name", "age"], ["john", "11"], ["mary", "15"]]
     # print(read_csv_file("all_files/ex_1/filename.txt"))
-    print(merge_dates_and_towns_into_csv("all_files/ex_1/dates_filename.txt", "all_files/ex_1/towns_filename.txt", "all_files/ex_1/csv_output_filename.txt"))
+    # print(merge_dates_and_towns_into_csv("all_files/ex_1/dates_filename.txt", "all_files/ex_1/towns_filename.txt", "all_files/ex_1/csv_output_filename.txt"))
+    print(read_csv_file_into_list_of_dicts("all_files/ex_2/filename2.txt"))
