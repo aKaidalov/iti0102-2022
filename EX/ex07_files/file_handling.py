@@ -228,19 +228,7 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     write_csv_file_for_last_function(csv_output_filename, list)
 
 
-    # for name_and_date in names_and_dates_list:
-    #     if name_and_date[1] == "":
-    #         name_and_date[1] = "-"
-    #     for name_and_town in names_and_towns_list:
-    #         if name_and_town[1] == "":
-    #             name_and_town[1] = "-"
-    #         if name_and_date[0] == name_and_town[0]:
-    #             row = [name_and_date[0], name_and_town[1], name_and_date[1]]
-    #             data.append(row)
-
-
 if __name__ == '__main__':
     # data = [["name", "age"], ["john", "11"], ["mary", "15"]]
     # print(read_csv_file("all_files/ex_1/filename.txt"))
     print(merge_dates_and_towns_into_csv("all_files/ex_1/dates_filename.txt", "all_files/ex_1/towns_filename.txt", "all_files/ex_1/csv_output_filename.txt"))
-
