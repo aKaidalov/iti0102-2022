@@ -310,10 +310,35 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     :param data: List of dictionaries to write to the file.
     :return: None
     """
+    result = []
+    inner_list = []
+    # make header
+    header = set()
+    for element in data:
+        keys = element.keys()       # receive dict_keys([age, name]). Control with debug.
+        for key in keys:
+            header.add(key)
+    # add first row
+    header_list = list(header)
+    result.append(header_list)
+    # sort data
+    for dict in data:
+        inner_list = []
+        for element in header_list:
+            if element in dict:
+                inner_list.append(dict[element])
+            else:
+                inner_list.append("")
+        result.append(inner_list)
+    # write to csv file
+    write_csv_file(filename, result)
+
 
 
 if __name__ == '__main__':
-    # data = [["name", "age"], ["john", "11"], ["mary", "15"]]
+    # data1 = [["name", "age"], ["john", "11"], ["mary", "15"]]
+    data2 = [{"name": "john", "age": "23"}, {"name": "mary", "age": "44"}]
     # print(read_csv_file("all_files/ex_1/filename.txt"))
     # print(merge_dates_and_towns_into_csv("all_files/ex_1/dates_filename.txt", "all_files/ex_1/towns_filename.txt", "all_files/ex_1/csv_output_filename.txt"))
     print(read_csv_file_into_list_of_dicts("all_files/ex_2/filename2.txt"))
+    print(write_list_of_dicts_to_csv_file("all_files/ex_2/csv_output_filename.txt", data2))
