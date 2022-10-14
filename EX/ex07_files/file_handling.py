@@ -129,72 +129,103 @@ def write_csv_file(filename: str, data: list) -> None:
             csv_writer.writerow(row)
 
 
-# def read_csv_file_for_last_function(filename: str, delimiter: str) -> list:
-#     """Read CSV file into list of rows."""
-#     with open(filename) as csv_file:
-#         csv_reader = csv.reader(csv_file, delimiter=delimiter)
-#         list = []
-#         for row in csv_reader:
-#             new_row = []
-#             for element in row:
-#                 new_row.append(element.strip("\n"))
-#             list.append(new_row)
-#         return list
-#
-#
-# def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv_output_filename: str) -> None:
-#     """
-#     Merge information from two files into one CSV file.
-#
-#     Dates file contains names and dates. Separated by colon.
-#     john:01.01.2001
-#     mary:06.03.2016
-#
-#     You don't have to validate the date.
-#     Every line contains name, colon and date.
-#
-#     Towns file contains names and towns. Separated by colon.
-#     john:london
-#     mary:new york
-#
-#     Every line contains name, colon and town name.
-#     There are no headers in the input files.
-#
-#     Those two files should be merged by names.
-#     The result should be a csv file:
-#
-#     name,town,date
-#     john,london,01.01.2001
-#     mary,new york,06.03.2016
-#
-#     Applies for the third part:
-#     If information about a person is missing, it should be "-" in the output file.
-#
-#     The order of the lines should follow the order in dates input file.
-#     Names which are missing in dates input file, will follow the order
-#     in towns input file.
-#     The order of the fields is: name,town,date
-#
-#     name,town,date
-#     john,-,01.01.2001
-#     mary,new york,-
-#
-#     Hint: try to reuse csv reading and writing functions.
-#     When reading csv, delimiter can be specified.
-#
-#     :param dates_filename: Input file with names and dates.
-#     :param towns_filename: Input file with names and towns.
-#     :param csv_output_filename: Output CSV-file with names, towns and dates.
-#     :return: None
-#     """
-#     names_and_dates_list = read_csv_file_for_last_function(dates_filename, ':')
-#     names_and_towns_list = read_csv_file_for_last_function(towns_filename, ':')
-#     data = []
-#     for name_and_date in names_and_dates_list:
-#         for name_and_town in names_and_towns_list:
-#             if name_and_date[0] == name_and_town[0]:
-#                 row = [name_and_date[0], name_and_town[1], name_and_date[1]]
-#                 data.append(row)
+def read_csv_file_for_last_function(filename: str, delimiter: str) -> list:
+    """Read CSV file into list of rows."""
+    with open(filename) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=delimiter)
+        list = []
+        for row in csv_reader:
+            list.append(row)
+        return list
+
+
+def write_csv_file_for_last_function(filename: str, data: list) -> list:
+    """Write data into CSV file."""
+    first_row = ["name", "town", "date"]
+    with open(filename, "w", newline='') as csv_file:
+        csv_writer = csv.writer(csv_file, delimiter=',')
+        csv_writer.writerow(first_row)
+        for row in data:
+            csv_writer.writerow(row)
+
+
+def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv_output_filename: str) -> None:
+    """
+    Merge information from two files into one CSV file.
+
+    Dates file contains names and dates. Separated by colon.
+    john:01.01.2001
+    mary:06.03.2016
+
+    You don't have to validate the date.
+    Every line contains name, colon and date.
+
+    Towns file contains names and towns. Separated by colon.
+    john:london
+    mary:new york
+
+    Every line contains name, colon and town name.
+    There are no headers in the input files.
+
+    Those two files should be merged by names.
+    The result should be a csv file:
+
+    name,town,date
+    john,london,01.01.2001
+    mary,new york,06.03.2016
+
+    Applies for the third part:
+    If information about a person is missing, it should be "-" in the output file.
+
+    The order of the lines should follow the order in dates input file.
+    Names which are missing in dates input file, will follow the order
+    in towns input file.
+    The order of the fields is: name,town,date
+
+    name,town,date
+    john,-,01.01.2001
+    mary,new york,-
+
+    Hint: try to reuse csv reading and writing functions.
+    When reading csv, delimiter can be specified.
+
+    :param dates_filename: Input file with names and dates.
+    :param towns_filename: Input file with names and towns.
+    :param csv_output_filename: Output CSV-file with names, towns and dates.
+    :return: None
+    """
+    names_and_dates_list = read_csv_file_for_last_function(dates_filename, ':')
+    names_and_towns_list = read_csv_file_for_last_function(towns_filename, ':')
+    dic = {}
+    data = []
+
+    for name_and_date in names_and_dates_list:
+        if name_and_date[1] == "":
+            name_and_date[1] = "-"
+        dic[name_and_date[0]] = [name_and_date[1]]
+    for name_and_town in names_and_towns_list:
+        if name_and_town[1] == "":
+            name_and_town[1] = "-"
+        if name_and_town[0] in dic:
+            dic[name_and_town[0]].insert(0, name_and_town[0])
+        else:
+            dic[name_and_town[0]] = [name_and_town[1]]
+    for key in dic:
+        row = [key, dic[key][0], dic[key][1]]
+        data.append(row)
+
+    write_csv_file_for_last_function(csv_output_filename, data)
+
+
+    # for name_and_date in names_and_dates_list:
+    #     if name_and_date[1] == "":
+    #         name_and_date[1] = "-"
+    #     for name_and_town in names_and_towns_list:
+    #         if name_and_town[1] == "":
+    #             name_and_town[1] = "-"
+    #         if name_and_date[0] == name_and_town[0]:
+    #             row = [name_and_date[0], name_and_town[1], name_and_date[1]]
+    #             data.append(row)
 
 
 if __name__ == '__main__':
