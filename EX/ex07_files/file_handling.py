@@ -196,25 +196,23 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     """
     names_and_dates_list = read_csv_file_for_last_function(dates_filename, ':')
     names_and_towns_list = read_csv_file_for_last_function(towns_filename, ':')
-    dic = {}
-    data = []
+    list = []
 
     for name_and_date in names_and_dates_list:
         if name_and_date[1] == "":
             name_and_date[1] = "-"
-        dic[name_and_date[0]] = [name_and_date[1]]
+        person = [name_and_date[0], name_and_date[1]]
+        list.append(person)
     for name_and_town in names_and_towns_list:
         if name_and_town[1] == "":
             name_and_town[1] = "-"
-        if name_and_town[0] in dic:
-            dic[name_and_town[0]].insert(0, name_and_town[0])
-        else:
-            dic[name_and_town[0]] = [name_and_town[1]]
-    for key in dic:
-        row = [key, dic[key][0], dic[key][1]]
-        data.append(row)
+        for person in list:
+            if name_and_town[0] == person[0]:
+                person.insert(1, name_and_town[1])
+            else:
+                list.append(name_and_town)
 
-    write_csv_file_for_last_function(csv_output_filename, data)
+    write_csv_file_for_last_function(csv_output_filename, list)
 
 
     # for name_and_date in names_and_dates_list:
