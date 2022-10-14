@@ -196,33 +196,29 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     """
     names_and_dates_list = read_csv_file_for_last_function(dates_filename, ':')
     names_and_towns_list = read_csv_file_for_last_function(towns_filename, ':')
+    dic = {}
     list = []
-    names = []
 
     # add all names with dates to the list
     for name_and_date in names_and_dates_list:
         if name_and_date[1] == "":
             name_and_date[1] = "-"
-        person = [name_and_date[0], name_and_date[1]]
-        list.append(person)
+        dic[name_and_date[0]] = [name_and_date[1]]
     # find towns for people in the list
     for name_and_town in names_and_towns_list:
         if name_and_town[1] == "":
             name_and_town[1] = "-"
-        for person in list:
-            if name_and_town[0] == person[0]:   # if person has date
-                if len(person) == 2:        # if person has only 2 elements, then town wasn't added
-                    person.insert(1, name_and_town[1])
-                break
-    # add "-" for people, if their town is missing
-    for p in list:
-        names.append(p[0])
-        if len(p) == 2:
-            p.insert(1, "-")
-    # add people, who has only town
-    for name_and_town in names_and_towns_list:
-        if name_and_town[0] not in names:
-            row = [name_and_town[0], name_and_town[1], "-"]
+        if name_and_town[0] in dic:
+            dic[name_and_town[0]].insert(0, name_and_town[1])
+            break
+        else:
+            dic[name_and_town[0]] = [name_and_town[1], "-"]
+    for key in dic:
+        if len(dic[key]) == 2:
+            row = [key, dic[key][0], dic[key][1]]
+            list.append(row)
+        else:
+            row = [key, "-", dic[key][0]]
             list.append(row)
 
     write_csv_file_for_last_function(csv_output_filename, list)
