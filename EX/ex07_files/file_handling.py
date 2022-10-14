@@ -199,25 +199,26 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     dic = {}
     list = []
 
-    # add all names with dates to the list
+    # Add all names with dates to the dictionary. Names are unique.
     for name_and_date in names_and_dates_list:
         if name_and_date[1] == "":
             name_and_date[1] = "-"
         dic[name_and_date[0]] = [name_and_date[1]]
-    # find towns for people in the list
+    # find towns for people in the dict
     for name_and_town in names_and_towns_list:
         if name_and_town[1] == "":
             name_and_town[1] = "-"
         if name_and_town[0] in dic:
             dic[name_and_town[0]].insert(0, name_and_town[1])
             break
-        else:
+        else:       # if person has only town
             dic[name_and_town[0]] = [name_and_town[1], "-"]
+    # Add all dict values to list.
     for key in dic:
-        if len(dic[key]) == 2:
+        if len(dic[key]) == 2:      # if there are town and date
             row = [key, dic[key][0], dic[key][1]]
             list.append(row)
-        else:
+        else:       # if town is missing
             row = [key, "-", dic[key][0]]
             list.append(row)
 
