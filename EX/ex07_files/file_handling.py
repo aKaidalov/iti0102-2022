@@ -1,5 +1,8 @@
 """Files."""
 import csv
+import re
+from datetime import datetime
+from datetime import date
 
 
 def read_file_contents(filename: str) -> str:
@@ -312,7 +315,6 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     :return: None
     """
     result = []
-    inner_list = []
     # make header
     header = set()
     for element in data:
@@ -339,11 +341,122 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
             file.write("")
 
 
+# 3.osa
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
+    """
+    Read data from file and cast values into different datatypes.
+    If a field contains only numbers, turn this into int.
+    If a field contains only dates (in format dd.mm.yyyy), turn this into date.
+    Otherwise the datatype is string (default by csv reader).
+
+    Example:
+    name,age
+    john,11
+    mary,14
+
+    Becomes ('age' is int):
+    [
+      {'name': 'john', 'age': 11},
+      {'name': 'mary', 'age': 14}
+    ]
+
+    But if all the fields cannot be cast to int, the field is left to string.
+    Example:
+    name,age
+    john,11
+    mary,14
+    ago,unknown
+
+    Becomes ('age' cannot be cast to int because of "ago"):
+    [
+      {'name': 'john', 'age': '11'},
+      {'name': 'mary', 'age': '14'},
+      {'name': 'ago', 'age': 'unknown'}
+    ]
+
+    Example:
+    name,date
+    john,01.01.2020
+    mary,07.09.2021
+
+    Becomes:
+    [
+      {'name': 'john', 'date': datetime.date(2020, 1, 1)},
+      {'name': 'mary', 'date': datetime.date(2021, 9, 7)},
+    ]
+
+    Example:
+    name,date
+    john,01.01.2020
+    mary,late 2021
+
+    Becomes:
+    [
+      {'name': 'john', 'date': "01.01.2020"},
+      {'name': 'mary', 'date': "late 2021"},
+    ]
+
+    Value "-" indicates missing value and should be None in the result
+    Example:
+    name,date
+    john,-
+    mary,07.09.2021
+
+    Becomes:
+    [
+      {'name': 'john', 'date': None},
+      {'name': 'mary', 'date': datetime.date(2021, 9, 7)},
+    ]
+
+    None value also doesn't affect the data type
+    (the column will have the type based on the existing values).
+
+    The order of the elements in the list should be the same
+    as the lines in the file.
+
+    For date, strptime can be used:
+    https://docs.python.org/3/library/datetime.html#examples-of-usage-date
+    """
+    list_with_dicts_and_strings = read_csv_file_into_list_of_dicts(filename)
+    list_with_d_and_int = []
+    dic_with_ints = {}
+    counter1 = 0
+
+    if list_with_dicts_and_strings == [] or len(list_with_dicts_and_strings) == 1:
+        return []
+
+    for info in list_with_dicts_and_strings:
+        for element in info:
+            if info[element].isdigit():
+                dic_with_ints[element] = int(info[element])
+                counter1 += 1
+            elif element == re.findall(r'\d{2}\.\d{2}\.\d{4}', element):
+                dic_with_ints[element] = datetime.strptime(element, "%d.%m.%y")
+            elif element == "-":
+                dic_with_ints[element] = None
+            else:
+                dic_with_ints[element] = info[element]
+        list_with_d_and_int.append(dic_with_ints)
+        dic_with_ints = {}
+    if counter1 == len(list_with_dicts_and_strings):
+        result = list_with_d_and_int
+    else:
+        result = list_with_dicts_and_strings
+
+    return result
+
+
+
+
 if __name__ == '__main__':
     # data1 = [["name", "age"], ["john", "11"], ["mary", "15"]]
     # data2 = [{"name": "john", "age": "23"}, {"name": "mary", "age": "44"}]
     data2 = []
     # print(read_csv_file("all_files/ex_1/filename.txt"))
     # print(merge_dates_and_towns_into_csv("all_files/ex_1/dates_filename.txt", "all_files/ex_1/towns_filename.txt", "all_files/ex_1/csv_output_filename.txt"))
-    print(read_csv_file_into_list_of_dicts("all_files/ex_2/filename2.txt"))
-    print(write_list_of_dicts_to_csv_file("all_files/ex_2/csv_output_filename.txt", data2))
+    # print(read_csv_file_into_list_of_dicts("all_files/ex_2/filename2.txt"))
+    # print(write_list_of_dicts_to_csv_file("all_files/ex_2/csv_output_filename.txt", data2))
+    print(read_csv_file_into_list_of_dicts_using_datatypes("all_files/ex_3/filename3.txt"))
