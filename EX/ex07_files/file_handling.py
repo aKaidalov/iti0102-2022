@@ -268,8 +268,13 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
         header = csv_file.readline().strip("\n").split(",")     # Take a first line as a keys value
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:      # Starts from second row, because the first line was already taken
+            counter = 0
             for el in row:
-                dic[header[row.index(el)]] = el
+                if el == "-":
+                    dic[header[counter]] = None
+                else:
+                    dic[header[counter]] = el
+                counter += 1        # to prevent an error with two elements ("-","-")
             list.append(dic)
             dic = {}
     return list
@@ -422,29 +427,48 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     """
     list_with_dicts_and_strings = read_csv_file_into_list_of_dicts(filename)
     list_with_d_and_int = []
+    new_dic = {}
     dic_with_ints = {}
-    counter1 = 0
+    list_of_types = [0, 0, 0]       # 0 - ne nado ismenjat' tip. 1 - izmenit na
 
-    if list_with_dicts_and_strings == [] or len(list_with_dicts_and_strings) == 1:
+    if not list_with_dicts_and_strings:
         return []
 
     for info in list_with_dicts_and_strings:
-        for element in info:
-            if info[element].isdigit():
-                dic_with_ints[element] = int(info[element])
-                counter1 += 1
-            elif element == re.findall(r'\d{2}\.\d{2}\.\d{4}', element):
-                dic_with_ints[element] = datetime.strptime(element, "%d.%m.%y")
-            elif element == "-":
-                dic_with_ints[element] = None
-            else:
-                dic_with_ints[element] = info[element]
-        list_with_d_and_int.append(dic_with_ints)
-        dic_with_ints = {}
-    if counter1 == len(list_with_dicts_and_strings):
-        result = list_with_d_and_int
-    else:
-        result = list_with_dicts_and_strings
+        for element1 in info:
+            if info[element1] is not None:
+                if info[element1].isdigit():
+                    if element1 not in dic_with_ints:
+                        dic_with_ints[element1] = [int(info[element1])]
+                    else:
+                        dic_with_ints[element1].append(int(info[element1]))
+                elif info[element1] == datetime.strptime(info[element1], "%d.%m.%y"):
+                    print("danja loh")
+    for element2 in dic_with_ints:
+        if len(dic_with_ints[element2]) == len(list_with_dicts_and_strings):
+            for info in list_with_dicts_and_strings:
+                for elem in info:
+                    if elem == element2:
+                        info[elem] = int(info[elem])
+
+
+
+
+
+
+
+
+
+                # elif dic_with_ints[element] == datetime.strptime(element, "%d.%m.%y"):
+                #     print("danja loh")
+                # else:
+                #     dic_with_ints[element] = info[element]
+            # list_with_d_and_int.append(dic_with_ints)
+            # dic_with_ints = {}
+    # if counter1 == len(list_with_dicts_and_strings):
+    #     result = list_with_d_and_int
+    # else:
+    #     result = list_with_dicts_and_strings
 
     return result
 
