@@ -213,14 +213,14 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
             name_and_town[1] = "-"
         if name_and_town[0] in dic:
             dic[name_and_town[0]].insert(0, name_and_town[1])
-        else:       # if person has only town
+        else:  # if person has only town
             dic[name_and_town[0]] = [name_and_town[1], "-"]
     # Add all dict values to list.
     for key in dic:
-        if len(dic[key]) == 2:      # if there are town and date
+        if len(dic[key]) == 2:  # if there are town and date
             row = [key, dic[key][0], dic[key][1]]
             list.append(row)
-        else:       # if town is missing
+        else:  # if town is missing
             row = [key, "-", dic[key][0]]
             list.append(row)
 
@@ -265,16 +265,16 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
     list = []
     dic = {}
     with open(filename) as csv_file:
-        header = csv_file.readline().strip("\n").split(",")     # Take a first line as a keys value
+        header = csv_file.readline().strip("\n").split(",")  # Take a first line as a keys value
         csv_reader = csv.reader(csv_file, delimiter=',')
-        for row in csv_reader:      # Starts from second row, because the first line was already taken
+        for row in csv_reader:  # Starts from second row, because the first line was already taken
             counter = 0
             for el in row:
                 if el == "-":
                     dic[header[counter]] = None
                 else:
                     dic[header[counter]] = el
-                counter += 1        # to prevent an error with two elements ("-","-")
+                counter += 1  # to prevent an error with two elements ("-","-")
             list.append(dic)
             dic = {}
     return list
@@ -426,11 +426,10 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     https://docs.python.org/3/library/datetime.html#examples-of-usage-date
     """
     list_with_dicts_and_strings = read_csv_file_into_list_of_dicts(filename)
-    list_with_d_and_int = []
-    new_dic = {}
     dic_with_ints = {}
-    list_of_types = [0, 0, 0]       # 0 - ne nado ismenjat' tip. 1 - izmenit na
+    # list_of_types = [0, 0, 0]  # 0 - ne nado ismenjat' tip. 1 - izmenit na
 
+    # check for empty list
     if not list_with_dicts_and_strings:
         return []
 
@@ -442,8 +441,12 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                         dic_with_ints[element1] = [int(info[element1])]
                     else:
                         dic_with_ints[element1].append(int(info[element1]))
-                elif info[element1] == datetime.strptime(info[element1], "%d.%m.%y"):
-                    print("danja loh")
+                else:
+                    try:
+                        info[element1] == datetime.strptime(info[element1], "%d.%m.%y")
+                    except:
+                        continue
+    # change numbers to int, if possible
     for element2 in dic_with_ints:
         if len(dic_with_ints[element2]) == len(list_with_dicts_and_strings):
             for info in list_with_dicts_and_strings:
@@ -451,28 +454,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                     if elem == element2:
                         info[elem] = int(info[elem])
 
-
-
-
-
-
-
-
-
-                # elif dic_with_ints[element] == datetime.strptime(element, "%d.%m.%y"):
-                #     print("danja loh")
-                # else:
-                #     dic_with_ints[element] = info[element]
-            # list_with_d_and_int.append(dic_with_ints)
-            # dic_with_ints = {}
-    # if counter1 == len(list_with_dicts_and_strings):
-    #     result = list_with_d_and_int
-    # else:
-    #     result = list_with_dicts_and_strings
-
-    return result
-
-
+    return list_with_dicts_and_strings
 
 
 if __name__ == '__main__':
