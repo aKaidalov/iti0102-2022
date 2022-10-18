@@ -446,7 +446,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     for key in dic_of_types:
         values.append(dic_of_types[key])
 
-    return change_types(values, list_with_dicts_and_strings)
+    return change_types(values, list_with_dicts_and_strings)        #
 
 
 def change_types(a: list, b: list) -> list:
