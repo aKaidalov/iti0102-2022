@@ -450,6 +450,7 @@ def change_types(a: list, b: list) -> list:
                 i[key] = int(i[key])
             elif a[counter] == 2:
                 i[key] = datetime.strptime(i[key], '%d.%m.%Y')
+                i[key] = i[key].date()
             counter += 1
     return b
 
