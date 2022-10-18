@@ -351,6 +351,7 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
 def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     """
     Read data from file and cast values into different datatypes.
+
     If a field contains only numbers, turn this into int.
     If a field contains only dates (in format dd.mm.yyyy), turn this into date.
     Otherwise the datatype is string (default by csv reader).
@@ -442,13 +443,14 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
 
 
 def change_types(a: list, b: list) -> list:
+    """Change types."""
     print(b)
     for i in b:
         counter = 0
         for key, value in i.items():
-            if a[counter] == 1:
+            if a[counter] == 1 and i[key] is not None:
                 i[key] = int(i[key])
-            elif a[counter] == 2:
+            elif a[counter] == 2 and i[key] is not None:
                 i[key] = datetime.strptime(i[key], '%d.%m.%Y')
                 i[key] = i[key].date()
             counter += 1
