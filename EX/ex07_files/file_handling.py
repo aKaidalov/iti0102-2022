@@ -438,6 +438,8 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                         dic_of_types[element1] = default
                 else:
                     dic_of_types[element1] = default
+            else:
+                dic_of_types[element1] = 0
 
             counter += 1
     print(dic_of_types)
