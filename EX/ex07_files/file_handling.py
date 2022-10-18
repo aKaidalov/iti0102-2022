@@ -421,8 +421,8 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     for info in list_with_dicts_and_strings:
         counter = 0
         for element1 in info:
+            default = 0
             if info[element1] is not None:
-                default = 0
                 if not info[element1].isdigit():
                     try:
                         datetime.strptime(info[element1], '%d.%m.%Y')
@@ -431,17 +431,18 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                         default = 0
                 elif info[element1].isdigit():
                     default = 1
-                if element1 in dic_of_types:
-                    if dic_of_types[element1] != default:
-                        dic_of_types[element1] = 0
-                    else:
-                        dic_of_types[element1] = default
                 else:
                     dic_of_types[element1] = default
             else:
-                dic_of_types[element1] = 0
+                dic_of_types[element1] = default
 
+            if element1 in dic_of_types:
+                if dic_of_types[element1] != default:
+                    dic_of_types[element1] = 0
+                else:
+                    dic_of_types[element1] = default
             counter += 1
+
     print(dic_of_types)
     for key in dic_of_types:
         values.append(dic_of_types[key])
