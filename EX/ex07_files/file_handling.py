@@ -412,46 +412,39 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     https://docs.python.org/3/library/datetime.html#examples-of-usage-date
     """
     list_with_dicts_and_strings = read_csv_file_into_list_of_dicts(filename)
-    breakloop = False
+    values = []
 
     if not list_with_dicts_and_strings:
         return []
 
-    list_of_types = [-1 for i in range(
-        len(list_with_dicts_and_strings[0]))]  # 0 - ne nado ismenjat' tip. 1 - izmenit na int, 2- na datetime
+    dic_of_types = {}
     for info in list_with_dicts_and_strings:
         counter = 0
-        if breakloop:
-            break
         for element1 in info:
             if info[element1] is not None:
+                default = 0
                 if not info[element1].isdigit():
                     try:
                         datetime.strptime(info[element1], '%d.%m.%Y')
-                        if list_of_types[counter] == 1 or list_of_types[counter] == 0:
-                            list_of_types[counter] = 0
-                            breakloop = True
-                            break
-                        else:
-                            list_of_types[counter] = 2
+                        default = 2
                     except ValueError:
-                        list_of_types[counter] = 0
-                        breakloop = True
-                        break
+                        default = 0
                 elif info[element1].isdigit():
-                    if list_of_types[counter] == 2 or list_of_types[counter] == 0:
-                        list_of_types[counter] = 0
-                        breakloop = True
-                        break
+                    default = 1
+                if element1 in dic_of_types:
+                    if dic_of_types[element1] != default:
+                        dic_of_types[element1] = 0
                     else:
-                        list_of_types[counter] = 1
+                        dic_of_types[element1] = default
                 else:
-                    list_of_types[counter] = 0
-                    breakloop = True
-                    break
+                    dic_of_types[element1] = default
+
             counter += 1
-    print(list_of_types)
-    return change_types(list_of_types, list_with_dicts_and_strings)
+    print(dic_of_types)
+    for key in dic_of_types:
+        values.append(dic_of_types[key])
+
+    return change_types(values, list_with_dicts_and_strings)
 
 
 def change_types(a: list, b: list) -> list:
