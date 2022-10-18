@@ -448,11 +448,13 @@ def change_types(a: list, b: list) -> list:
     for i in b:
         counter = 0
         for key, value in i.items():
-            if a[counter] == 1 and i[key] is not None and i[key].isdigit():
+            if a[counter] == 1 and i[key] is not None:
                 i[key] = int(i[key])
-            elif a[counter] == 2 and i[key] is not None and not i[key].isdigit():
+            elif a[counter] == 2 and i[key] is not None:
                 i[key] = datetime.strptime(i[key], '%d.%m.%Y')
                 i[key] = i[key].date()
+            else:
+                continue
             counter += 1
     return b
 
