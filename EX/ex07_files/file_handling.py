@@ -417,7 +417,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     if not list_with_dicts_and_strings:
         return []
 
-    list_of_types = [0 for i in range(
+    list_of_types = [-1 for i in range(
         len(list_with_dicts_and_strings[0]))]  # 0 - ne nado ismenjat' tip. 1 - izmenit na int, 2- na datetime
     for info in list_with_dicts_and_strings:
         counter = 0
@@ -428,15 +428,27 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                 if not info[element1].isdigit():
                     try:
                         datetime.strptime(info[element1], '%d.%m.%Y')
-                        list_of_types[counter] = 2
+                        if list_of_types[counter] == 1 or list_of_types[counter] == 0:
+                            list_of_types[counter] = 0
+                            breakloop = True
+                            break
+                        else:
+                            list_of_types[counter] = 2
                     except ValueError:
                         list_of_types[counter] = 0
                         breakloop = True
+                        break
                 elif info[element1].isdigit():
-                    list_of_types[counter] = 1
+                    if list_of_types[counter] == 2 or list_of_types[counter] == 0:
+                        list_of_types[counter] = 0
+                        breakloop = True
+                        break
+                    else:
+                        list_of_types[counter] = 1
                 else:
                     list_of_types[counter] = 0
                     breakloop = True
+                    break
             counter += 1
     print(list_of_types)
     return change_types(list_of_types, list_with_dicts_and_strings)
@@ -453,8 +465,6 @@ def change_types(a: list, b: list) -> list:
             elif a[counter] == 2 and i[key] is not None:
                 i[key] = datetime.strptime(i[key], '%d.%m.%Y')
                 i[key] = i[key].date()
-            else:
-                continue
             counter += 1
     return b
 
