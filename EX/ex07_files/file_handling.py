@@ -1,8 +1,6 @@
 """Files."""
 import csv
-import re
 from datetime import datetime
-from datetime import date
 
 
 def read_file_contents(filename: str) -> str:
@@ -356,105 +354,104 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     If a field contains only numbers, turn this into int.
     If a field contains only dates (in format dd.mm.yyyy), turn this into date.
     Otherwise the datatype is string (default by csv reader).
-
     Example:
     name,age
     john,11
     mary,14
-
     Becomes ('age' is int):
     [
       {'name': 'john', 'age': 11},
       {'name': 'mary', 'age': 14}
     ]
-
     But if all the fields cannot be cast to int, the field is left to string.
     Example:
     name,age
     john,11
     mary,14
     ago,unknown
-
     Becomes ('age' cannot be cast to int because of "ago"):
     [
       {'name': 'john', 'age': '11'},
       {'name': 'mary', 'age': '14'},
       {'name': 'ago', 'age': 'unknown'}
     ]
-
     Example:
     name,date
     john,01.01.2020
     mary,07.09.2021
-
     Becomes:
     [
       {'name': 'john', 'date': datetime.date(2020, 1, 1)},
       {'name': 'mary', 'date': datetime.date(2021, 9, 7)},
     ]
-
     Example:
     name,date
     john,01.01.2020
     mary,late 2021
-
     Becomes:
     [
       {'name': 'john', 'date': "01.01.2020"},
       {'name': 'mary', 'date': "late 2021"},
     ]
-
     Value "-" indicates missing value and should be None in the result
     Example:
     name,date
     john,-
     mary,07.09.2021
-
     Becomes:
     [
       {'name': 'john', 'date': None},
       {'name': 'mary', 'date': datetime.date(2021, 9, 7)},
     ]
-
     None value also doesn't affect the data type
     (the column will have the type based on the existing values).
-
     The order of the elements in the list should be the same
     as the lines in the file.
-
     For date, strptime can be used:
     https://docs.python.org/3/library/datetime.html#examples-of-usage-date
     """
     list_with_dicts_and_strings = read_csv_file_into_list_of_dicts(filename)
-    dic_with_ints = {}
-    # list_of_types = [0, 0, 0]  # 0 - ne nado ismenjat' tip. 1 - izmenit na
+    breakloop = False
 
-    # check for empty list
     if not list_with_dicts_and_strings:
         return []
 
+    list_of_types = [0 for i in range(
+        len(list_with_dicts_and_strings[0]))]  # 0 - ne nado ismenjat' tip. 1 - izmenit na int, 2- na datetime
     for info in list_with_dicts_and_strings:
+        counter = 0
+        if breakloop:
+            break
         for element1 in info:
             if info[element1] is not None:
-                if info[element1].isdigit():
-                    if element1 not in dic_with_ints:
-                        dic_with_ints[element1] = [int(info[element1])]
-                    else:
-                        dic_with_ints[element1].append(int(info[element1]))
-                else:
+                if not info[element1].isdigit():
                     try:
-                        info[element1] == datetime.strptime(info[element1], "%d.%m.%y")
-                    except:
-                        continue
-    # change numbers to int, if possible
-    for element2 in dic_with_ints:
-        if len(dic_with_ints[element2]) == len(list_with_dicts_and_strings):
-            for info in list_with_dicts_and_strings:
-                for elem in info:
-                    if elem == element2:
-                        info[elem] = int(info[elem])
+                        datetime.strptime(info[element1], '%d.%m.%Y')
+                        list_of_types[counter] = 2
+                    except ValueError:
+                        list_of_types[counter] = 0
+                        breakloop = True
+                elif info[element1].isdigit():
+                    list_of_types[counter] = 1
+                else:
+                    list_of_types[counter] = 0
+                    breakloop = True
+            counter += 1
+    print(list_of_types)
+    return change_types(list_of_types, list_with_dicts_and_strings)
 
-    return list_with_dicts_and_strings
+
+def change_types(a: list, b: list) -> list:
+    print(b)
+    for i in b:
+        counter = 0
+        for key, value in i.items():
+            if a[counter] == 1:
+                i[key] = int(i[key])
+            elif a[counter] == 2:
+                i[key] = datetime.strptime(i[key], '%d.%m.%Y')
+            counter += 1
+    return b
 
 
 if __name__ == '__main__':
