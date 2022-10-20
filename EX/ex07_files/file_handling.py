@@ -433,17 +433,25 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                     default = 1
                 if element1 in dic_of_types:
                     if dic_of_types[element1] != default:
-                        dic_of_types[element1] = 0
+                        if dic_of_types[element1] is not None:
+                            dic_of_types[element1] = 0
+                        else:
+                            dic_of_types[element1] = default
                     else:
                         dic_of_types[element1] = default
                 else:
                     dic_of_types[element1] = default
             else:
-                dic_of_types[element1] = 0
+                if element1 in dic_of_types and dic_of_types[element1] is not None:
+                    pass
+                else:
+                    dic_of_types[element1] = None
 
             counter += 1
     print(dic_of_types)
     for key in dic_of_types:
+        if dic_of_types[key] is None:
+            dic_of_types[key] = 0
         values.append(dic_of_types[key])
 
     return change_types(values, list_with_dicts_and_strings)        #
