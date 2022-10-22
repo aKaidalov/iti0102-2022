@@ -1,3 +1,6 @@
+"""Solutions."""
+
+
 def students_study(time: int, coffee_needed: bool) -> bool:
     """
     Return True if students study in given circumstances.
@@ -5,10 +8,9 @@ def students_study(time: int, coffee_needed: bool) -> bool:
     (19, False) -> True
     (1, True) -> False.
     """
-    if (5 <= time <= 17 and coffee_needed is True) or (18 <= time <= 24 and coffee_needed is False):
+    if (5 <= time <= 17 and coffee_needed is True) or (18 <= time <= 24):
         return True
     return False
-
 
 
 def lottery(a: int, b: int, c: int) -> int:
@@ -23,7 +25,7 @@ def lottery(a: int, b: int, c: int) -> int:
         return 10
     if a == b == c:
         return 5
-    if a != b != c:
+    if a != b or b != c or a != c:
         return 1
     return 0
 
