@@ -32,11 +32,13 @@ def test_students_study__day_hours_to_study():
 def test_student_study__evening_edge_case_coffee_true():
     """Evening edge true case True."""
     assert students_study(18, True) is True
+    assert students_study(24, True) is True
 
 
 def test_student_study__evening_edge_case_coffee_false():
     """Evening edge false case False."""
     assert students_study(18, False) is True
+    assert students_study(24, False) is True
 
 
 def test_student_study__day_edge_case_coffee_true():
@@ -51,9 +53,11 @@ def test_student_study__day_edge_case_coffee_false():
 
 def test_student_study__night_edge_case_coffee_true():
     """Night edge case True."""
-    assert students_study(2, True) is False
+    assert students_study(1, True) is False
+    assert students_study(4, True) is False
 
 
 def test_student_study__night_edge_case_coffee_false():
     """Night edge case False."""
-    assert students_study(3, False) is False
+    assert students_study(1, False) is False
+    assert students_study(4, True) is False
