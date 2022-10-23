@@ -27,3 +27,9 @@ def test_students_study__day_hours_to_study():
     """Right day hours to study."""
     assert students_study(5, True) is True
     assert students_study(5, False) is False
+
+
+def test_student_study__evening_edge_case_coffee():
+    """Evening edge case."""
+    assert students_study(24, True) is True
+    assert students_study(24, False) is False
