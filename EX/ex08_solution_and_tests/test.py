@@ -24,6 +24,7 @@ def test_students_study__night_to_study():
     assert students_study(2, False) is False
 
 
-def test_students_study__evening_hours_to_study():
-    """Right evening hours to study."""
-    assert students_study(20, False) is True
+def test_students_study__day_hours_to_study():
+    """Right day hours to study."""
+    assert students_study(5, True) is True
+    assert students_study(5, False) is False
