@@ -51,9 +51,9 @@ def test_student_study__day_edge_case_coffee_false():
 
 def test_student_study__night_edge_case_coffee_true():
     """Night edge case True."""
-    assert students_study(24, True) is True
+    assert students_study(2, True) is False
 
 
 def test_student_study__night_edge_case_coffee_false():
     """Night edge case False."""
-    assert students_study(24, False) is True
+    assert students_study(3, False) is False
