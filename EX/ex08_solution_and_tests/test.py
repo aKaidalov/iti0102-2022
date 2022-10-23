@@ -67,6 +67,7 @@ def test_student_study__night_edge_case_coffee_false():
 # lottery
 # ----------------------------------------------------------------------------------------------------------------------
 
+
 def test_lottery__all_fives():
     """When all numbers are fives."""
     assert lottery(5, 5, 5) == 10
@@ -80,3 +81,8 @@ def test_lottery__all_same_positive():
 def test_lottery__all_same_negative():
     """When all numbers are the same and negative."""
     assert lottery(-2, -2, -2) == 5
+
+
+def test_lottery__all_same_zero():
+    """When all numbers are zeros."""
+    assert lottery(0, 0, 0) == 5
