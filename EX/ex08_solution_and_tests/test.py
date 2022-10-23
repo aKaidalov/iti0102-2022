@@ -5,13 +5,15 @@ from solution import students_study
 
 def test_students_study__evening_not_coffee_needed():
     """In the evening it doesn't matter weather we have coffee."""
-    assert students_study(20, True) is True
+    assert students_study(20, True) is False
+    assert students_study(20, False) is True
     assert students_study(20, False) is True
 
 
 def test_students_study__night_to_study():
     """
-    Test case:
+    Test case.
+
     time 20-24 (evening)
     coffee is True (coffee not needed).
 
@@ -20,3 +22,9 @@ def test_students_study__night_to_study():
     """
     assert students_study(2, True) is False
     assert students_study(2, False) is False
+
+
+def test_students_study__evening_hours_to_study():
+    """Right evening hours to study."""
+    assert students_study(18, False) is True
+    assert students_study(24, False) is True
