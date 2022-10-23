@@ -73,5 +73,10 @@ def test_lottery__all_fives():
 
 
 def test_lottery__all_same_positive():
-    """When all numbers are the same."""
+    """When all numbers are the same and positive."""
     assert lottery(2, 2, 2) == 5
+
+
+def test_lottery__all_same_negative():
+    """When all numbers are the same and negative."""
+    assert lottery(-2, -2, -2) == 5
