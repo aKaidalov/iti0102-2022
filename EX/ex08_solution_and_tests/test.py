@@ -33,5 +33,5 @@ def test_student_study__evening_edge_case_coffee():
     """Evening edge case."""
     assert students_study(24, True) is True
     assert students_study(18, True) is True
-    # assert students_study(24, False) is False
-    # assert students_study(18, False) is False
+    assert students_study(24, False) is False
+    assert students_study(18, False) is False
