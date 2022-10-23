@@ -86,3 +86,23 @@ def test_lottery__all_same_negative():
 def test_lottery__all_same_zero():
     """When all numbers are zeros."""
     assert lottery(0, 0, 0) == 5
+
+
+def test_lottery__a_b_same_c_diff():
+    """When a and b are same and c is different."""
+    assert lottery(3, 3, 4) == 0
+
+
+def test_lottery__a_c_same_b_diff():
+    """When a and c are same and b is different."""
+    assert lottery(5, 3, 5) == 0
+
+
+def test_lottery__b_c_same_a_diff():
+    """When b and c are same and a is different."""
+    assert lottery(3, 4, 4) == 1
+
+
+def test_lottery__all_diff():
+    """When all are different."""
+    assert lottery(2, 3, 4) == 1
