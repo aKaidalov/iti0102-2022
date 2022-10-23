@@ -1,6 +1,7 @@
 """Tests."""
 import pytest
 from solution import students_study
+from solution import lottery
 
 
 def test_students_study__evening_not_coffee_needed():
@@ -61,3 +62,11 @@ def test_student_study__night_edge_case_coffee_false():
     """Night edge case False."""
     assert students_study(1, False) is False
     assert students_study(4, False) is False
+
+
+# lottery
+# ----------------------------------------------------------------------------------------------------------------------
+
+def test_lottery__all_fives():
+    """When all numbers are fives."""
+    assert lottery(5, 5, 5) == 10
