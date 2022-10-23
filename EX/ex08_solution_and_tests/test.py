@@ -26,5 +26,4 @@ def test_students_study__night_to_study():
 
 def test_students_study__evening_hours_to_study():
     """Right evening hours to study."""
-    assert students_study(18, False) is True
-    assert students_study(24, False) is True
+    assert students_study(20, False) is True
