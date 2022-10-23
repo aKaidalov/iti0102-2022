@@ -474,9 +474,9 @@ def change_types(a: list, b: list) -> list:
 
 if __name__ == '__main__':
     # data1 = [["name", "age"], ["john", "11"], ["mary", "15"]]
-    # data2 = [{"name": "john", "age": "23"}, {"name": "mary", "age": "44"}]
-    data2 = []
-    # print(read_csv_file("all_files/ex_1/filename.txt"))
+    data2 = [{"name": "john", "age": "23"}, {"name": "mary", "age": "44"}]
+    data3 = []
+    print(write_csv_file("all_files/ex_1/filename.txt", data2))
     # print(merge_dates_and_towns_into_csv("all_files/ex_1/dates_filename.txt", "all_files/ex_1/towns_filename.txt", "all_files/ex_1/csv_output_filename.txt"))
     # print(read_csv_file_into_list_of_dicts("all_files/ex_2/filename2.txt"))
     # print(write_list_of_dicts_to_csv_file("all_files/ex_2/csv_output_filename.txt", data2))
