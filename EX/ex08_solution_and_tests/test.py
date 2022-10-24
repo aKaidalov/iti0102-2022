@@ -149,5 +149,10 @@ def test_fruit_order__only_big_not_enough_but_multiple_of_5():
 
 
 def test_fruit_order__only_big_more_than_required_match():
-    """Only big baskets are more than required match."""
+    """Only amount of big baskets is more than required match."""
+    assert fruit_order(0, 3, 10) == -1
+
+
+def test_fruit_order__only_big_more_than_required_no_match():
+    """Only amount of big baskets is more than required no match."""
     assert fruit_order(0, 2, 7) == -1
