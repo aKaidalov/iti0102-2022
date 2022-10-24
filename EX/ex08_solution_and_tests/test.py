@@ -133,6 +133,7 @@ def test_fruit_order__zero_amount_others_not_zero():
     assert fruit_order(2, 3, 0) == 0
 
 
+# big -----------------------------------------------
 def test_fruit_order__only_big_exact_match():
     """Amount of big baskets is equal to order amount and small baskets are 0."""
     assert fruit_order(0, 2, 10) == 0
@@ -156,3 +157,9 @@ def test_fruit_order__only_big_more_than_required_match():
 def test_fruit_order__only_big_more_than_required_no_match():
     """Only amount of big baskets is more than required no match."""
     assert fruit_order(0, 2, 7) == -1
+
+
+# small ---------------------------------------------
+def test_fruit_order__only_small_exact_match():
+    """Amount of big baskets is equal to order amount and small baskets are 0."""
+    assert fruit_order(3, 0, 3) == 3
