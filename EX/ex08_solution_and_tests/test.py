@@ -2,6 +2,7 @@
 import pytest
 from solution import students_study
 from solution import lottery
+from solution import fruit_order
 
 
 def test_students_study__evening_not_coffee_needed():
@@ -106,3 +107,32 @@ def test_lottery__b_c_same_a_diff():
 def test_lottery__all_diff():
     """When all are different."""
     assert lottery(2, 3, 4) == 1
+
+
+# fruit order
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def test_fruit_order__all_zero():
+    """When all are zeros."""
+    assert fruit_order(0, 0, 0) == 0
+
+
+def test_fruit_order__zero_amount_zero_small():
+    """When order amount and amount of small baskets are equal to zero."""
+    assert fruit_order(0, 3, 0) == 0
+
+
+def test_fruit_order__zero_amount_zero_big():
+    """Order amount and big baskets are 0."""
+    assert fruit_order(6, 0, 0) == 0
+
+
+def test_fruit_order__zero_amount_others_not_zero():
+    """Only order amount is 0."""
+    assert fruit_order(2, 3, 0) == 0
+
+
+def test_fruit_order__only_big_exact_match():
+    """Amount of big baskets is equal to order amount."""
+    assert fruit_order(3, 3, 15) == 0
