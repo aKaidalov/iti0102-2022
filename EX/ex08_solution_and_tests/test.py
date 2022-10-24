@@ -1,5 +1,5 @@
 """Tests."""
-# import pytest - pochemu ne rabotalo
+# import pytest - pochemu ne rabotalo? Kak isspol'zovat?
 from solution import students_study
 from solution import lottery
 from solution import fruit_order
