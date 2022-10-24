@@ -168,3 +168,8 @@ def test_fruit_order__only_small_exact_match():
 def test_fruit_order__only_small_not_enough():
     """Only small baskets are not enough."""
     assert fruit_order(6, 0, 7) == -1
+
+
+def test_fruit_order__only_small_match_more_than_5_smalls():
+    """Only small match(more than 5 smalls)."""
+    assert fruit_order(9, 0, 9) == 9
