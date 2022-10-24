@@ -1,5 +1,5 @@
 """Tests."""
-import pytest
+# import pytest - pochemu ne rabotalo
 from solution import students_study
 from solution import lottery
 from solution import fruit_order
