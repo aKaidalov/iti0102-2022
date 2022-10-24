@@ -167,4 +167,4 @@ def test_fruit_order__only_small_exact_match():
 
 def test_fruit_order__only_small_not_enough():
     """Only small baskets are not enough."""
-    assert fruit_order(6, 2, 7) == -1
+    assert fruit_order(6, 0, 7) == -1
