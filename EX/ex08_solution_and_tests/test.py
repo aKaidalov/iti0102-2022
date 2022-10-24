@@ -146,3 +146,8 @@ def test_fruit_order__only_big_not_enough():
 def test_fruit_order__only_big_not_enough_but_multiple_of_5():
     """Only big baskets are not enough but order amount is multiple of 5."""
     assert fruit_order(0, 1, 10) == -1
+
+
+def test_fruit_order__only_big_more_than_required_match():
+    """Only big baskets are more than required match."""
+    assert fruit_order(0, 2, 7) == -1
