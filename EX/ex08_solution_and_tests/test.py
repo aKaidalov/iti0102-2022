@@ -135,4 +135,4 @@ def test_fruit_order__zero_amount_others_not_zero():
 
 def test_fruit_order__only_big_exact_match():
     """Amount of big baskets is equal to order amount."""
-    assert fruit_order(3, 3, 15) == 0
+    assert fruit_order(0, 2, 10) == 0
