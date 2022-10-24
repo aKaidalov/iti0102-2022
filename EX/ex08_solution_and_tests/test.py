@@ -180,6 +180,36 @@ def test_fruit_order__only_small_more_than_required():
     assert fruit_order(10, 0, 9) == 9
 
 
+# all ---------------------------------------------
 def test_fruit_order__match_with_more_than_5_smalls():
-    """Fruit order match with more than 5 smalls."""
+    """
+    Fruit order match with more than 5 smalls.
+
+    Covers also fruit_order__all_positive_exact_match.
+    """
     assert fruit_order(6, 2, 16) == 6
+
+
+def test_fruit_order__use_all_smalls_some_bigs():
+    """All smalls and some bigs."""
+    assert fruit_order(4, 3, 9) == 4
+
+
+def test_fruit_order__use_some_smalls_all_bigs():
+    """Some smalls and all bigs."""
+    assert fruit_order(2, 2, 11) == 1
+
+
+def test_fruit_order__use_some_smalls_some_bigs():
+    """Some smalls and some bigs."""
+    assert fruit_order(4, 3, 12) == 2
+
+
+def test_fruit_order__not_enough():
+    """Not enough."""
+    assert fruit_order(2, 2, 14) == -1
+
+
+def test_fruit_order__enough_bigs_not_enough_smalls():
+    """Enough bigs and not enough smalls."""
+    assert fruit_order(2, 1, 8) == -1
