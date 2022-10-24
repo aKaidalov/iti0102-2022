@@ -182,4 +182,4 @@ def test_fruit_order__only_small_more_than_required():
 
 def test_fruit_order__match_with_more_than_5_smalls():
     """Fruit order match with more than 5 smalls."""
-    assert fruit_order(6, 2, 15) == 5
+    assert fruit_order(6, 2, 16) == 6
