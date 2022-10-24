@@ -222,4 +222,4 @@ def test_fruit_order__not_enough_with_more_than_5_smalls():
 
 def test_fruit_order__enough_bigs_not_enough_smalls_large_numbers():
     """Enough bigs and not enough smalls in large numbers."""
-    assert fruit_order(554, 1000, 5555) == -1
+    assert fruit_order(554, 10000, 50555) == -1
