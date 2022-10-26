@@ -182,7 +182,7 @@ def stonks(coins: float, rate: float, years: int) -> int:
     """
     if years == 0:
         return floor(coins)
-    return stonks(floor(coins * (1 + rate / 100)), rate, years - 1)
+    return stonks(coins * (1 + rate / 100), rate, years - 1)
 
 
 def quic_mafs(a: int, b: int) -> list:
