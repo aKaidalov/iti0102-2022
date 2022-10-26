@@ -93,7 +93,7 @@ def countdown(n: int):
         return [0]
     if n < 0:
         return []
-    return [n] + countdown(n-1)
+    return [n] + countdown(n - 1)
 
 
 def add_commas(n: int):
