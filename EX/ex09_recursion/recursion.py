@@ -115,7 +115,7 @@ def add_commas(n: int):
     if n < 1000:
         return str(n)
     s = n % 1000
-    return add_commas(floor(n/1000)) + ",{:03d}".format(s)
+    return add_commas(int(str(n)[:-3])) + ",{:03d}".format(s)
 
 
 def sum_digits_recursive(number: int) -> int:
@@ -205,9 +205,9 @@ def quic_mafs(a: int, b: int) -> list:
     if a == 0 or b == 0:
         return [a, b]
     elif a >= 2 * b:
-        return quic_mafs(a - 2*b, b)
-    elif b >= 2*a:
-        return quic_mafs(a, b - 2*a)
+        return quic_mafs(a - 2 * b, b)
+    elif b >= 2 * a:
+        return quic_mafs(a, b - 2 * a)
     else:
         return [a, b]
 
@@ -235,7 +235,9 @@ if __name__ == "__main__":
 
     print(add_commas(1245))  # -> '1,245'
     print(add_commas(123456789))  # -> '123,456,789'
-    print(add_commas(1011))  # -> '1,011'
+    print(add_commas(1011))  # -> '1,011' 3,485,729,348,573,949,928,923
+    print(add_commas(3485729348573948753923))    # -> 3,485,729,348,573,948,753,923
+    print(add_commas(948753923))
 
     print(sum_digits_recursive(123))  # -> 6
     print(sum_digits_recursive(0))  # -> 0
