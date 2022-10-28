@@ -73,7 +73,13 @@ def sum_squares(nested_list):
     :param nested_list: list of lists of lists of lists of lists ... and ints
     :return: sum of squares
     """
-    pass
+    if len(nested_list) == 1:
+        if type(nested_list[0]) == list:        # means that there is [[...]]
+            return sum_squares(nested_list[0])
+        return pow(nested_list[0], 2)
+    if type(nested_list[0]) == int:
+        return sum_squares(nested_list[1:]) + pow(nested_list[0], 2)        # [(2)^2,[(3)^2,[(4)^2..., when is last el, then goes to 1st if]
+    return sum_squares(nested_list[1:]) + sum_squares(nested_list[0])       # [(2)^2,[(3)^2,[...]]]
 
 
 def count_strings(data: list, pos=None, result: dict = None) -> dict:
@@ -99,10 +105,6 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
 
 
 if __name__ == "__main__":
-    print(x_sum_recursion([], 3))  # 0
-    print(x_sum_recursion([2, 5, 6, 0, 15, 5], 3))  # 11
-    print(x_sum_recursion([0, 5, 6, -5, -9, 3], 1))  # 0
-    print(x_sum_recursion([43, 90, 115, 500], -2))  # 158
-    print(x_sum_recursion([1, 2], -9))  # 0
-    print(x_sum_recursion([2, 3, 6], 5))  # 0
-    print(x_sum_recursion([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
+    print(sum_squares([1, 2, 3]))  # -> 14)
+    print(sum_squares([[1, 2], 3]))    # -> sum_squares([1, 2]) + 9  -> 1 + 4 + 9 -> 14
+    print(sum_squares([[[[[[[[[2]]]]]]]]]))
