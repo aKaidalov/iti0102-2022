@@ -101,10 +101,41 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     :param result: figure out how to use it
     :return: dict of given symbols and their count
     """
-    pass
+    if result is None:
+        result = {}
+    if len(data) == 0:
+        return result
+    if len(data[0]) != 0 and type(data[0]) == list:  # means that there is [[...]]
+        result = count_strings(data[0], pos, result)
+        return count_strings(data[1:], pos, result)
+    elif type(data[0]) == str:
+        if data[0] not in result:
+            result[data[0]] = 1
+        else:
+            result[data[0]] += 1
+        return count_strings(data[1:], pos, result)
+    return count_strings(data[1:], pos, result)
 
 
 if __name__ == "__main__":
-    print(sum_squares([1, 2, 3]))  # -> 14)
-    print(sum_squares([[1, 2], 3]))    # -> sum_squares([1, 2]) + 9  -> 1 + 4 + 9 -> 14
-    print(sum_squares([[[[[[[[[2]]]]]]]]]))
+    print(count_strings([["J", "*", "W", "f"], [], ["j", "g", "*"], ["j", "8", "5", "6", "*"], ["*", "*", "A", "8"]]))
+    # {'J': 1, '*': 5, 'W': 1, 'f': 1, 'j': 2, 'g': 1, '8': 2, '5': 1, '6': 1, 'A': 1}
+    # if data is []:
+    #     return {}
+    # if type(data[0]) == list:  # means that there is [[...]]
+    #     if data[0] is []:
+    #         return {}
+    #     return count_strings(data[0])
+    # if type(data[0]) == int or type(data[0]) == str:
+    #     if data[0] not in result:
+    #         result[data[0]] = 0
+    #     else:
+    #         result[data[0]] += 1
+    # if type(data[0]) == list:
+    #     if type(data[0]) == int or type(data[0]) == str:
+    #         if data[0] not in result:
+    #             result[data[0]] = 0
+    #         else:
+    #             result[data[0]] += 1
+    #     return count_strings(data[0][1:])
+    # return count_strings(data[1:])
