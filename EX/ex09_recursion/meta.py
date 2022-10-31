@@ -84,6 +84,8 @@ def format_curve(string):
     :param string: instruction string
     :return: clean instructions with only "F", "R", and "L" characters
     """
+    if len(string) == 0:
+        return ""
     if string[0] == "a" or string[0] == "b" and len(string) != 1:
         return format_curve(string[1:])
     elif string[0] == "a" or string[0] == "b" and len(string) == 1:
