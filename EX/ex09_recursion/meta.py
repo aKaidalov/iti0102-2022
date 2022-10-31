@@ -107,7 +107,13 @@ def draw_dragon(string, length):
     :param string: instructions left to process
     :param length: how many pixels to move forward, left or right
     """
-    pass
+    if string[0] == "R":
+        t.right(90)
+    elif string[0] == "L":
+        t.left(90)
+    else:
+        t.forward(length)
+    draw_dragon(string[1:], length)
 
 
 def get_line_length(dragon_width, depth):
@@ -122,22 +128,22 @@ def save(t: Turtle):
 
 
 if __name__ == '__main__':
-    # t = Turtle()
+    t = Turtle()
     # t.getscreen().bgcolor("#1c262b")
     # t.color("#96004f")
-    # t.speed(0)
+    t.speed(100)
     # t.pensize(2)
     # t.left(90)
     # tree(200)
 
-    # '''
-    # s = curve("Fa", 8)
-    # s = format_curve(s)
-    # l = get_line_length(100, 8)
-    # draw_dragon(s, l)
-    # '''
-    # save(t)
-    # t.getscreen().exitonclick()
+
+    s = curve("Fa", 8)
+    s = format_curve(s)
+    l = get_line_length(100, 8)
+    draw_dragon(s, l)
+
+    save(t)
+    t.getscreen().exitonclick()
 
     print(apply_dragon_rules("a")) #-> "aRbFR"
     print(apply_dragon_rules("aa")) #-> "aRbFRaRbFR"
