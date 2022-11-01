@@ -126,21 +126,21 @@ def save(t: Turtle):
     t.getscreen().getcanvas().postscript(file='tree.ps')
 
 
-if __name__ == '__main__':
-    t = Turtle()
+# if __name__ == '__main__':
+    # t = Turtle()
     # t.getscreen().bgcolor("#1c262b")
     # t.color("#96004f")
-    t.speed(100)
+    # t.speed(100)
     # t.pensize(2)
     # t.left(90)
     # tree(200)
 
-    s = curve("Fa", 8)
-    s = format_curve(s)
-    l = get_line_length(100, 8)
-    draw_dragon(s, l)
-    save(t)
-    t.getscreen().exitonclick()
+    # s = curve("Fa", 8)
+    # s = format_curve(s)
+    # l = get_line_length(100, 8)
+    # draw_dragon(s, l)
+    # save(t)
+    # t.getscreen().exitonclick()
 
     # print(apply_dragon_rules("a"))        # -> "aRbFR"
     # print(apply_dragon_rules("aa"))       # -> "aRbFRaRbFR"
