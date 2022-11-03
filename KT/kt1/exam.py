@@ -50,9 +50,23 @@ def list_move(initial_list: list, amount: int, factor: int) -> list:
     list_move([1, 2, 3], 4, 1) => [[1, 2, 3], [3, 1, 2], [2, 3, 1], [1, 2, 3]]
     list_move([], 3, 4) => [[], [], []]
     """
-    pass
+    if amount > 1:
+        big_list = [initial_list] * amount
+        if factor > 0:
+            for small_list in big_list[1:]:
+                if factor < len(small_list):
+                    for element in small_list:
+                        if small_list.index(element) + factor > len(small_list):
+                            small_list[factor - 1] = element
+                elif factor == len(small_list):
+                    break
+                else:
+                    new_factor = factor % len(small_list)
 
+        return big_list
+    return initial_list
 
+print(list_move(["a", "b", "c"], 3, 0))
 def parse_call_log(call_log: str) -> dict:
     """
     Parse calling logs to find out who has been calling to whom.
@@ -86,4 +100,20 @@ def parse_call_log(call_log: str) -> dict:
     :param call_log: the whole log as string
     :return: dictionary with call information
     """
-    pass
+    dic = {}
+    list_with_info = call_log.split(",")
+    for element in list_with_info:
+        list_with_names = element.split(":")
+        if len(list_with_info) == 2:
+            if list_with_names[0] not in dic:
+                dic[list_with_names[0]] = [list_with_names[1]]
+            else:
+                dic[list_with_names[0]].append(list_with_names[1])
+        else:
+            for i in range(len(list_with_names)):
+                if i + 1 <= len(list_with_names) - 1:
+                    if list_with_names[i] not in dic:
+                        dic[list_with_names[i]] = [list_with_names[i + 1]]
+                    else:
+                        dic[list_with_names[i]].append(list_with_names[i + 1])
+    return dic
