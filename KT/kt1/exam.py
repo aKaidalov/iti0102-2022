@@ -10,8 +10,8 @@ def capitalize_string(s: str) -> str:
     capitalize_string("ABc") => "ABc"
     capitalize_string("") => ""
     """
-    if s == "" or [0] == s[0].capitalize():
-        return s
+    # if s == "" or [0] == s[0].capitalize():
+    #     return s
     return s.capitalize()
 
 
@@ -27,9 +27,15 @@ def has_seven(nums):
     has_seven([7, 1, 7, 1, 7]) => True
     has_seven([7, 1, 7, 1, 1, 7]) => False
     """
-    pass
+    # if 7 in nums and nums.count(7) == 3:
+    #     for i in nums:
+    #         if i != len(nums) - 1:
+    #             if nums[i] == nums[i + 1]:
+    #                 return False
+    #     return True
+    # return False
 
-
+# print(has_seven([7, 1, 7, 7]))
 def list_move(initial_list: list, amount: int, factor: int) -> list:
     """
     Create amount lists where elements are shifted right by factor.
