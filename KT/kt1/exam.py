@@ -66,7 +66,7 @@ def list_move(initial_list: list, amount: int, factor: int) -> list:
         return big_list
     return initial_list
 
-print(list_move(["a", "b", "c"], 3, 0))
+
 def parse_call_log(call_log: str) -> dict:
     """
     Parse calling logs to find out who has been calling to whom.
