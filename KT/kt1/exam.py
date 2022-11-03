@@ -104,16 +104,10 @@ def parse_call_log(call_log: str) -> dict:
     list_with_info = call_log.split(",")
     for element in list_with_info:
         list_with_names = element.split(":")
-        if len(list_with_info) == 2:
-            if list_with_names[0] not in dic:
-                dic[list_with_names[0]] = [list_with_names[1]]
-            else:
-                dic[list_with_names[0]].append(list_with_names[1])
-        else:
-            for i in range(len(list_with_names)):
-                if i + 1 <= len(list_with_names) - 1:
-                    if list_with_names[i] not in dic:
-                        dic[list_with_names[i]] = [list_with_names[i + 1]]
-                    else:
-                        dic[list_with_names[i]].append(list_with_names[i + 1])
+        for i in range(len(list_with_names)):
+            if i + 1 <= len(list_with_names) - 1:
+                if list_with_names[i] not in dic:
+                    dic[list_with_names[i]] = [list_with_names[i + 1]]
+                else:
+                    dic[list_with_names[i]].append(list_with_names[i + 1])
     return dic
