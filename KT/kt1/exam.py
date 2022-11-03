@@ -50,17 +50,24 @@ def list_move(initial_list: list, amount: int, factor: int) -> list:
     list_move([1, 2, 3], 4, 1) => [[1, 2, 3], [3, 1, 2], [2, 3, 1], [1, 2, 3]]
     list_move([], 3, 4) => [[], [], []]
     """
-    # if amount > 1:
-    #     big_list = [initial_list] * amount
-    #     if factor > 0:
-    #         for small_list in big_list[1:]:
-    #             e = 1       # [0, 1, 2] => [1, 2, 3]
-    #             for e in range(len(small_list) + 1):
-    #                 if e + factor > len(small_list):
-    #                     (e + factor) % len(small_list)
-    #
-    #     return big_list
-    # return initial_list
+    if amount > 1:
+        big_list = [initial_list] * amount
+        if factor > 0 and factor != len(initial_list) and initial_list is not []:
+            for count, small_list in enumerate(big_list):
+                if count != 0:
+                    temp_list = big_list[count - 1].copy()
+                    for e in range(len(big_list[count - 1])):
+                        if e + 1 + factor > len(big_list[count - 1]):        # [0, 1, 2] => [1, 2, 3]
+                            position = ((e + 1 + factor) % len(big_list[count - 1])) - 1
+                            del temp_list[position]
+                            temp_list.insert(position, big_list[count - 1][e])
+                        else:
+                            position = (e + factor)
+                            del temp_list[position]
+                            temp_list.insert(position, big_list[count - 1][e])
+                    big_list[count] = temp_list
+        return big_list
+    return initial_list
 
 
 def parse_call_log(call_log: str) -> dict:
