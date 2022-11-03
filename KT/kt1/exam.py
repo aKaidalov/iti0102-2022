@@ -109,5 +109,6 @@ def parse_call_log(call_log: str) -> dict:
                 if list_with_names[i] not in dic:
                     dic[list_with_names[i]] = [list_with_names[i + 1]]
                 else:
-                    dic[list_with_names[i]].append(list_with_names[i + 1])
+                    if list_with_names[i + 1] not in dic[list_with_names[i]]:
+                        dic[list_with_names[i]].append(list_with_names[i + 1])
     return dic
