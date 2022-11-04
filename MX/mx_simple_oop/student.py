@@ -1,3 +1,6 @@
+"""MX OOP."""
+
+
 class Student:
     """Student class."""
     def __init__(self, name: str):
