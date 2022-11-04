@@ -54,14 +54,22 @@ def min_diff(nums: list) -> int:
     :param nums: list of ints, at least 2 elements.
     :return: min diff between 2 numbers.
     """
-    diffs = []
+    # diffs = []
+    # for e in range(len(nums)):
+    #     for i in range(len(nums)):
+    #         if e != i:
+    #             diff = abs(nums[e] - nums[i])
+    #             if diff not in diffs:
+    #                 diffs.append(diff)
+    # return min(diffs)
+    diff = 10000000000000
     for e in range(len(nums)):
         for i in range(len(nums)):
             if e != i:
-                diff = abs(nums[e] - nums[i])
-                if diff not in diffs:
-                    diffs.append(diff)
-    return min(diffs)
+                new_diff = abs(nums[e] - nums[i])
+                if new_diff < diff:
+                    diff = new_diff
+    return diff
 
 
 def get_symbols_by_occurrences(text: str) -> dict:
