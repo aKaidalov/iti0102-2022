@@ -16,7 +16,6 @@ def tree(length):
 
     :param length: height of the trunk or leaf
     """
-    t.speed(1)
     if length < 5:
         return
     t.forward(length)
@@ -128,19 +127,19 @@ def save(t: Turtle):
 
 if __name__ == '__main__':
     t = Turtle()
-    # t.getscreen().bgcolor("#1c262b")
-    # t.color("#96004f")
+    t.getscreen().bgcolor("#1c262b")
+    t.color("#96004f")
     t.speed(100)
-    # t.pensize(2)
-    # t.left(90)
-    # tree(200)
+    t.pensize(2)
+    t.left(90)
+    tree(200)
 
-    s = curve("Fa", 8)
-    s = format_curve(s)
-    # l = get_line_length(100, 8)
-    # draw_dragon(s, l)
-    save(t)
-    t.getscreen().exitonclick()
+    # s = curve("Fa", 8)
+    # s = format_curve(s)
+    # # l = get_line_length(100, 8)
+    # # draw_dragon(s, l)
+    # save(t)
+    # t.getscreen().exitonclick()
 
     # print(apply_dragon_rules("a"))        # -> "aRbFR"
     # print(apply_dragon_rules("aa"))       # -> "aRbFRaRbFR"
