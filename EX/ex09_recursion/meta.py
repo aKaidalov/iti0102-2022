@@ -16,6 +16,7 @@ def tree(length):
 
     :param length: height of the trunk or leaf
     """
+    t.speed(1)
     if length < 5:
         return
     t.forward(length)
