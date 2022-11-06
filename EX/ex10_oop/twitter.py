@@ -89,11 +89,12 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     """
     dic = {}
     for tweet in tweets:
-        hashtag = re.findall(r"#\w+", tweet.content)[0]
-        if hashtag not in dic:
-            dic[hashtag] = tweet.retweets
-        else:
-            dic[hashtag] += tweet.retweets
+        hashtag = re.findall(r"#\w+", tweet.content)
+        for i in hashtag:
+            if i not in dic:
+                dic[i] = tweet.retweets
+            else:
+                dic[i] += tweet.retweets
     return sorted(dic.keys(), key=lambda x: (-dic[x], x))
 
 
