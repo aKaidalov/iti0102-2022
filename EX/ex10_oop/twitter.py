@@ -1,4 +1,5 @@
 """Twitter."""
+import re
 
 
 class Tweet:
@@ -17,6 +18,10 @@ class Tweet:
         self.content = content
         self.time = time
         self.retweets = retweets
+
+    def __repr__(self):
+        """Repr."""
+        return self.user
 
 
 def find_fastest_growing(tweets: list) -> Tweet:
@@ -82,7 +87,14 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     :param tweets: Input list of tweets.
     :return: List of hashtags by popularity.
     """
-    pass
+    dic = {}
+    for tweet in tweets:
+        hashtag = re.findall(r"#\w+", tweet.content)[0]
+        if hashtag not in dic:
+            dic[hashtag] = tweet.retweets
+        else:
+            dic[hashtag] += tweet.retweets
+    return sorted(dic.keys(), key=lambda x: (-dic[x], x))
 
 
 if __name__ == '__main__':
