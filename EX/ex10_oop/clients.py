@@ -83,18 +83,11 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     :param filename: name of file to get info from.
     :return: client with largest earnings.
     """
-    n = []
     clients = read_from_file_into_list(filename)        # list with objects
-    for client in clients:
-        print(client.earnings_per_day())
-        if client.earnings_per_day() > 0:
-            n.append(client.earnings_per_day())
-    print(n)
-    someone_has_earned_money = [lambda x: x if x.earnings_per_day() > 0 else None, clients]
-    if someone_has_earned_money is []:
-        return None
     clients_with_money_per_day = sorted(clients, key=lambda x: (-x.earnings_per_day(), x.account_age))
-    return clients_with_money_per_day[0]
+    if clients_with_money_per_day[0].current_amount > clients_with_money_per_day[0].starting_amount:
+        return clients_with_money_per_day[0]
+    return None
 
 
 def largest_loss_per_day(filename: str) -> Optional[Client]:
