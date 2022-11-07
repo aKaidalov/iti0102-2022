@@ -83,7 +83,6 @@ def sort_people_and_hobbies(people_list: list) -> list:
     :param people_list: list of people to sort.
     :return: sorted list of people.
     """
-
     return sorted(people_list, key=lambda x: (x.full_name, x.hobbies.sort()))
 
 
