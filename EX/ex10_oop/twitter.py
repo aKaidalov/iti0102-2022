@@ -19,10 +19,6 @@ class Tweet:
         self.time = time
         self.retweets = retweets
 
-    def __repr__(self):
-        """Repr."""
-        return self.user
-
 
 def find_fastest_growing(tweets: list) -> Tweet:
     """
