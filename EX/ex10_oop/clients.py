@@ -34,6 +34,7 @@ class Client:
     def __repr__(self):
         """
         Client representation.
+
         :return: clients name
         """
         return self.name
@@ -48,13 +49,6 @@ class Client:
         pass
 
 
-def read_csv_file(filename: str) -> list:
-    """Read CSV file into list of rows."""
-    with open(filename) as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        return list(Client(row[0], row[1], int(row[2]), int(row[3]), int(row[4])) for row in csv_reader)
-
-
 def read_from_file_into_list(filename: str) -> list:
     """
     Read from the file, make client objects and add the clients into a list.
@@ -62,9 +56,10 @@ def read_from_file_into_list(filename: str) -> list:
     :param filename: name of file to get info from.
     :return: list of clients.
     """
-    objects = read_csv_file(filename)
-    clients = [client.name for client in objects]
-    return clients
+    # Taken from ex07/file_handing.py -> read_from_csv_file(filename):
+    with open(filename) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        return list(Client(row[0], row[1], int(row[2]), int(row[3]), int(row[4])) for row in csv_reader)
 
 
 def filter_by_bank(filename: str, bank: str) -> list:
@@ -75,7 +70,8 @@ def filter_by_bank(filename: str, bank: str) -> list:
     :param bank: to filter by.
     :return: filtered list of people.
     """
-    pass
+    clients = read_from_file_into_list(filename)
+    return list(filter(lambda x: x.bank == bank, clients))
 
 
 def largest_earnings_per_day(filename: str) -> Optional[Client]:
@@ -105,7 +101,7 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
 if __name__ == '__main__':
     print(read_from_file_into_list("files/clients_info.txt"))  # -> [Ann, Mark, Josh, Jonah, Franz]
 
-    print(filter_by_bank("clients_info.txt", "Sprint"))  # -> [Ann, Mark]
+    print(filter_by_bank("files/clients_info.txt", "Sprint"))  # -> [Ann, Mark]
 
     print(largest_earnings_per_day("clients_info.txt"))  # -> Josh
 
