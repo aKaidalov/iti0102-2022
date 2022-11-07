@@ -88,7 +88,7 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     clients_with_money_per_day = sorted(clients, key=lambda x: (-x.earnings_per_day(), x.account_age))
     print(clients_with_money_per_day)
     for client in clients_with_money_per_day:
-        if client.current_amount < client.starting_amount:
+        if client.earnings_per_day() <= 0:
             counter += 1
     if counter == len(clients_with_money_per_day):
         return None
