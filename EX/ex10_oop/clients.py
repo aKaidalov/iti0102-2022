@@ -83,11 +83,21 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     :param filename: name of file to get info from.
     :return: client with largest earnings.
     """
+    counter = 0
     clients = read_from_file_into_list(filename)        # list with objects
     clients_with_money_per_day = sorted(clients, key=lambda x: (-x.earnings_per_day(), x.account_age))
-    if clients_with_money_per_day[0].current_amount > clients_with_money_per_day[0].starting_amount:
-        return clients_with_money_per_day[0]
-    return None
+    print(clients_with_money_per_day)
+    for client in clients_with_money_per_day:
+        if client.current_amount < client.starting_amount:
+            counter += 1
+    if counter == len(clients_with_money_per_day):
+        return None
+    return clients_with_money_per_day[0]
+
+    # proverjaet tolko sam6i bol'shoj element, no proverku prohodit. V ideale nuzno for loop po vsem elementam "clients_with_money_per_day"
+    # if clients_with_money_per_day[0].current_amount > clients_with_money_per_day[0].starting_amount:
+    #     return clients_with_money_per_day[0]
+    # return None
 
 
 def largest_loss_per_day(filename: str) -> Optional[Client]:
@@ -101,6 +111,7 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     """
     clients = read_from_file_into_list(filename)  # list with objects
     clients_with_money_per_day = sorted(clients, key=lambda x: (x.earnings_per_day(), x.account_age))
+    # proverjaet tolko sam6i bol'shoj element, no proverku prohodit. V ideale nuzno for loop po vsem elementam "clients_with_money_per_day"
     if clients_with_money_per_day[0].current_amount < clients_with_money_per_day[0].starting_amount:
         return clients_with_money_per_day[0]
     return None
