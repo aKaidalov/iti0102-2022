@@ -31,13 +31,13 @@ class Client:
         self.starting_amount = starting_amount
         self.current_amount = current_amount
 
-    def __repr__(self):
-        """
-        Client representation.
-
-        :return: clients name
-        """
-        return self.name
+    # def __repr__(self):
+    #     """
+    #     Client representation.
+    #
+    #     :return: clients name
+    #     """
+    #     return self.name
 
     def earnings_per_day(self):
         """
