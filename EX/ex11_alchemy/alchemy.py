@@ -40,7 +40,6 @@ class AlchemicalStorage:
             raise TypeError("Only alchemical elements are allowed")
         self.alchemical_storage.append(element)
 
-
     def pop(self, element_name: str) -> AlchemicalElement or None:
         """
         Remove and return previously added element from storage by its name.
@@ -51,7 +50,7 @@ class AlchemicalStorage:
         :param element_name: Name of the element to remove.
         :return: The removed AlchemicalElement object or None.
         """
-        count = self.alchemical_storage.count(element_name)
+        count = self.alchemical_storage.count(AlchemicalElement(element_name))
         if count > 0:
             for e in reversed(self.alchemical_storage):
                 if e == element_name:
