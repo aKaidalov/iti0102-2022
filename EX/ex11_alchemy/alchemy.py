@@ -50,10 +50,11 @@ class AlchemicalStorage:
         :param element_name: Name of the element to remove.
         :return: The removed AlchemicalElement object or None.
         """
-        count = self.alchemical_storage.count(AlchemicalElement(element_name))
+        names = list(map(lambda x: x.name, self.alchemical_storage))
+        count = names.count(element_name)
         if count > 0:
             for e in reversed(self.alchemical_storage):
-                if e == element_name:
+                if e.name == element_name:
                     self.alchemical_storage.remove(e)
                     return e
         return None
