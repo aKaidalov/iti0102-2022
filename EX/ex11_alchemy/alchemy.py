@@ -28,6 +28,10 @@ class AlchemicalStorage:
         """
         self.alchemical_storage = []
 
+    # def __repr__(self):
+    #     """Alchemical storage representation."""
+    #     return f"* {}"
+
     def add(self, element: AlchemicalElement):
         """
         Add element to storage.
@@ -100,7 +104,14 @@ class AlchemicalStorage:
 
         :return: Content as a string.
         """
-        return ''
+        res = "Content:"
+        if len(self.alchemical_storage) != 0:
+            names = list(map(lambda x: x.name, self.alchemical_storage))
+            for element in self.alchemical_storage:
+                count = names.count(element.name)
+                res += f"\n * {element.name} x {count}"
+            return res
+        return res + " \n Empty"
 
 
 if __name__ == '__main__':
