@@ -104,14 +104,15 @@ class AlchemicalStorage:
 
         :return: Content as a string.
         """
+        filtered_names = []
         res = "Content:"
         if len(self.alchemical_storage) != 0:
-            names = list(map(lambda x: x.name, self.alchemical_storage))
-            for element in self.alchemical_storage:
-                count = names.count(element.name)
+            filtered_names = list(filter(lambda x: x if x not in filtered_names else None, self.alchemical_storage))
+            for element in filtered_names:
+                count = self.alchemical_storage.count(element)
                 res += f"\n * {element.name} x {count}"
             return res
-        return res + " \n Empty"
+        return res + "\n Empty."
 
 
 if __name__ == '__main__':
