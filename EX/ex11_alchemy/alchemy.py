@@ -104,21 +104,31 @@ class AlchemicalStorage:
 
         :return: Content as a string.
         """
-        filtered_names = []
         res = "Content:"
         if len(self.alchemical_storage) != 0:
-            filtered_names = list(filter(lambda x: x if x not in filtered_names else None, self.alchemical_storage))
+            names = list(map(lambda x: x.name, self.alchemical_storage))
+            filtered_names = []
+            for el in names:
+                if el not in filtered_names:
+                    filtered_names.append(el)
             for element in filtered_names:
-                count = self.alchemical_storage.count(element)
-                res += f"\n * {element.name} x {count}"
+                count = names.count(element)
+                res += f"\n * {element} x {count}"
             return res
         return res + "\n Empty."
 
+        # filtered_names = []
+        # for el in names:
+        #     if el not in filtered_names:
+        #         filtered_names.append(el)
 
 if __name__ == '__main__':
     element_one = AlchemicalElement('Fire')
     element_two = AlchemicalElement('Water')
     element_three = AlchemicalElement('Water')
+    element_four = AlchemicalElement('Water')
+    element_five = AlchemicalElement('Water')
+    element_six = AlchemicalElement('Water')
     storage = AlchemicalStorage()
 
     print(element_one)  # <AE: Fire>
@@ -126,6 +136,9 @@ if __name__ == '__main__':
 
     storage.add(element_one)
     storage.add(element_two)
+    storage.add(element_three)
+    storage.add(element_four)
+    storage.add(element_five)
 
     print(storage.get_content())
     # Content:
