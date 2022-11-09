@@ -77,7 +77,9 @@ class AlchemicalStorage:
 
         :return: A list of all of the elements that were previously in the storage.
         """
-        return []
+        e = self.alchemical_storage
+        self.alchemical_storage = []
+        return e
 
     def get_content(self) -> str:
         """
