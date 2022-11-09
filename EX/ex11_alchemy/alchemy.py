@@ -108,7 +108,7 @@ class AlchemicalStorage:
         if len(self.alchemical_storage) != 0:
             names = list(map(lambda x: x.name, self.alchemical_storage))
             filtered_names = []
-            for el in names:
+            for el in sorted(names):
                 if el not in filtered_names:
                     filtered_names.append(el)
             for element in filtered_names:
@@ -122,12 +122,13 @@ class AlchemicalStorage:
         #     if el not in filtered_names:
         #         filtered_names.append(el)
 
+
 if __name__ == '__main__':
     element_one = AlchemicalElement('Fire')
     element_two = AlchemicalElement('Water')
     element_three = AlchemicalElement('Water')
-    element_four = AlchemicalElement('Water')
-    element_five = AlchemicalElement('Water')
+    element_four = AlchemicalElement('Earth')
+    element_five = AlchemicalElement('Snow')
     element_six = AlchemicalElement('Water')
     storage = AlchemicalStorage()
 
