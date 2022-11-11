@@ -214,18 +214,19 @@ class Cauldron(AlchemicalStorage):
         :param element: Input object to add to storage.
         """
         check = True
-        if len(self.alchemical_storage) == 0:
-            super().add(element)
-        else:
-            for elem in reversed(self.alchemical_storage):  # [w, e, i] -> [i, e, w]
-                result = self.recipes.get_product_name(elem.name, element.name)
-                if result is not None:
-                    super().pop(elem.name)
-                    super().add(AlchemicalElement(result))
-                    check = False
-                    break
-            if check:
+        if isinstance(element, AlchemicalElement):
+            if len(self.alchemical_storage) == 0:
                 super().add(element)
+            else:
+                for elem in reversed(self.alchemical_storage):  # [w, e, i] -> [i, e, w]
+                    result = self.recipes.get_product_name(elem.name, element.name)
+                    if result is not None:
+                        super().pop(elem.name)
+                        super().add(AlchemicalElement(result))
+                        check = False
+                        break
+                if check:
+                    super().add(element)
 
 
 if __name__ == '__main__':
