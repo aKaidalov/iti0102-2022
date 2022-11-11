@@ -213,8 +213,8 @@ class Cauldron(AlchemicalStorage):
 
         :param element: Input object to add to storage.
         """
-        check = True
         if isinstance(element, AlchemicalElement):
+            check = True
             if len(self.alchemical_storage) == 0:
                 super().add(element)
             else:
@@ -261,7 +261,7 @@ if __name__ == '__main__':
 
     print(cauldron.extract())  # -> [<AE: Earth>, <AE: Steam>]
 
-    cauldron.add(AlchemicalElement('Earth'))
+    cauldron.add(AlchemicalElement("Earth"))
     cauldron.add(AlchemicalElement('Earth'))
     cauldron.add(AlchemicalElement('Earth'))
     cauldron.add(AlchemicalElement('Fire'))     # e, e, i
