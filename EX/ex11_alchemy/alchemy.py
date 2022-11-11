@@ -194,6 +194,7 @@ class Cauldron(AlchemicalStorage):
     def __init__(self, recipes: AlchemicalRecipes):
         """Initialize the Cauldron class."""
         self.recipes = recipes
+        self.list_to_extract = []
         super(Cauldron, self).__init__()
 
     def add(self, element: AlchemicalElement):
@@ -212,6 +213,19 @@ class Cauldron(AlchemicalStorage):
 
         :param element: Input object to add to storage.
         """
+        check = True
+        if len(self.alchemical_storage) == 0:
+            super().add(element)
+        else:
+            for elem in reversed(self.alchemical_storage):  # [w, e, i] -> [i, e, w]
+                result = self.recipes.get_product_name(elem.name, element.name)
+                if result is not None:
+                    super().pop(elem.name)
+                    super().add(AlchemicalElement(result))
+                    check = False
+                    break
+            if check:
+                super().add(element)
 
 
 if __name__ == '__main__':
@@ -249,8 +263,8 @@ if __name__ == '__main__':
     cauldron.add(AlchemicalElement('Earth'))
     cauldron.add(AlchemicalElement('Earth'))
     cauldron.add(AlchemicalElement('Earth'))
-    cauldron.add(AlchemicalElement('Fire'))
-    cauldron.add(AlchemicalElement('Fire'))
-    cauldron.add(AlchemicalElement('Water'))
+    cauldron.add(AlchemicalElement('Fire'))     # e, e, i
+    cauldron.add(AlchemicalElement('Fire'))     # e, i, i
+    cauldron.add(AlchemicalElement('Water'))    # e, i, r
 
     print(cauldron.extract())  # -> [<AE: Earth>, <AE: Iron>, <AE: Rust>]
