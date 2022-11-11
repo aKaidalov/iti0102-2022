@@ -142,10 +142,10 @@ class AlchemicalRecipes:
         :param product_name: The name of the product element.
         """
         if first_component_name == second_component_name or product_name == first_component_name or product_name == second_component_name:
-            raise TypeError("DuplicateRecipeNamesException")
+            raise DuplicateRecipeNamesException
         for key in self.alchemical_recipes:
             if first_component_name in self.alchemical_recipes[key] and second_component_name in self.alchemical_recipes[key]:
-                raise TypeError("RecipeOverlapException")
+                raise RecipeOverlapException
         self.alchemical_recipes[product_name] = (first_component_name, second_component_name)
 
     def get_product_name(self, first_component_name: str, second_component_name: str) -> str or None:
@@ -193,6 +193,8 @@ class Cauldron(AlchemicalStorage):
 
     def __init__(self, recipes: AlchemicalRecipes):
         """Initialize the Cauldron class."""
+        self.recipes = recipes
+        super(Cauldron, self).__init__()
 
     def add(self, element: AlchemicalElement):
         """
@@ -219,7 +221,7 @@ if __name__ == '__main__':
     recipes.add_recipe('Water', 'Iron', 'Rust')
     recipes.add_recipe('Water', 'Wind', 'Ice')
 
-    print(recipes.get_product_name('Fire', 'Fire'))  # -> 'Steam'
+    print(recipes.get_product_name('Water', 'Fire'))  # -> 'Steam'
     print(recipes.get_product_name('Water', 'Wind'))
     print(recipes.get_product_name('Wind', 'Water'))
 
