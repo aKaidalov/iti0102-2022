@@ -227,6 +227,7 @@ class Cauldron(AlchemicalStorage):
                         break
                 if check:
                     super().add(element)
+        raise TypeError("Only alchemical elements are allowed")
 
 
 if __name__ == '__main__':
