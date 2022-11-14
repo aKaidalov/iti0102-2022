@@ -232,8 +232,11 @@ class Cauldron(AlchemicalStorage):
                     if result is not None:
                         if isinstance(elem, Catalyst):
                             if elem.uses > 0:
-                                if isinstance(element, Catalyst) and element.uses > 0:
-                                    element.uses -= 1
+                                if isinstance(element, Catalyst):
+                                    if element.uses > 0:
+                                        element.uses -= 1
+                                    else:
+                                        break
                                 super().add(AlchemicalElement(result))
                                 elem.uses -= 1
                                 check = False   # If the elem is Catalyst, but uses = 0, need to add just one element
