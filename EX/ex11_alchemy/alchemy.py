@@ -230,9 +230,15 @@ class Cauldron(AlchemicalStorage):
                 for elem in reversed(self.alchemical_storage):  # [w, e, i] -> [i, e, w]
                     result = self.recipes.get_product_name(elem.name, element.name)
                     if result is not None:
-                        super().pop(elem.name)
-                        super().add(AlchemicalElement(result))
-                        check = False
+                        if isinstance(elem, Catalyst):
+                            if elem.uses > 0:
+                                super().add(AlchemicalElement(result))
+                                elem.uses -= 1
+                                check = False   # If the elem is Catalyst, but uses = 0, need to add just one element
+                        else:
+                            super().pop(elem.name)
+                            super().add(AlchemicalElement(result))
+                            check = False   # no need after adding a result add same "element" one more time in following "if" statement
                         break
                 if check:
                     super().add(element)
@@ -254,6 +260,9 @@ class Catalyst(AlchemicalElement):
         :param name: The name of the Catalyst.
         :param uses: The number of uses the Catalyst has.
         """
+        self.name = name
+        self.uses = uses
+        super(AlchemicalElement, self).__init__()
 
     def __repr__(self) -> str:
         """
@@ -265,7 +274,7 @@ class Catalyst(AlchemicalElement):
 
         :return: String representation of the Catalyst.
         """
-        return ""
+        return f"<C: {self.name} ({self.uses})>"
 
 
 class Purifier(AlchemicalStorage):
@@ -356,18 +365,18 @@ if __name__ == '__main__':
     recipes.add_recipe('Water', 'Iron', 'Rust')
     recipes.add_recipe('Water', 'Wind', 'Ice')
 
-    # cauldron = Cauldron(recipes)
-    # cauldron.add(philosophers_stone)
-    # cauldron.add(AlchemicalElement('Mercury'))
-    # print(cauldron.extract())  # -> [<C: Philosophers' stone (1)>, <AE: Gold>]
-    #
-    # cauldron.add(philosophers_stone)
-    # cauldron.add(AlchemicalElement('Mercury'))
-    # print(cauldron.extract())  # -> [<C: Philosophers' stone (0)>, <AE: Gold>]
-    #
-    # cauldron.add(philosophers_stone)
-    # cauldron.add(AlchemicalElement('Mercury'))
-    # print(cauldron.extract())  # -> [<C: Philosophers' stone (0)>, <AE: Mercury>]
+    cauldron = Cauldron(recipes)
+    cauldron.add(philosophers_stone)
+    cauldron.add(AlchemicalElement('Mercury'))
+    print(cauldron.extract())  # -> [<C: Philosophers' stone (1)>, <AE: Gold>]
+
+    cauldron.add(philosophers_stone)
+    cauldron.add(AlchemicalElement('Mercury'))
+    print(cauldron.extract())  # -> [<C: Philosophers' stone (0)>, <AE: Gold>]
+
+    cauldron.add(philosophers_stone)
+    cauldron.add(AlchemicalElement('Mercury'))
+    print(cauldron.extract())  # -> [<C: Philosophers' stone (0)>, <AE: Mercury>]
 
     purifier = Purifier(recipes)
     purifier.add(AlchemicalElement('Iron'))
