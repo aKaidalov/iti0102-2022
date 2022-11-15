@@ -228,12 +228,25 @@ class Cauldron(AlchemicalStorage):
                 super().add(element)
             else:
                 for elem in reversed(self.alchemical_storage):  # [w, e, i] -> [i, e, w]
-                    if isinstance(elem, Catalyst) and isinstance(element, Catalyst) and elem.name == element.name:
-                        if element.uses > 0:
-                            self.alchemical_storage.remove(elem)
-                            super().add(element)
-                        check = False
-                        break
+                    if isinstance(elem, Catalyst) and isinstance(element, Catalyst):
+                        if elem.name == element.name:
+                            if element.uses > 0:
+                                self.alchemical_storage.remove(elem)
+                                super().add(element)
+                            check = False
+                            break
+                        else:
+                            result = self.recipes.get_product_name(elem.name, element.name)
+                            if result is not None:
+                                if elem.uses > 0 and element.uses > 0:
+                                    super().add(AlchemicalElement(result))
+                                    elem.uses -= 1
+                                    element.uses -= 1
+                                    check = False
+                                elif elem.uses == 0 or element.uses == 0:
+                                    super().add(element)
+                                    check = False
+                                break
                     result = self.recipes.get_product_name(elem.name, element.name)
                     if result is not None:
                         if isinstance(elem, Catalyst):
