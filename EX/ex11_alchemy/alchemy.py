@@ -334,8 +334,8 @@ class Purifier(AlchemicalStorage):
             if result is None:
                 super().add(element)
             else:
-                super().add(AlchemicalElement(result[0]))
-                super().add(AlchemicalElement(result[1]))
+                self.add(AlchemicalElement(result[0]))
+                self.add(AlchemicalElement(result[1]))
         else:
             raise TypeError("Only alchemical elements are allowed")
 
@@ -361,5 +361,6 @@ if __name__ == '__main__':
     cauldron.add(AlchemicalElement('Earth'))
     print(cauldron.extract())  # -> [<C: Philosophers' stone (0)>, <AE: Gold>]
 
-
-
+    purifier = Purifier(recipes)
+    purifier.add(AlchemicalElement('Talisman'))
+    print(purifier.extract())  # -> [<AE: Earth>, <AE: Fire>, <AE: Crystal>]  (in any order)
