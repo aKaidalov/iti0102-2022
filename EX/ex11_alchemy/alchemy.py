@@ -228,15 +228,16 @@ class Cauldron(AlchemicalStorage):
                 super().add(element)
             else:
                 for elem in reversed(self.alchemical_storage):  # [w, e, i] -> [i, e, w]
+                    if isinstance(elem, Catalyst) and isinstance(element, Catalyst) and elem.name == element.name:
+                        if element.uses > 0:
+                            self.alchemical_storage.remove(elem)
+                            super().add(element)
+                        check = False
+                        break
                     result = self.recipes.get_product_name(elem.name, element.name)
                     if result is not None:
                         if isinstance(elem, Catalyst):
                             if elem.uses > 0:
-                                if isinstance(element, Catalyst):
-                                    if element.uses > 0:
-                                        element.uses -= 1
-                                    else:
-                                        break
                                 super().add(AlchemicalElement(result))
                                 elem.uses -= 1
                                 check = False   # If the elem is Catalyst, but uses = 0, need to add just one element
@@ -362,6 +363,7 @@ if __name__ == '__main__':
     # print(cauldron.extract())  # -> [<AE: Earth>, <AE: Iron>, <AE: Rust>]
 
     philosophers_stone = Catalyst("Philosophers' stone", 2)
+    zero_uses_stone = Catalyst(philosophers_stone.name, 0)
 
     recipes = AlchemicalRecipes()
     recipes.add_recipe("Philosophers' stone", 'Mercury', 'Gold')
@@ -371,6 +373,11 @@ if __name__ == '__main__':
     recipes.add_recipe('Water', 'Wind', 'Ice')
 
     cauldron = Cauldron(recipes)
+
+    cauldron.add(philosophers_stone)
+    cauldron.add(zero_uses_stone)
+    print(cauldron.extract())
+
     cauldron.add(philosophers_stone)
     cauldron.add(AlchemicalElement('Mercury'))
     print(cauldron.extract())  # -> [<C: Philosophers' stone (1)>, <AE: Gold>]
