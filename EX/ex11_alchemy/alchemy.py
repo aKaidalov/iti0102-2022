@@ -340,8 +340,6 @@ class Purifier(AlchemicalStorage):
             raise TypeError("Only alchemical elements are allowed")
 
 
-
-
 if __name__ == '__main__':
     recipes = AlchemicalRecipes()
     recipes.add_recipe('Earth', 'Fire', 'Iron')
