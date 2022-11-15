@@ -207,7 +207,7 @@ class Cauldron(AlchemicalStorage):
         super(Cauldron, self).__init__()
 
     def check_for_catalysts(self, element: AlchemicalElement):
-        """Check if in list are catalysts."""
+        """Check if list contains catalysts."""
         check = True
         for el in reversed(self.alchemical_storage):  # [w, e, i] -> [i, e, w]
             if isinstance(el, Catalyst) and isinstance(element, Catalyst):
@@ -249,26 +249,26 @@ class Cauldron(AlchemicalStorage):
         :param element: Input object to add to storage.
         """
         if isinstance(element, AlchemicalElement):
-            check = True
             if len(self.alchemical_storage) == 0:
                 super().add(element)
             else:
-                for elem in reversed(self.alchemical_storage):  # [w, e, i] -> [i, e, w]
-                    check = self.check_for_catalysts(element)
-                    result = self.recipes.get_product_name(elem.name, element.name)
-                    if result is not None:
-                        if isinstance(elem, Catalyst):
-                            if elem.uses > 0:
+                check = self.check_for_catalysts(element)
+                if check:   # if check is False, then element is already added to storage, and we can end program
+                    for elem in reversed(self.alchemical_storage):  # [w, e, i] -> [i, e, w]
+                        result = self.recipes.get_product_name(elem.name, element.name)
+                        if result is not None:
+                            if isinstance(elem, Catalyst):
+                                if elem.uses > 0:
+                                    super().add(AlchemicalElement(result))
+                                    elem.uses -= 1
+                                    check = False   # If the elem is Catalyst, but uses = 0, need to add just one element
+                            else:
+                                super().pop(elem.name)
                                 super().add(AlchemicalElement(result))
-                                elem.uses -= 1
-                                check = False   # If the elem is Catalyst, but uses = 0, need to add just one element
-                        else:
-                            super().pop(elem.name)
-                            super().add(AlchemicalElement(result))
-                            check = False   # no need after adding a result add same "element" one more time in following "if" statement
-                        break
-                if check:
-                    super().add(element)
+                                check = False   # no need after adding a result add same "element" one more time in following "if" statement
+                            break
+                    if check:
+                        super().add(element)
         else:
             raise TypeError("Only alchemical elements are allowed")
 
