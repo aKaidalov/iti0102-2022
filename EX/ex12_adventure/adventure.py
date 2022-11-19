@@ -85,12 +85,12 @@ class World:
     def add_adventurer(self, element: Adventurer):
         """Add Adventurer class object to the adventurers list."""
         if isinstance(element, Adventurer):
-            self.adventurers.append(element.name)
+            self.adventurers.append(element)
 
     def add_monster(self, element: Monster):
         """Add Monster class object to the monsters list."""
         if isinstance(element, Monster):
-            self.monsters.append(element.name)
+            self.monsters.append(element)
 
 
 if __name__ == "__main__":
