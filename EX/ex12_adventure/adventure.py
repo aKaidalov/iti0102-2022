@@ -97,29 +97,6 @@ class World:
         if isinstance(element, Monster):
             self.monsters.append(element)
 
-    def remove_character(self, name: str):
-        """Remove character."""
-        for adventurer in self.adventurers:
-            if name == adventurer.name:
-                self.graveyard.append(adventurer)
-                self.adventurers.remove(adventurer)
-                break
-        for monster in self.monsters:
-            if name == monster.name:
-                self.graveyard.append(monster)
-                self.monsters.remove(monster)
-                break
-        for deadman in self.graveyard:
-            if name == deadman.name:
-                self.graveyard.remove(deadman)
-                break
-
-    def necromancers_active(self):
-        """Activate necromancers."""
-
-    def revive_graveyard(self):
-        """Revive graveyard."""
-
 
 if __name__ == "__main__":
     print("Kord oli maailm.")
