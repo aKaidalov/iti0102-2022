@@ -1,4 +1,5 @@
 """Adventure."""
+import math
 
 
 class Adventurer:
@@ -35,6 +36,8 @@ class Adventurer:
         """Add experience to Adventurer."""
         if self.experience < 100:
             self.experience += exp
+        else:
+            self.experience += math.floor(exp / 10)
 
 
 class Monster:
@@ -51,6 +54,7 @@ class Monster:
     def __repr__(self):
         """Class representation."""
         return f"{self.name} of type {self.type}, Power: {self.power}."
+
 
 class World:
     """World class."""
