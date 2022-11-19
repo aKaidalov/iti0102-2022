@@ -66,6 +66,7 @@ class World:
         self.graveyard = []
         self.adventurers = []
         self.monsters = []
+        self.active_necromancers = False
 
     def __repr__(self):
         """Class representation."""
@@ -114,13 +115,21 @@ class World:
                 self.graveyard.remove(deadman)
                 break
 
-    def necromancers_active(self):
+    def necromancers_active(self, element: bool):
         """Activate necromancers."""
-        pass
+        self.active_necromancers = element
 
     def revive_graveyard(self):
         """Revive graveyard."""
-        pass
+        if self.active_necromancers:
+            for deadman in self.graveyard:
+                if isinstance(deadman, Monster):
+                    deadman.type = "Zombie"
+                    self.monsters.append(deadman)
+                elif isinstance(deadman, Adventurer):
+                    self.monsters.append(Monster(f"Undead {deadman.name}", f"Zombie {deadman.type}", deadman.power))
+            self.active_necromancers = False
+            self.graveyard = []
 
 
 if __name__ == "__main__":
