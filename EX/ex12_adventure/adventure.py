@@ -22,7 +22,7 @@ class Adventurer:
             power = 10
         self.power = power
 
-        self.experience = max([0, experience])    # ( , ) - tuple? max() finds largest number. if exp < 0 -> 0.
+        self.experience = max(0, experience)    # ( , ) - tuple? max() finds largest number. if exp < 0 -> 0.
 
     def __repr__(self):
         """Class representation."""
@@ -34,10 +34,11 @@ class Adventurer:
 
     def add_experience(self, exp: int):
         """Add experience to Adventurer."""
-        if self.experience < 100:
+        if self.experience + exp < 100:
             self.experience += exp
-        # else:
-        #     self.experience += math.floor(exp / 10)
+        else:
+            self.power += math.floor(self.experience / 10)
+            self.experience = 0
 
 
 class Monster:
@@ -45,7 +46,7 @@ class Monster:
 
     def __init__(self, name: str, type: str, power: int):
         """Initialize the Monster class."""
-        if type == "Zombie":
+        if type == "Zombie" and "Undead " not in name:
             name = "Undead " + name
         self.name = name
         self.type = type
