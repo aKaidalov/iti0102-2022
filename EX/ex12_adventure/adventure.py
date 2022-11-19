@@ -36,7 +36,7 @@ class Adventurer:
         """Add experience to Adventurer."""
         if exp > 0:
             self.experience = self.experience + exp
-            if self.experience + exp > 99:
+            if self.experience > 99:
                 self.power += math.floor(self.experience / 10)
                 self.experience = 0
 
