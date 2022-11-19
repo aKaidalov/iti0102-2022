@@ -127,7 +127,7 @@ class World:
                     deadman.type = "Zombie"
                     self.monsters.append(deadman)
                 elif isinstance(deadman, Adventurer):
-                    self.monsters.append(Monster(f"Undead {deadman.name}", f"Zombie {deadman.type}", deadman.power))
+                    self.monsters.append(Monster(f"Undead {deadman.name}", f"Zombie {deadman.class_type}", deadman.power))
             self.active_necromancers = False
             self.graveyard = []
 
