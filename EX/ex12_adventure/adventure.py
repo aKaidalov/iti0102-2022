@@ -109,18 +109,16 @@ class World:
                 self.graveyard.append(monster)
                 self.monsters.remove(monster)
                 break
-        for dead in self.graveyard:
-            if name == dead.name:
-                self.graveyard.remove(dead)
+        for deadman in self.graveyard:
+            if name == deadman.name:
+                self.graveyard.remove(deadman)
                 break
 
     def necromancers_active(self):
         """Activate necromancers."""
 
-
     def revive_graveyard(self):
         """Revive graveyard."""
-
 
 
 if __name__ == "__main__":
