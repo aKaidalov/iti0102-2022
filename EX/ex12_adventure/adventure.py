@@ -35,7 +35,7 @@ class Adventurer:
     def add_experience(self, exp: int):
         """Add experience to Adventurer."""
         if self.experience + exp < 100:
-            self.experience += exp
+            self.experience = max(0, self.experience) + exp
         else:
             self.power += math.floor(self.experience / 10)
             self.experience = 0
