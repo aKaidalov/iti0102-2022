@@ -22,7 +22,7 @@ class Adventurer:
             power = 10
         self.power = power
 
-        self.experience = max(0, experience)    # ( , ) - tuple? max() finds largest number. if exp < 0 -> 0.
+        self.experience = max([0, experience])    # ( , ) - tuple? max() finds largest number. if exp < 0 -> 0.
 
     def __repr__(self):
         """Class representation."""
@@ -36,8 +36,8 @@ class Adventurer:
         """Add experience to Adventurer."""
         if self.experience < 100:
             self.experience += exp
-        else:
-            self.experience += math.floor(exp / 10)
+        # else:
+        #     self.experience += math.floor(exp / 10)
 
 
 class Monster:
@@ -71,28 +71,28 @@ class World:
         pass
 
     def get_python_master(self):
-        """Return python master."""
+        """Return a python master."""
         return self.python_master
 
     def get_graveyard(self):
-        """Return graveyard."""
+        """Return a graveyard."""
         return self.graveyard
 
     def get_adventurer_list(self):
-        """Return graveyard."""
+        """Return an adventurer list."""
         return self.adventurers
 
     def get_monster_list(self):
-        """Return graveyard."""
+        """Return a monster list."""
         return self.monsters
 
     def add_adventurer(self, element: Adventurer):
-        """Add Adventurer class object to the adventurers list."""
+        """Add an Adventurer class object to the adventurers list."""
         if isinstance(element, Adventurer):
             self.adventurers.append(element)
 
     def add_monster(self, element: Monster):
-        """Add Monster class object to the monsters list."""
+        """Add a Monster class object to the monsters list."""
         if isinstance(element, Monster):
             self.monsters.append(element)
 
