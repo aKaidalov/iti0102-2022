@@ -19,7 +19,7 @@ class Adventurer:
         if power > 99:
             power = 10
         self.power = power
-        self.experience = max(0, experience)    # ( , ) - tuple? max() finds largest number. if exp < 0 -> 0.
+        self.experience = max(0, experience)  # ( , ) - tuple? max() finds largest number. if exp < 0 -> 0.
         self.active_adventurer = False
 
     def __repr__(self):
@@ -80,8 +80,8 @@ class World:
         """Return a graveyard."""
         return self.graveyard
 
-# adventurers
-# ----------------------------------------------------------------------------------------------------------------------
+    # adventurers
+    # ----------------------------------------------------------------------------------------------------------------------
 
     def add_adventurer(self, element: Adventurer):
         """Add an Adventurer class object to the adventurers list."""
@@ -144,8 +144,8 @@ class World:
             if not adventurer.active_adventurer:
                 adventurer.active_adventurer = True
 
-# monsters
-# ----------------------------------------------------------------------------------------------------------------------
+    # monsters
+    # ----------------------------------------------------------------------------------------------------------------------
 
     def add_monster(self, element: Monster):
         """Add a Monster class object to the monsters list."""
@@ -192,7 +192,7 @@ class World:
             if not monster.active_monster:
                 monster.active_monster = True
 
-# ----------------------------------------------------------------------------------------------------------------------
+    # ----------------------------------------------------------------------------------------------------------------------
 
     def remove_character(self, name: str):
         """Remove character."""
@@ -201,17 +201,17 @@ class World:
                 adventurer.active_adventurer = False
                 self.graveyard.append(adventurer)
                 self.adventurers.remove(adventurer)
-                break
+                return
         for monster in self.monsters:
             if name == monster.name:
                 monster.active_monster = False
                 self.graveyard.append(monster)
                 self.monsters.remove(monster)
-                break
+                return
         for deadman in self.graveyard:
             if name == deadman.name:
                 self.graveyard.remove(deadman)
-                break
+                return
         # self.graveyard = list(filter(lambda a: a.name != name, self.adventurers))
 
     def necromancers_active(self, element: bool):
@@ -226,18 +226,19 @@ class World:
                     deadman.type = "Zombie"
                     self.monsters.append(deadman)
                 elif isinstance(deadman, Adventurer):
-                    self.monsters.append(Monster(f"Undead {deadman.name}", f"Zombie {deadman.class_type}", deadman.power))
+                    self.monsters.append(
+                        Monster(f"Undead {deadman.name}", f"Zombie {deadman.class_type}", deadman.power))
             self.active_necromancers = False
             self.graveyard = []
 
-# 3. osa
-# ----------------------------------------------------------------------------------------------------------------------
-# -----------------
+    # 3. osa
+    # ----------------------------------------------------------------------------------------------------------------------
+    # -----------------
 
     def find_druid(self):
         """Show if there is a driud."""
         active_adventurers = self.get_active_adventurers()
-        for adventurer in active_adventurers:       # Kak napisat' odnoi strochkoi?
+        for adventurer in active_adventurers:  # Kak napisat' odnoi strochkoi?
             if adventurer.class_type == "Druid":
                 return True
         return False
@@ -245,25 +246,25 @@ class World:
     def check_for_druid_and_monsters(self):
         """Deactivate monsters with Animal and Ent type if there is a Druid."""
         if self.find_druid():
-            active_monsters = self.get_active_monsters()        # Mozno srazu self isspolsovat' v for?
+            active_monsters = self.get_active_monsters()  # Mozno srazu self isspolsovat' v for?
             for monster in active_monsters:
                 if monster.type == "Animal" or monster.type == "Ent":
                     monster.active_monster = False
 
-# -----------------
+    # -----------------
 
     def find_zombie(self):
         """Show if there are any zombies."""
-        check_list = ["Zombie", "Zombie Fighter", "Zombie Druid", "Zombie Paladin", "Zombie Wizard"]
         for monster in self.get_active_monsters():
-            if monster in check_list:
+            if "Zombie" in monster.type:
                 return True
         return False
 
     def check_for_paladin_and_zombies(self):
         """Double Paladin power if there are any zombies."""
         if self.find_zombie():
-            for adventurer in self.adventurers:
+            active_adventurers = self.get_active_adventurers()
+            for adventurer in active_adventurers:
                 if adventurer.class_type == "Paladin":
                     adventurer.power *= 2
 
@@ -272,52 +273,55 @@ class World:
         if self.find_zombie():
             for adventurer in self.adventurers:
                 if adventurer.class_type == "Paladin":
-                    adventurer.power /= 2
+                    adventurer.power = math.floor(adventurer.power / 2)
 
-# -----------------
+    # -----------------
 
     # def add_more_power_after_winn(self, active_adventurers: list, individual_experience: int):
     #     """Add power."""
     #     for adventurer in active_adventurers:
     #         adventurer.experience += individual_experience
 
-
     def go_adventure(self, deadly: bool = False):
         """A."""
         self.check_for_druid_and_monsters()
-        self.check_for_paladin_and_zombies()        # Gives all Paladins power for this round
+        self.check_for_paladin_and_zombies()  # Gives all Paladins power for this round
         active_adventurers = self.get_active_adventurers()
         active_monsters = self.get_active_monsters()
         active_a_power_sum = sum(list(map(lambda a: a.power, active_adventurers)))
         active_m_power_sum = sum(list(map(lambda m: m.power, active_monsters)))
-        individual_experience = math.floor(active_m_power_sum / len(active_monsters))
-
-        if active_a_power_sum > active_m_power_sum:
-            if not deadly:
-                map(lambda a: a.experience + individual_experience, active_adventurers)
-                self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
-                for adventurer in active_adventurers: adventurer.active_adventurer = False
-                for monster in active_monsters: monster.active_monster = False
-            else:
-                individual_experience *= 2
-                map(lambda a: a.experience + individual_experience, active_adventurers)
-                self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
-                for adventurer in active_adventurers: adventurer.active_adventurer = False
-                for monster in active_monsters: self.remove_character(monster)  # Change active status to False in ".remove_character"
-        elif active_a_power_sum < active_m_power_sum:
-            if not deadly:
-                for adventurer in active_adventurers: adventurer.active_adventurer = False
-                for monster in active_monsters: monster.active_monster = False
-            else:
-                for adventurer in active_adventurers: self.remove_character(adventurer)
-                for monster in active_monsters: monster.active_monster = False
-        else:
-            i_e = math.floor(individual_experience / 2)
-            map(lambda a: a.experience + i_e, active_adventurers)
-            self.return_paladin_power_back_to_normal()      # Takes all Paladins' power back at the end of the round
+        if not active_monsters:
             for adventurer in active_adventurers: adventurer.active_adventurer = False
-            for monster in active_monsters: monster.active_monster = False
+        else:
+            individual_experience = math.floor(active_m_power_sum / len(active_monsters))
 
+            if active_a_power_sum > active_m_power_sum:
+                if not deadly:
+                    for adventurer in active_adventurers: adventurer.experience += individual_experience
+                    self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
+                    for adventurer in active_adventurers: adventurer.active_adventurer = False
+                    for monster in active_monsters: monster.active_monster = False
+                else:
+                    individual_experience *= 2
+                    print(individual_experience)
+                    for adventurer in active_adventurers: adventurer.experience += individual_experience
+                    self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
+                    for adventurer in active_adventurers: adventurer.active_adventurer = False
+                    for monster in active_monsters: self.remove_character(
+                        monster.name)  # Change active status to False in ".remove_character"
+            elif active_a_power_sum < active_m_power_sum:
+                if not deadly:
+                    for adventurer in active_adventurers: adventurer.active_adventurer = False
+                    for monster in active_monsters: monster.active_monster = False
+                else:
+                    for adventurer in active_adventurers: self.remove_character(adventurer)
+                    for monster in active_monsters: monster.active_monster = False
+            else:
+                i_e = math.floor(individual_experience / 2)
+                for adventurer in active_adventurers: adventurer.experience += i_e
+                self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
+                for adventurer in active_adventurers: adventurer.active_adventurer = False
+                for monster in active_monsters: monster.active_monster = False
 
 
 if __name__ == "__main__":
