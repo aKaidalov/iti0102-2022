@@ -10,19 +10,18 @@ class Adventurer:
     power and experience.
     """
 
+
     def __init__(self, name: str, class_type: str, power: int, experience: int = 0):
         """Initialize the Adventurer class."""
         self.name = name
-
         if class_type not in {"Druid", "Wizard", "Paladin"}:
             class_type = "Fighter"
         self.class_type = class_type
-
         if power > 99:
             power = 10
         self.power = power
-
         self.experience = max(0, experience)    # ( , ) - tuple? max() finds largest number. if exp < 0 -> 0.
+        self.active_adventurer = False
 
     def __repr__(self):
         """Class representation."""
@@ -51,6 +50,7 @@ class Monster:
         self.name = name
         self.type = type
         self.power = power
+        self.active_monster = False
 
     def __repr__(self):
         """Class representation."""
@@ -65,6 +65,7 @@ class World:
         self.python_master = python_master
         self.graveyard = []
         self.adventurers = []
+        # self.active_adventurers = []
         self.monsters = []
         self.active_necromancers = False
 
@@ -80,23 +81,118 @@ class World:
         """Return a graveyard."""
         return self.graveyard
 
-    def get_adventurer_list(self):
-        """Return an adventurer list."""
-        return self.adventurers
-
-    def get_monster_list(self):
-        """Return a monster list."""
-        return self.monsters
+# adventurers
+# ----------------------------------------------------------------------------------------------------------------------
 
     def add_adventurer(self, element: Adventurer):
         """Add an Adventurer class object to the adventurers list."""
         if isinstance(element, Adventurer):
             self.adventurers.append(element)
 
+    def get_adventurer_list(self):
+        """Return an adventurer list."""
+        return list(filter(lambda a: not a.active_adventurer, self.adventurers))
+
+    def get_active_adventurers(self):
+        """Get active adventurers."""
+        active_adventurers = list(filter(lambda a: a.active_adventurer, self.adventurers))
+        return sorted(active_adventurers, key=lambda x: -x.experience)
+
+    def add_strongest_adventurer(self, class_type: str):
+        """Add strongest adventurer."""
+        strongest_adventurer = max(
+            list(filter(lambda x: x.class_type == class_type and not x.active_adventurer, self.adventurers)),
+            key=lambda a: a.power)
+        strongest_adventurer.active_adventurer = True
+
+    def add_weakest_adventurer(self, class_type: str):
+        """Add weakest adventurer."""
+        weakest_adventurer = min(
+            list(filter(lambda x: x.class_type == class_type and not x.active_adventurer, self.adventurers)),
+            key=lambda a: a.power)
+        weakest_adventurer.active_adventurer = True
+
+    def add_most_experienced_adventurer(self, class_type: str):
+        """Add most experienced adventurer."""
+        most_experienced_adventurer = max(
+            list(filter(lambda x: x.class_type == class_type and not x.active_adventurer, self.adventurers)),
+            key=lambda a: a.experience)
+        most_experienced_adventurer.active_adventurer = True
+
+    def add_least_experienced_adventurer(self, class_type: str):
+        """Add least experienced adventurer."""
+        most_experienced_adventurer = min(
+            list(filter(lambda x: x.class_type == class_type and not x.active_adventurer, self.adventurers)),
+            key=lambda a: a.experience)
+        most_experienced_adventurer.active_adventurer = True
+
+    def add_adventurer_by_name(self, name: str):
+        """Add adventurer by name."""
+        for adventurer in self.adventurers:
+            if adventurer.name == name and not adventurer.active_adventurer:
+                adventurer.active_adventurer = True
+                break
+
+    def add_all_adventurers_of_class_type(self, class_type: str):
+        """Add all adventurers by class_type."""
+        for adventurer in self.adventurers:
+            if adventurer.class_type == class_type and not adventurer.active_adventurer:
+                adventurer.active_adventurer = True
+
+    def add_all_adventurers(self):
+        """Add all adventurers."""
+        for adventurer in self.adventurers:
+            if not adventurer.active_adventurer:
+                adventurer.active_adventurer = True
+
+# monsters
+# ----------------------------------------------------------------------------------------------------------------------
+
     def add_monster(self, element: Monster):
         """Add a Monster class object to the monsters list."""
         if isinstance(element, Monster):
             self.monsters.append(element)
+
+    def get_monster_list(self):
+        """Return a monster list."""
+        return list(filter(lambda m: not m.active_monster, self.monsters))
+
+    def get_active_monsters(self):
+        """Get active monsters."""
+        active_monsters = list(filter(lambda m: m.active_monster, self.monsters))
+        return sorted(active_monsters, key=lambda x: -x.experience)
+
+    def add_monster_by_name(self, name: str):
+        """Add adventurer by name."""
+        for monster in self.monsters:
+            if monster.name == name and not monster.active_monster:
+                monster.active_adventurer = True
+                break
+
+    def add_strongest_monster(self):
+        """Add all monsters."""
+        for monster in self.adventurers:
+            if not monster.active_monster:
+                monster.active_adventurer = True
+
+    def add_weakest_monster(self):
+        """Add weakest adventurer."""
+        weakest_monster = min(list(filter(lambda x: not x.active_monster, self.monsters)), key=lambda m: m.power)
+        weakest_monster.active_adventurer = True
+
+    def add_all_monsters_of_type(self, type: str):
+        """Add all adventurers by class_type."""
+        for monster in self.monsters:
+            if monster.class_type == type and not monster.active_monster:
+                monster.active_monster = True
+
+    def add_all_monsters(self):
+        """Add all monsters."""
+        for monster in self.monsters:
+            if not monster.active_monster:
+                monster.active_monster = True
+
+    # ----------------------------------------------------------------------------------------------------------------------
 
     def remove_character(self, name: str):
         """Remove character."""
@@ -114,6 +210,7 @@ class World:
             if name == deadman.name:
                 self.graveyard.remove(deadman)
                 break
+        # self.graveyard = list(filter(lambda a: a.name != name, self.adventurers))
 
     def necromancers_active(self, element: bool):
         """Activate necromancers."""
