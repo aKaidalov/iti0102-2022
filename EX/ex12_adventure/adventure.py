@@ -10,7 +10,6 @@ class Adventurer:
     power and experience.
     """
 
-
     def __init__(self, name: str, class_type: str, power: int, experience: int = 0):
         """Initialize the Adventurer class."""
         self.name = name
@@ -166,19 +165,19 @@ class World:
         """Add adventurer by name."""
         for monster in self.monsters:
             if monster.name == name and not monster.active_monster:
-                monster.active_adventurer = True
+                monster.active_monster = True
                 break
 
     def add_strongest_monster(self):
         """Add all monsters."""
-        for monster in self.adventurers:
+        for monster in self.monsters:
             if not monster.active_monster:
-                monster.active_adventurer = True
+                monster.active_monster = True
 
     def add_weakest_monster(self):
         """Add weakest adventurer."""
         weakest_monster = min(list(filter(lambda x: not x.active_monster, self.monsters)), key=lambda m: m.power)
-        weakest_monster.active_adventurer = True
+        weakest_monster.active_monster = True
 
     def add_all_monsters_of_type(self, type: str):
         """Add all adventurers by class_type."""
@@ -192,7 +191,7 @@ class World:
             if not monster.active_monster:
                 monster.active_monster = True
 
-    # ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 
     def remove_character(self, name: str):
         """Remove character."""
