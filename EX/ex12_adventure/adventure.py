@@ -169,15 +169,16 @@ class World:
                 break
 
     def add_strongest_monster(self):
-        """Add all monsters."""
-        for monster in self.monsters:
-            if not monster.active_monster:
-                monster.active_monster = True
+        """Add the strongest monster."""
+        if len(self.monsters) > 0:
+            strongest_monster = max(list(filter(lambda x: not x.active_monster, self.monsters)), key=lambda m: m.power)
+            strongest_monster.active_monster = True
 
     def add_weakest_monster(self):
-        """Add weakest adventurer."""
-        weakest_monster = min(list(filter(lambda x: not x.active_monster, self.monsters)), key=lambda m: m.power)
-        weakest_monster.active_monster = True
+        """Add the weakest adventurer."""
+        if len(self.monsters) > 0:
+            weakest_monster = min(list(filter(lambda x: not x.active_monster, self.monsters)), key=lambda m: m.power)
+            weakest_monster.active_monster = True
 
     def add_all_monsters_of_type(self, type: str):
         """Add all adventurers by class_type."""
