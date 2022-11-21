@@ -159,7 +159,7 @@ class World:
     def get_active_monsters(self):
         """Get active monsters."""
         active_monsters = list(filter(lambda m: m.active_monster, self.monsters))
-        return sorted(active_monsters, key=lambda x: -x.experience)
+        return sorted(active_monsters, key=lambda x: -x.power)
 
     def add_monster_by_name(self, name: str):
         """Add adventurer by name."""
@@ -182,7 +182,7 @@ class World:
     def add_all_monsters_of_type(self, type: str):
         """Add all adventurers by class_type."""
         for monster in self.monsters:
-            if monster.class_type == type and not monster.active_monster:
+            if monster.type == type and not monster.active_monster:
                 monster.active_monster = True
 
     def add_all_monsters(self):
