@@ -226,6 +226,7 @@ class World:
             for deadman in self.graveyard:
                 if isinstance(deadman, Monster):
                     deadman.type = "Zombie"
+                    deadman.name = f"Undead {deadman.name}"
                     self.monsters.append(deadman)
                 elif isinstance(deadman, Adventurer):
                     self.monsters.append(
@@ -344,10 +345,10 @@ if __name__ == "__main__":
         return "".join([random.choice(string.ascii_lowercase) for _ in range(length)])
     world = World("Sõber")
     world.necromancers_active(True)
-    hero = 'l'
+    hero = generate_random_character(5)
     monster = Monster("BadMan", "Goblin", 1)
     world.add_monster(monster)
-    world.add_adventurer(generate_random_character(5))
+    world.add_adventurer(hero)
 
     world.add_all_adventurers()
     world.add_all_monsters()
