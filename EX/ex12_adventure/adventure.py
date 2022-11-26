@@ -273,34 +273,24 @@ class World:
 
     def return_paladin_power_back_to_normal(self):
         """Return paladin power back to normal"""
-        if self.find_zombie():
-            for adventurer in self.adventurers:
-                if adventurer.class_type == "Paladin":
-                    adventurer.power = math.floor(adventurer.power / 2)
+        for adventurer in self.adventurers:
+            if adventurer.class_type == "Paladin":
+                adventurer.power = math.floor(adventurer.power / 2)
 
     # -----------------
 
-    # def add_more_power_after_winn(self, active_adventurers: list, individual_experience: int):
-    #     """Add power."""
-    #     for adventurer in active_adventurers:
-    #         adventurer.experience += individual_experience
-
     def go_adventure(self, deadly: bool = False):
-        """A."""
+        """Adfcg."""
         self.check_for_druid_and_monsters()
         self.check_for_paladin_and_zombies()  # Gives all Paladins power for this round
         active_adventurers = self.get_active_adventurers()
         active_monsters = self.get_active_monsters()
         active_a_power_sum = sum(list(map(lambda a: a.power, active_adventurers)))
         active_m_power_sum = sum(list(map(lambda m: m.power, active_monsters)))
-        print(active_a_power_sum)
-        print(active_m_power_sum)
-        print(active_monsters)
-        print(active_adventurers)
         if not active_monsters:
             for adventurer in active_adventurers: adventurer.active_adventurer = False
         else:
-            individual_experience = math.floor(active_m_power_sum / len(active_monsters))
+            individual_experience = math.floor(active_m_power_sum / len(active_adventurers))
 
             if active_a_power_sum > active_m_power_sum:
                 if not deadly:
@@ -332,31 +322,28 @@ class World:
 
 
 if __name__ == "__main__":
-    def generate_random_character(power):
-        acceptable_classes = ["Fighter", "Druid", "Paladin", "Wizard"]
-        return Adventurer(generate_string(30), random.choice(acceptable_classes), power)
-
-
-    def generate_random_monster(power):
-        return Monster(generate_string(3), generate_string(9), power)
-
-
-    def generate_string(length):
-        return "".join([random.choice(string.ascii_lowercase) for _ in range(length)])
     world = World("Sõber")
-    world.necromancers_active(True)
-    hero = generate_random_character(5)
-    monster = Monster("BadMan", "Goblin", 1)
+    assert world.get_python_master() == "Sõber"
+    assert world.get_graveyard() == []
+
+    hero = Adventurer("Sander", "Paladin", 50)
+    hero2 = Adventurer("Toomas", "Druid", 50)
+    hero3 = Adventurer("Toots", "Druid", 1)
+    hero3.add_experience(149)
+
+    assert hero3.power == 15
+
+    monster = Monster("Giant Badger", "Animal", 39043)
+    monster2 = Monster("Monsu", "Zombie", 149)
+    monster3 = Monster("Tilluke asi", "suva", 1)
+
     world.add_monster(monster)
+    world.add_monster(monster2)
     world.add_adventurer(hero)
+    world.add_adventurer(hero2)
 
     world.add_all_adventurers()
     world.add_all_monsters()
+
     world.go_adventure(True)
-    assert len(world.get_graveyard()) == 1
-    assert len(world.get_monster_list()) == 0
-    world.revive_graveyard()
-    assert len(world.get_monster_list()) == 1
-    assert len(world.get_graveyard()) == 0
-    assert monster.type == "Zombie"
-    assert str(monster) == "Undead BadMan of type Zombie, Power: 1."
+    print(hero2)
