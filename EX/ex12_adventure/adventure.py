@@ -64,13 +64,8 @@ class World:
         self.python_master = python_master
         self.graveyard = []
         self.adventurers = []
-        # self.active_adventurers = []
         self.monsters = []
         self.active_necromancers = False
-
-    def __repr__(self):
-        """Class representation."""
-        pass
 
     def get_python_master(self):
         """Return a python master."""
