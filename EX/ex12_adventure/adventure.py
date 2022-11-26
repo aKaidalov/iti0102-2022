@@ -294,15 +294,15 @@ class World:
 
             if active_a_power_sum > active_m_power_sum:
                 if not deadly:
-                    for adventurer in active_adventurers: adventurer.add_experience(individual_experience)
                     self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
+                    for adventurer in active_adventurers: adventurer.add_experience(individual_experience)
                     for adventurer in active_adventurers: adventurer.active_adventurer = False
                     for monster in active_monsters: monster.active_monster = False
                 else:
                     individual_experience *= 2
                     print(individual_experience)
-                    for adventurer in active_adventurers: adventurer.add_experience(individual_experience)
                     self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
+                    for adventurer in active_adventurers: adventurer.add_experience(individual_experience)
                     for adventurer in active_adventurers: adventurer.active_adventurer = False
                     for monster in active_monsters: self.remove_character(
                         monster.name)  # Change active status to False in ".remove_character"
@@ -315,8 +315,8 @@ class World:
                     for monster in active_monsters: monster.active_monster = False
             else:
                 i_e = math.floor(individual_experience / 2)
-                for adventurer in active_adventurers: adventurer.experience.add_experience(i_e)
                 self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
+                for adventurer in active_adventurers: adventurer.experience.add_experience(i_e)
                 for adventurer in active_adventurers: adventurer.active_adventurer = False
                 for monster in active_monsters: monster.active_monster = False
 
