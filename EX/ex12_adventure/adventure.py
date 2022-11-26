@@ -1,7 +1,5 @@
 """Adventure."""
 import math
-import random
-import string
 
 
 class Adventurer:
@@ -272,7 +270,7 @@ class World:
                     adventurer.power *= 2
 
     def return_paladin_power_back_to_normal(self):
-        """Return paladin power back to normal"""
+        """Return paladin power back to normal."""
         if self.find_zombie():
             for adventurer in self.adventurers:
                 if adventurer.class_type == "Paladin":
@@ -289,8 +287,10 @@ class World:
 
     def add_i_e_and_return_monsters_to_list(self, active_adventurers: list, active_monsters: list, individual_experience: int):
         """Return all the characters back to their lists."""
-        for adventurer in active_adventurers: adventurer.add_experience(individual_experience)
-        for adventurer in active_adventurers: adventurer.active_adventurer = False
+        for adventurer in active_adventurers:
+            adventurer.add_experience(individual_experience)
+        for adventurer in active_adventurers:
+            adventurer.active_adventurer = False
         for monster in active_monsters:
             self.remove_character(monster.name)  # Change active status to False in ".remove_character"
 
@@ -303,7 +303,8 @@ class World:
         active_a_power_sum = sum(list(map(lambda a: a.power, active_adventurers)))
         active_m_power_sum = sum(list(map(lambda m: m.power, active_monsters)))
         if not active_monsters:
-            for adventurer in active_adventurers: adventurer.active_adventurer = False
+            for adventurer in active_adventurers:
+                adventurer.active_adventurer = False
         else:
             individual_experience = math.floor(active_m_power_sum / len(active_adventurers))
             if active_a_power_sum > active_m_power_sum:
