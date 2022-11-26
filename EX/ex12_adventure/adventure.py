@@ -308,9 +308,11 @@ class World:
                         monster.name)  # Change active status to False in ".remove_character"
             elif active_a_power_sum < active_m_power_sum:
                 if not deadly:
+                    self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
                     for adventurer in active_adventurers: adventurer.active_adventurer = False
                     for monster in active_monsters: monster.active_monster = False
                 else:
+                    self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
                     for adventurer in active_adventurers: self.remove_character(adventurer)
                     for monster in active_monsters: monster.active_monster = False
             else:
