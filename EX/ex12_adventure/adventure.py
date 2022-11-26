@@ -312,7 +312,7 @@ class World:
                     for adventurer in active_adventurers: adventurer.active_adventurer = False
                     for monster in active_monsters: monster.active_monster = False
                 else:
-                    for adventurer in active_adventurers: self.remove_character(adventurer)
+                    for adventurer in active_adventurers: self.remove_character(adventurer.name)
                     for monster in active_monsters: monster.active_monster = False
             else:
                 i_e = math.floor(individual_experience / 2)
@@ -358,3 +358,10 @@ if __name__ == "__main__":
         world.add_all_adventurers()
         world.add_all_monsters()
         world.go_adventure(True)
+
+        if hero_power > monster_power:
+            assert len(world.get_graveyard()) == monster_count
+        elif hero_power == monster_power:
+            assert len(world.get_graveyard()) == 0
+        elif hero_power < monster_power:
+            assert len(world.get_graveyard()) == hero_count
