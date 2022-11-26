@@ -273,9 +273,10 @@ class World:
 
     def return_paladin_power_back_to_normal(self):
         """Return paladin power back to normal"""
-        for adventurer in self.adventurers:
-            if adventurer.class_type == "Paladin":
-                adventurer.power = math.floor(adventurer.power / 2)
+        if self.find_zombie():
+            for adventurer in self.adventurers:
+                if adventurer.class_type == "Paladin":
+                    adventurer.power = math.floor(adventurer.power / 2)
 
     # -----------------
 
@@ -308,11 +309,9 @@ class World:
                         monster.name)  # Change active status to False in ".remove_character"
             elif active_a_power_sum < active_m_power_sum:
                 if not deadly:
-                    self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
                     for adventurer in active_adventurers: adventurer.active_adventurer = False
                     for monster in active_monsters: monster.active_monster = False
                 else:
-                    self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
                     for adventurer in active_adventurers: self.remove_character(adventurer)
                     for monster in active_monsters: monster.active_monster = False
             else:
@@ -324,28 +323,43 @@ class World:
 
 
 if __name__ == "__main__":
+    def generate_random_character(power):
+        acceptable_classes = ["Fighter", "Druid", "Paladin", "Wizard"]
+        return Adventurer(generate_string(30), random.choice(acceptable_classes), power)
+
+
+    def generate_random_monster(power):
+        return Monster(generate_string(3), generate_string(9), power)
+
+
+    def generate_string(length):
+        return "".join([random.choice(string.ascii_lowercase) for _ in range(length)])
+
     world = World("Sõber")
-    assert world.get_python_master() == "Sõber"
-    assert world.get_graveyard() == []
-
-    hero = Adventurer("Sander", "Paladin", 50)
-    hero2 = Adventurer("Toomas", "Druid", 50)
-    hero3 = Adventurer("Toots", "Druid", 1)
-    hero3.add_experience(149)
-
-    assert hero3.power == 15
-
-    monster = Monster("Giant Badger", "Animal", 39043)
-    monster2 = Monster("Monsu", "Zombie", 149)
-    monster3 = Monster("Tilluke asi", "suva", 1)
-
-    world.add_monster(monster)
-    world.add_monster(monster2)
+    world.necromancers_active(True)
+    hero = Adventurer("Sander", "Paladin", 51)
     world.add_adventurer(hero)
-    world.add_adventurer(hero2)
+
+    for _ in range(50):
+        monster = Monster(generate_string(3), generate_string(20), 1)
+        world.add_monster(monster)
 
     world.add_all_adventurers()
     world.add_all_monsters()
 
     world.go_adventure(True)
-    print(hero2)
+
+    assert len(world.get_graveyard()) == 50
+
+    world.revive_graveyard()
+
+    assert len(world.get_graveyard()) == 0
+
+    assert len(world.get_monster_list()) == 50
+
+    for monster in world.get_monster_list():
+        monster.power = 2
+    world.add_all_adventurers()
+    world.add_all_monsters()
+    world.go_adventure(True)
+    assert str(hero) == "Sander, the Paladin, Power: 81, Experience: 0."
