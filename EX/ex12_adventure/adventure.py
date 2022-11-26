@@ -310,7 +310,8 @@ class World:
             if active_a_power_sum > active_m_power_sum:
                 if not deadly:
                     self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
-                    for adventurer in active_adventurers: adventurer.add_experience(individual_experience)
+                    for adventurer in active_adventurers:
+                        adventurer.add_experience(individual_experience)
                     self.return_characters_to_lists(active_adventurers, active_monsters)
                 else:
                     individual_experience *= 2
