@@ -280,6 +280,20 @@ class World:
 
     # -----------------
 
+    def return_characters_to_lists(self, active_adventurers: list, active_monsters: list):
+        """Return all the characters back to their lists."""
+        for adventurer in active_adventurers:
+            adventurer.active_adventurer = False
+        for monster in active_monsters:
+            monster.active_monster = False
+
+    def add_i_e_and_return_monsters_to_list(self, active_adventurers: list, active_monsters: list, individual_experience: int):
+        """Return all the characters back to their lists."""
+        for adventurer in active_adventurers: adventurer.add_experience(individual_experience)
+        for adventurer in active_adventurers: adventurer.active_adventurer = False
+        for monster in active_monsters:
+            self.remove_character(monster.name)  # Change active status to False in ".remove_character"
+
     def go_adventure(self, deadly: bool = False):
         """Adfcg."""
         self.check_for_druid_and_monsters()
@@ -292,34 +306,30 @@ class World:
             for adventurer in active_adventurers: adventurer.active_adventurer = False
         else:
             individual_experience = math.floor(active_m_power_sum / len(active_adventurers))
-
             if active_a_power_sum > active_m_power_sum:
                 if not deadly:
                     self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
                     for adventurer in active_adventurers: adventurer.add_experience(individual_experience)
-                    for adventurer in active_adventurers: adventurer.active_adventurer = False
-                    for monster in active_monsters: monster.active_monster = False
+                    self.return_characters_to_lists(active_adventurers, active_monsters)
                 else:
                     individual_experience *= 2
                     print(individual_experience)
                     self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
-                    for adventurer in active_adventurers: adventurer.add_experience(individual_experience)
-                    for adventurer in active_adventurers: adventurer.active_adventurer = False
-                    for monster in active_monsters: self.remove_character(
-                        monster.name)  # Change active status to False in ".remove_character"
+                    self.add_i_e_and_return_monsters_to_list(active_adventurers, active_monsters, individual_experience)
             elif active_a_power_sum < active_m_power_sum:
                 if not deadly:
-                    for adventurer in active_adventurers: adventurer.active_adventurer = False
-                    for monster in active_monsters: monster.active_monster = False
+                    self.return_characters_to_lists(active_adventurers, active_monsters)
                 else:
-                    for adventurer in active_adventurers: self.remove_character(adventurer.name)
-                    for monster in active_monsters: monster.active_monster = False
+                    for adventurer in active_adventurers:
+                        self.remove_character(adventurer.name)
+                    for monster in active_monsters:
+                        monster.active_monster = False
             else:
                 i_e = math.floor(individual_experience / 2)
                 self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
-                for adventurer in active_adventurers: adventurer.add_experience(i_e)
-                for adventurer in active_adventurers: adventurer.active_adventurer = False
-                for monster in active_monsters: monster.active_monster = False
+                for adventurer in active_adventurers:
+                    adventurer.add_experience(i_e)
+                self.return_characters_to_lists(active_adventurers, active_monsters)
 
 
 if __name__ == "__main__":
