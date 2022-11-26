@@ -317,7 +317,7 @@ class World:
             else:
                 i_e = math.floor(individual_experience / 2)
                 self.return_paladin_power_back_to_normal()  # Takes all Paladins' power back at the end of the round
-                for adventurer in active_adventurers: adventurer.experience.add_experience(i_e)
+                for adventurer in active_adventurers: adventurer.add_experience(i_e)
                 for adventurer in active_adventurers: adventurer.active_adventurer = False
                 for monster in active_monsters: monster.active_monster = False
 
@@ -335,31 +335,26 @@ if __name__ == "__main__":
     def generate_string(length):
         return "".join([random.choice(string.ascii_lowercase) for _ in range(length)])
 
-    world = World("Sõber")
-    world.necromancers_active(True)
-    hero = Adventurer("Sander", "Paladin", 51)
-    world.add_adventurer(hero)
 
-    for _ in range(50):
-        monster = Monster(generate_string(3), generate_string(20), 1)
-        world.add_monster(monster)
+    for _ in range(10):
+        world = World("Mad God")
+        hero_power = 0
+        monster_power = 0
+        monster_count = 0
+        hero_count = 0
+        for _ in range(random.randint(1, 5)):
+            power = random.randint(0, 5)
+            hero = generate_random_character(power)
+            world.add_adventurer(hero)
+            hero_power += power
+            hero_count += 1
+        for _ in range(random.randint(1, 5)):
+            power = random.randint(0, 5)
+            monster = generate_random_monster(power)
+            world.add_monster(monster)
+            monster_power += power
+            monster_count += 1
 
-    world.add_all_adventurers()
-    world.add_all_monsters()
-
-    world.go_adventure(True)
-
-    assert len(world.get_graveyard()) == 50
-
-    world.revive_graveyard()
-
-    assert len(world.get_graveyard()) == 0
-
-    assert len(world.get_monster_list()) == 50
-
-    for monster in world.get_monster_list():
-        monster.power = 2
-    world.add_all_adventurers()
-    world.add_all_monsters()
-    world.go_adventure(True)
-    assert str(hero) == "Sander, the Paladin, Power: 81, Experience: 0."
+        world.add_all_adventurers()
+        world.add_all_monsters()
+        world.go_adventure(True)
