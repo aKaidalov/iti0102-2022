@@ -22,6 +22,7 @@ SAMPLE_RANGE_NAME = 'A:A'
 def get_links_from_spreadsheet(id: str, token_file_name: str) -> list:
     """
     Return a list of strings from the first column of a Google Spreadsheet with the given ID.
+
     Example input with https://docs.google.com/spreadsheets/d/1WrCzu4p5lFwPljqZ6tMQEJb2vSJQSGjyMsqcYt-yS4M
         get_links_from_spreadsheet('1WrCzu4p5lFwPljqZ6tMQEJb2vSJQSGjyMsqcYt-yS4M', 'token.json')
 
