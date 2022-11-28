@@ -70,5 +70,51 @@ def get_links_from_spreadsheet(id: str, token_file_name: str) -> list:
         print(err)
 
 
+# -*- coding: utf-8 -*-
+
+# Sample Python code for youtube.playlistItems.list
+# See instructions for running these code samples locally:
+# https://developers.google.com/explorer-help/code-samples#python
+
+import os
+
+import googleapiclient.discovery
+
+def get_links_from_playlist(link: str, developer_key: str) -> list:
+    """
+    Return a list of links to songs in the Youtube playlist with the given address.
+
+    Example input
+        get_links_from_playlist('https://www.youtube.com/playlist?list=PLFt_AvWsXl0ehjAfLFsp1PGaatzAwo0uK',
+                                'ThisIsNotARealKey_____ThisIsNotARealKey')
+
+    Returns
+        ['https://youtube.com/watch?v=r_It_X7v-1E', 'https://youtube.com/watch?v=U4ogK0MIzqk', ... and so on]
+    """
+    # Disable OAuthlib's HTTPS verification when running locally.
+    # *DO NOT* leave this option enabled in production.
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
+    api_service_name = "youtube"
+    api_version = "v3"
+
+    id_from_link = link.split("=")[1]
+
+    youtube = googleapiclient.discovery.build(
+        api_service_name, api_version, developerKey=developer_key)
+
+    request = youtube.playlistItems().list(
+        part="contentDetails",
+        playlistId=id_from_link
+    )
+    response = request.execute()
+
+    res = []
+    for elements in response["items"]:
+        res.append(f"https://youtube.com/watch?v={elements['id']}")
+    return res
+
+
 if __name__ == '__main__':
     get_links_from_spreadsheet('1WrCzu4p5lFwPljqZ6tMQEJb2vSJQSGjyMsqcYt-yS4M', 'token.json')
+    get_links_from_playlist("https://www.youtube.com/playlist?list=PLPszdKAlKCXUP9YFezxviJIOdw5kF2uil", "AIzaSyDFiX9bxAQxN7vvim_G64MNZ7hl343BIuk")
