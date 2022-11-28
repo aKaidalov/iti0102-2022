@@ -57,13 +57,13 @@ def get_links_from_spreadsheet(id: str, token_file_name: str) -> list:
 
         if not values:
             print('No data found.')
-            return
+            return []
 
         res = []
         for row in values:
             # Print all in column A.
             res += row
-        print(res)
+        return res
 
     except HttpError as err:
         print(err)
