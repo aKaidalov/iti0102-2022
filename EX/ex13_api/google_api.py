@@ -104,10 +104,9 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
     youtube = googleapiclient.discovery.build(api_service_name, api_version, developerKey=developer_key)
 
     request = youtube.playlistItems().list(
-        part="snippet",
+        part="contentDetails",
         playlistId=id_from_link,
         maxResults=50,
-        # pageToken=nextPageToken
     )
     response = request.execute()
 
