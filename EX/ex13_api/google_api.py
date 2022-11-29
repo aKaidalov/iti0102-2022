@@ -2,14 +2,15 @@
 
 
 from __future__ import print_function
-
 import os.path
-
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+
+import os
+import googleapiclient.discovery
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
@@ -78,10 +79,6 @@ def get_links_from_spreadsheet(id: str, token_file_name: str) -> list:
 # Sample Python code for youtube.playlistItems.list
 # See instructions for running these code samples locally:
 # https://developers.google.com/explorer-help/code-samples#python
-
-import os
-
-import googleapiclient.discovery
 
 
 def get_links_from_playlist(link: str, developer_key: str) -> list:
