@@ -70,6 +70,9 @@ def get_links_from_spreadsheet(id: str, token_file_name: str) -> list:
         print(err)
 
 
+# 2. osa
+# ----------------------------------------------------------------------------------------------------------------------
+
 # -*- coding: utf-8 -*-
 
 # Sample Python code for youtube.playlistItems.list
@@ -79,6 +82,7 @@ def get_links_from_spreadsheet(id: str, token_file_name: str) -> list:
 import os
 
 import googleapiclient.discovery
+
 
 def get_links_from_playlist(link: str, developer_key: str) -> list:
     """
@@ -100,12 +104,13 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
 
     id_from_link = link.split("=")[1]
 
-    youtube = googleapiclient.discovery.build(
-        api_service_name, api_version, developerKey=developer_key)
+    youtube = googleapiclient.discovery.build(api_service_name, api_version, developerKey=developer_key)
 
     request = youtube.playlistItems().list(
-        part="contentDetails",
-        playlistId=id_from_link
+        part="snippet",
+        playlistId=id_from_link,
+        maxResults=50,
+        # pageToken=nextPageToken
     )
     response = request.execute()
 
