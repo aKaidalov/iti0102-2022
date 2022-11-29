@@ -112,7 +112,7 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
     res = []
     while True:
         for elements in response["items"]:
-            res.append(f"https://youtube.com/watch?v={elements['id']}")
+            res.append(f"https://youtube.com/watch?v={elements['contentDetails']['videoId']}")
         if "nextPageToken" in response:
             request = youtube.playlistItems().list(
                 part="contentDetails",
