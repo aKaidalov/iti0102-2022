@@ -122,7 +122,7 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
             response = request.execute()
         else:
             break
-    print(res)
+    return res
 
 
 if __name__ == '__main__':
