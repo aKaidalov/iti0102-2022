@@ -106,13 +106,14 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
     request = youtube.playlistItems().list(
         part="snippet",
         playlistId=id_from_link,
+        maxResults=50
     )
     response = request.execute()
 
     res = []
     for elements in response["items"]:
         res.append(f"https://youtube.com/watch?v={elements['id']}")
-    return res
+    print(res)
 
 
 if __name__ == '__main__':
