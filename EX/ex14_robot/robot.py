@@ -71,21 +71,24 @@ def follow_the_line(robot: FollowerBot):
         robot.sleep(0.01)
         robot.set_wheels_speed(0)
         color1 = robot.get_third_line_sensor_from_left()
-    if robot.get_line_sensors().count(0) == 6:
-        color2 = robot.get_left_line_sensor()
-        while color2 == 0:
+
+    color2 = robot.get_left_line_sensor()
+    while color2 == 0:
+        if robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() == 0:
             robot.set_wheels_speed(100)
             robot.sleep(0.01)
             robot.set_wheels_speed(0)
-            if robot.get_line_sensors().count(0) != 6 and robot.get_left_line_sensors().count(0) != 3:
-                robot.set_right_wheel_speed(0)
-                robot.set_left_wheel_speed(20)
-                robot.set_left_wheel_speed(0)
-            elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
-                robot.set_left_wheel_speed(0)
-                robot.set_right_wheel_speed(20)
-                robot.set_right_wheel_speed(0)
-            color2 = sum(robot.get_line_sensors()) / 6
+        if robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() == 0:
+            robot.set_right_wheel_speed(0)
+            robot.set_left_wheel_speed(20)
+            robot.set_left_wheel_speed(0)
+        elif robot.get_right_line_sensor() != 0 and robot.get_left_line_sensor() == 0:
+            robot.set_left_wheel_speed(0)
+            robot.set_right_wheel_speed(20)
+            robot.set_right_wheel_speed(0)
+        else:
+            color2 = 1
+
     robot.done()
 
 
