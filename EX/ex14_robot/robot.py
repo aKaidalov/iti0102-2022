@@ -22,14 +22,14 @@ def drive_to_line(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    color = robot.get_left_line_sensor()
+    color = robot.get_third_line_sensor_from_left()
     print(color)
     while color != 0:
         print(robot.get_position())
         robot.set_wheels_speed(100)
         robot.sleep(0.001)
         robot.set_wheels_speed(0)
-        color = robot.get_left_line_sensor()
+        color = robot.get_third_line_sensor_from_left()
     robot.set_wheels_speed(50)
     robot.sleep(0.01)
     robot.set_wheels_speed(0)
