@@ -2,26 +2,26 @@
 from FollowerBot import FollowerBot
 
 
-robot = FollowerBot()
-color = robot.get_left_line_sensor()
-print(color)
-while color != 0:
-    robot.set_wheels_speed(100)
-    robot.sleep(0.01)
-    robot.set_wheels_speed(0)
-    if robot.get_line_sensors().count(0) == 6:
-        while color != 1024:
-            robot.set_wheels_speed(100)
-            robot.sleep(0.01)
-            robot.set_wheels_speed(0)
-            if robot.get_line_sensors().count(0) != 6 and robot.get_left_line_sensors().count(0) != 3:
-                robot.set_left_wheel_speed(20)
-            elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
-                robot.set_right_wheel_speed(20)
-        break
-    else:
-        color = robot.get_left_line_sensor()
-robot.done()
+# robot = FollowerBot()
+# color = robot.get_left_line_sensor()
+# print(color)
+# while color != 0:
+#     robot.set_wheels_speed(100)
+#     robot.sleep(0.01)
+#     robot.set_wheels_speed(0)
+#     if robot.get_line_sensors().count(0) == 6:
+#         while color != 1024:
+#             robot.set_wheels_speed(100)
+#             robot.sleep(0.01)
+#             robot.set_wheels_speed(0)
+#             if robot.get_line_sensors().count(0) != 6 and robot.get_left_line_sensors().count(0) != 3:
+#                 robot.set_left_wheel_speed(20)
+#             elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
+#                 robot.set_right_wheel_speed(20)
+#         break
+#     else:
+#         color = robot.get_left_line_sensor()
+# robot.done()
 def test_run(robot: FollowerBot):
     """
     Make the robot move, doesnt matter how much, just as long as it has moved from the starting position.
@@ -64,7 +64,24 @@ def follow_the_line(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    pass
+    color = robot.get_left_line_sensor()
+    while color != 0:
+        robot.set_wheels_speed(100)
+        robot.sleep(0.01)
+        robot.set_wheels_speed(0)
+        if robot.get_line_sensors().count(0) == 6:
+            while color != 1024:
+                robot.set_wheels_speed(100)
+                robot.sleep(0.01)
+                robot.set_wheels_speed(0)
+                if robot.get_line_sensors().count(0) != 6 and robot.get_left_line_sensors().count(0) != 3:
+                    robot.set_left_wheel_speed(20)
+                elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
+                    robot.set_right_wheel_speed(20)
+            break
+        else:
+            color = robot.get_left_line_sensor()
+    robot.done()
 
 
 def the_true_follower(robot: FollowerBot):
