@@ -30,7 +30,7 @@ def drive_to_line(robot: FollowerBot):
         robot.sleep(0.001)
         robot.set_wheels_speed(0)
         color = robot.get_third_line_sensor_from_left()
-    robot.set_wheels_speed(50)
+    robot.set_wheels_speed(100)
     robot.sleep(0.1)
     robot.set_wheels_speed(0)
     robot.done()
