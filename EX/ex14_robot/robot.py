@@ -2,27 +2,6 @@
 from FollowerBot import FollowerBot
 
 
-# robot = FollowerBot()
-# color1 = robot.get_left_line_sensor()
-# while color1 != 0:
-#     robot.set_wheels_speed(100)
-#     robot.sleep(0.01)
-#     robot.set_wheels_speed(0)
-#     if robot.get_line_sensors().count(0) == 6:
-#         color2 = robot.get_left_line_sensor()
-#         while color2 != 1024:
-#             robot.set_wheels_speed(100)
-#             robot.sleep(0.01)
-#             robot.set_wheels_speed(0)
-#             if robot.get_line_sensors().count(0) != 6 and robot.get_left_line_sensors().count(0) != 3:
-#                 robot.set_left_wheel_speed(20)
-#             elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
-#                 robot.set_right_wheel_speed(20)
-#             color2 = sum(robot.get_line_sensors()) / 6
-#         break
-#     else:
-#         color1 = robot.get_left_line_sensor()
-# robot.done()
 def test_run(robot: FollowerBot):
     """
     Make the robot move, doesnt matter how much, just as long as it has moved from the starting position.
@@ -65,6 +44,7 @@ def follow_the_line(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
+    # drives to a line on a white surface
     color1 = robot.get_left_line_sensor()
     while color1 != 0:
         robot.set_wheels_speed(100)
@@ -72,26 +52,22 @@ def follow_the_line(robot: FollowerBot):
         robot.set_wheels_speed(0)
         color1 = robot.get_left_line_sensor()
 
+    # follows the black line with "u" pattern
     color2 = robot.get_left_line_sensor()
     while color2 == 0:
         if robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() == 0:
-            robot.set_wheels_speed(100)
+            robot.set_left_wheel_speed(100)
+            robot.set_right_wheel_speed(60)
             robot.sleep(0.01)
             robot.set_wheels_speed(0)
         elif robot.get_left_line_sensor() != 0 and robot.get_right_line_sensor() == 0:
             robot.set_left_wheel_speed(50)
             robot.sleep(0.01)
             robot.set_left_wheel_speed(0)
-            # robot.set_wheels_speed(100)
-            # robot.sleep(0.01)
-            # robot.set_wheels_speed(0)
         elif robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() != 0:
             robot.set_right_wheel_speed(50)
             robot.sleep(0.01)
             robot.set_right_wheel_speed(0)
-            # robot.set_wheels_speed(100)
-            # robot.sleep(0.01)
-            # robot.set_wheels_speed(0)
         else:
             color2 = 1
 
