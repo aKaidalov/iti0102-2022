@@ -18,6 +18,7 @@ from FollowerBot import FollowerBot
 #                 robot.set_left_wheel_speed(20)
 #             elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
 #                 robot.set_right_wheel_speed(20)
+#             color = robot.get_left_line_sensor()
 #         break
 #     else:
 #         color = robot.get_left_line_sensor()
@@ -65,22 +66,15 @@ def follow_the_line(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     color = robot.get_left_line_sensor()
-    while color != 0:
+    while color != 1024:
         robot.set_wheels_speed(100)
         robot.sleep(0.01)
         robot.set_wheels_speed(0)
-        if robot.get_line_sensors().count(0) == 6:
-            while color != 1024:
-                robot.set_wheels_speed(100)
-                robot.sleep(0.01)
-                robot.set_wheels_speed(0)
-                if robot.get_line_sensors().count(0) != 6 and robot.get_left_line_sensors().count(0) != 3:
-                    robot.set_left_wheel_speed(20)
-                elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
-                    robot.set_right_wheel_speed(20)
-            break
-        else:
-            color = robot.get_left_line_sensor()
+        if robot.get_line_sensors().count(0) != 6 and robot.get_left_line_sensors().count(0) != 3:
+            robot.set_left_wheel_speed(20)
+        elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
+            robot.set_right_wheel_speed(20)
+        color = robot.get_left_line_sensor()
     robot.done()
 
 
