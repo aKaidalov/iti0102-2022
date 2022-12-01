@@ -2,6 +2,22 @@
 from FollowerBot import FollowerBot
 
 
+# robot = FollowerBot()
+# color = robot.get_left_line_sensor()
+# print(color)
+# while color != 0:
+#     print(robot.get_position())
+#     robot.set_wheels_speed(100)
+#     robot.sleep(0.01)
+#     robot.set_wheels_speed(0)
+#     if robot.get_line_sensors().count(0) == 6:
+#         while color != 1024:
+#             robot.set_wheels_speed(100)
+#             robot.sleep(0.001)
+#             robot.set_wheels_speed(0)
+#         break
+#     else:
+#         color = robot.get_left_line_sensor()
 def test_run(robot: FollowerBot):
     """
     Make the robot move, doesnt matter how much, just as long as it has moved from the starting position.
@@ -27,7 +43,7 @@ def drive_to_line(robot: FollowerBot):
     while color != 0:
         print(robot.get_position())
         robot.set_wheels_speed(100)
-        robot.sleep(0.001)
+        robot.sleep(0.01)
         robot.set_wheels_speed(0)
         color = robot.get_left_line_sensor()
     robot.set_wheels_speed(20)
