@@ -22,7 +22,6 @@ def drive_to_line(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    robot = FollowerBot()
     color = robot.get_left_line_sensor()
     print(color)
     while color != 0:
