@@ -73,7 +73,7 @@ def follow_the_line(robot: FollowerBot):
         color1 = robot.get_third_line_sensor_from_left()
     if robot.get_line_sensors().count(0) == 6:
         color2 = robot.get_left_line_sensor()
-        while color2 != 1024:
+        while color2 == 0:
             robot.set_wheels_speed(100)
             robot.sleep(0.01)
             robot.set_wheels_speed(0)
