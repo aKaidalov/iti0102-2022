@@ -65,25 +65,23 @@ def follow_the_line(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    color1 = robot.get_left_line_sensor()
+    color1 = robot.get_third_line_sensor_from_left()
     while color1 != 0:
         robot.set_wheels_speed(100)
         robot.sleep(0.01)
         robot.set_wheels_speed(0)
-        if robot.get_line_sensors().count(0) == 6:
-            color2 = robot.get_left_line_sensor()
-            while color2 != 1024:
-                robot.set_wheels_speed(100)
-                robot.sleep(0.01)
-                robot.set_wheels_speed(0)
-                if robot.get_line_sensors().count(0) != 6 and robot.get_left_line_sensors().count(0) != 3:
-                    robot.set_left_wheel_speed(20)
-                elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
-                    robot.set_right_wheel_speed(20)
-                color2 = sum(robot.get_line_sensors()) / 6
-            break
-        else:
-            color1 = robot.get_left_line_sensor()
+        color1 = robot.get_third_line_sensor_from_left()
+    if robot.get_line_sensors().count(0) == 6:
+        color2 = robot.get_left_line_sensor()
+        while color2 != 1024:
+            robot.set_wheels_speed(100)
+            robot.sleep(0.01)
+            robot.set_wheels_speed(0)
+            if robot.get_line_sensors().count(0) != 6 and robot.get_left_line_sensors().count(0) != 3:
+                robot.set_left_wheel_speed(20)
+            elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
+                robot.set_right_wheel_speed(20)
+            color2 = sum(robot.get_line_sensors()) / 6
     robot.done()
 
 
