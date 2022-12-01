@@ -65,12 +65,12 @@ def follow_the_line(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    color1 = robot.get_third_line_sensor_from_left()
+    color1 = robot.get_left_line_sensor()
     while color1 != 0:
         robot.set_wheels_speed(100)
         robot.sleep(0.01)
         robot.set_wheels_speed(0)
-        color1 = robot.get_third_line_sensor_from_left()
+        color1 = robot.get_left_line_sensor()
 
     # color2 = robot.get_left_line_sensor()
     # while color2 == 0:
