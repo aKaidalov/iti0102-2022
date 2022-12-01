@@ -79,7 +79,7 @@ def follow_the_line(robot: FollowerBot):
                     robot.set_left_wheel_speed(20)
                 elif robot.get_line_sensors().count(0) != 6 and robot.get_right_line_sensors().count(0) != 3:
                     robot.set_right_wheel_speed(20)
-                color = robot.get_left_line_sensor()
+                color = sum(robot.get_line_sensors()) / 6
             break
         else:
             color = robot.get_left_line_sensor()
