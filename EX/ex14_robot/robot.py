@@ -185,6 +185,7 @@ def the_true_follower(robot: FollowerBot):
     follow_the_line_left_section_2(robot)
     follow_the_line_section_1_and_3(robot)  # section 3
     follow_the_line_section_4(robot)
+    follow_the_line(robot)  # section 5
     robot.done()
 
 
