@@ -118,7 +118,7 @@ def follow_the_line(robot: FollowerBot):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-def follow_the_line_section_1(robot: FollowerBot):
+def follow_the_line_section_1_and_3(robot: FollowerBot):
     """
     Create a FollowerBot that will follow a black line until the end of that line.
 
@@ -153,7 +153,7 @@ def follow_the_line_section_1(robot: FollowerBot):
     robot.done()
 
 
-def follow_the_line_section_2(robot: FollowerBot):
+def follow_the_line_left_section_2(robot: FollowerBot):
     """
     Create a FollowerBot that will turn on a corner.
 
@@ -163,10 +163,8 @@ def follow_the_line_section_2(robot: FollowerBot):
     """
     robot.set_left_wheel_speed(-100)
     robot.set_right_wheel_speed(100)
-    robot.sleep(0.13)
+    robot.sleep(0.14)
     robot.set_wheels_speed(0)
-    robot.set_wheels_speed(100)
-    robot.sleep(0.2)
 
 
 def the_true_follower(robot: FollowerBot):
@@ -175,8 +173,9 @@ def the_true_follower(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    follow_the_line_section_1(robot)
-    follow_the_line_section_2(robot)
+    follow_the_line_section_1_and_3(robot)
+    follow_the_line_left_section_2(robot)
+    follow_the_line_section_1_and_3(robot)
     robot.done()
 
 
