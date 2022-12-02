@@ -91,10 +91,11 @@ def follow_the_line(robot: FollowerBot):
             robot.sleep(0.01)
             robot.set_right_wheel_speed(0)
         else:
-            # for "п" pattern
+            # hardcode for "п" pattern with 2 turns. turn == 6 because robot does 2 turns in 6 rotations.
             if turn == 6:
                 break
             turn += 1
+            # for "п" pattern
             if not robot.get_third_line_sensor_from_left() and robot.get_third_line_sensor_from_right() > 0:
                 turn_left(robot)
             elif robot.get_third_line_sensor_from_left() > 0 and not robot.get_third_line_sensor_from_right():
