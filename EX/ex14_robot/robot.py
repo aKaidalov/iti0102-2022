@@ -118,7 +118,7 @@ def follow_the_line(robot: FollowerBot):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-def follow_the_line_section_1_3_5(robot: FollowerBot):
+def follow_the_curve(robot: FollowerBot):
     """
     Create a FollowerBot that will follow a black line until the end of that line.
 
@@ -150,7 +150,7 @@ def follow_the_line_section_1_3_5(robot: FollowerBot):
             break
 
 
-def follow_the_line_left_section_2(robot: FollowerBot):
+def follow_the_turn_left(robot: FollowerBot):
     """
     Create a FollowerBot that will turn on a corner.
 
@@ -164,12 +164,28 @@ def follow_the_line_left_section_2(robot: FollowerBot):
     robot.set_wheels_speed(0)
 
 
-def follow_the_line_section_4(robot: FollowerBot):
+def jump(robot: FollowerBot):
     """
-    Create a FollowerBot that will hop through a squares.
+    Create a FollowerBot that will jump through squares.
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
+    robot.set_wheels_speed(100)
+    robot.sleep(0.8)
+    robot.set_wheels_speed(0)
+
+
+def reversal(robot: FollowerBot):
+    """
+    Create a FollowerBot that will turn around.
+
+    :param FollowerBot robot: instance of the robot that you need to make move
+    """
+    robot.set_left_wheel_speed(-100)
+    robot.set_right_wheel_speed(100)
+    robot.sleep(0.28)
+    robot.set_wheels_speed(0)
+
     robot.set_wheels_speed(100)
     robot.sleep(0.8)
     robot.set_wheels_speed(0)
@@ -181,15 +197,15 @@ def the_true_follower(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    follow_the_line_section_1_3_5(robot)  # section 1
-    follow_the_line_left_section_2(robot)
-    follow_the_line_section_1_3_5(robot)  # section 3
-    follow_the_line_section_4(robot)
-    follow_the_line_section_1_3_5(robot)  # section 5
-    follow_the_line_left_section_2(robot)   # section 6
-    follow_the_line_section_1_3_5(robot)    # section 7
-    follow_the_line_left_section_2(robot)  # section 8
-    follow_the_line_section_1_3_5(robot)  # section 9
+    follow_the_curve(robot)  # section 1
+    follow_the_turn_left(robot)
+    follow_the_curve(robot)  # section 3
+    jump(robot)  # section 4
+    follow_the_curve(robot)  # section 5
+    follow_the_turn_left(robot)  # section 6
+    follow_the_curve(robot)  # section 7
+    follow_the_turn_left(robot)  # section 8
+    follow_the_curve(robot)  # section 9
     robot.done()
 
 
