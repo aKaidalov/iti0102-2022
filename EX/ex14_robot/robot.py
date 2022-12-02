@@ -118,7 +118,7 @@ def follow_the_line(robot: FollowerBot):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-def follow_the_line_section_1_and_3(robot: FollowerBot):
+def follow_the_line_section_1_3_5(robot: FollowerBot):
     """
     Create a FollowerBot that will follow a black line until the end of that line.
 
@@ -181,11 +181,15 @@ def the_true_follower(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    follow_the_line_section_1_and_3(robot)  # section 1
+    follow_the_line_section_1_3_5(robot)  # section 1
     follow_the_line_left_section_2(robot)
-    follow_the_line_section_1_and_3(robot)  # section 3
+    follow_the_line_section_1_3_5(robot)  # section 3
     follow_the_line_section_4(robot)
-    follow_the_line(robot)  # section 5
+    follow_the_line_section_1_3_5(robot)  # section 5
+    follow_the_line_left_section_2(robot)   # section 6
+    follow_the_line_section_1_3_5(robot)    # section 7
+    follow_the_line_left_section_2(robot)  # section 8
+    follow_the_line_section_1_3_5(robot)  # section 9
     robot.done()
 
 
