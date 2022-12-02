@@ -186,10 +186,6 @@ def reversal(robot: FollowerBot):
     robot.sleep(0.28)
     robot.set_wheels_speed(0)
 
-    robot.set_wheels_speed(100)
-    robot.sleep(0.8)
-    robot.set_wheels_speed(0)
-
 
 def the_true_follower(robot: FollowerBot):
     """
@@ -197,6 +193,7 @@ def the_true_follower(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
+    # start -> finish
     follow_the_curve(robot)  # section 1
     follow_the_turn_left(robot)
     follow_the_curve(robot)  # section 3
@@ -208,6 +205,9 @@ def the_true_follower(robot: FollowerBot):
     follow_the_curve(robot)  # section 9
 
     reversal(robot)
+
+    # finish -> start
+    follow_the_curve(robot)  # section 1
 
     robot.done()
 
