@@ -68,7 +68,7 @@ def follow_the_line(robot: FollowerBot):
             robot.set_right_wheel_speed(0)
         else:
             # for "п" pattern
-            if turn == 3:
+            if turn == 4:
                 break
             turn += 1
             if not robot.get_third_line_sensor_from_left() and robot.get_third_line_sensor_from_right() > 0:
