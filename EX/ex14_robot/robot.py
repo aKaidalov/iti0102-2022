@@ -67,15 +67,28 @@ def follow_the_line(robot: FollowerBot):
             robot.set_right_wheel_speed(0)
         else:
             # for "п" pattern
-            robot.set_right_wheel_speed(-50)
-            robot.sleep(0.1)
+            robot.set_wheels_speed(-100)
+            robot.sleep(0.03)
             robot.set_right_wheel_speed(0)
-            color3 = robot.get_third_line_sensor_from_right()
-            if color3 == 1024:
-                robot.set_right_wheel_speed(40)
+            if not robot.get_third_line_sensor_from_left() and robot.get_third_line_sensor_from_right() > 0:
+                robot.set_left_wheel_speed(-50)
+                robot.sleep(0.1)
+                robot.set_left_wheel_speed(0)
+                color3 = robot.get_third_line_sensor_from_left()
+                if color3 == 1024:
+                    robot.set_left_wheel_speed(40)
+                    robot.sleep(0.1)
+                    robot.set_left_wheel_speed(0)
+            elif robot.get_third_line_sensor_from_left() > 0 and not robot.get_third_line_sensor_from_right():
+                robot.set_right_wheel_speed(-50)
                 robot.sleep(0.1)
                 robot.set_right_wheel_speed(0)
-            if robot.get_third_line_sensor_from_right() and robot.get_third_line_sensor_from_left():
+                color3 = robot.get_third_line_sensor_from_right()
+                if color3 == 1024:
+                    robot.set_right_wheel_speed(40)
+                    robot.sleep(0.1)
+                    robot.set_right_wheel_speed(0)
+            elif robot.get_third_line_sensor_from_left() and robot.get_third_line_sensor_from_right():
                 break
 
     robot.done()
