@@ -54,7 +54,7 @@ def follow_the_line(robot: FollowerBot):
 
     # follows the black line with "u" pattern
     color2 = robot.get_left_line_sensor()
-    while color2 == 0:
+    for i in range(12000):
         if robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() == 0:
             robot.set_wheels_speed(100)
             robot.sleep(0.01)
@@ -68,8 +68,7 @@ def follow_the_line(robot: FollowerBot):
             robot.sleep(0.01)
             robot.set_right_wheel_speed(0)
         else:
-            color3 = 0
-            while color3 != 1024:
+            for j in range(10000):
                 robot.set_right_wheel_speed(-50)
                 robot.sleep(0.01)
                 robot.set_right_wheel_speed(0)
@@ -78,11 +77,12 @@ def follow_the_line(robot: FollowerBot):
                     robot.set_right_wheel_speed(50)
                     robot.sleep(0.01)
                     robot.set_right_wheel_speed(0)
+                    break
             if robot.get_third_line_sensor_from_right() and robot.get_third_line_sensor_from_left():
-                color2 = 1
-
+                break
 
     robot.done()
+
 
 def the_true_follower(robot: FollowerBot):
     """
