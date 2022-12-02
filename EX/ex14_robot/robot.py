@@ -68,7 +68,7 @@ def follow_the_line(robot: FollowerBot):
         else:
             # for "п" pattern
             robot.set_wheels_speed(-100)
-            robot.sleep(0.01)
+            robot.sleep(0.03)
             robot.set_right_wheel_speed(0)
             if not robot.get_second_line_sensor_from_left() and robot.get_second_line_sensor_from_right() > 0:
                 robot.set_left_wheel_speed(-50)
