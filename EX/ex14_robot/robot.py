@@ -49,7 +49,7 @@ def follow_the_line(robot: FollowerBot):
     robot.sleep(1)
 
     # follows the black line with "u" pattern
-    for i in range(10000):
+    for i in range(5000):
         left_line_sensor = robot.get_left_line_sensor()
         right_line_sensor = robot.get_right_line_sensor()
 
