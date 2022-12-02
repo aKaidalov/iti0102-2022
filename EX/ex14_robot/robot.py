@@ -77,7 +77,7 @@ def follow_the_line(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     # drives to a line on a white surface
-    robot.set_wheels_speed(20)
+    robot.set_wheels_speed(30)
     robot.sleep(1)
 
     turn = 0
