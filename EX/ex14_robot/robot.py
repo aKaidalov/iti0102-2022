@@ -189,7 +189,7 @@ def jump(robot: FollowerBot):
     robot.set_wheels_speed(0)
 
 
-def reversal(robot: FollowerBot):
+def turnaround(robot: FollowerBot):
     """
     Create a FollowerBot that will turn around.
 
@@ -218,18 +218,18 @@ def the_true_follower(robot: FollowerBot):
     follow_the_turn_left(robot)  # section 8
     follow_the_curve(robot)  # section 9
 
-    reversal(robot)
+    turnaround(robot)
 
     # finish -> start
     follow_the_curve(robot)  # section 1
     follow_the_turn_right(robot)  # section 2
-    follow_the_curve(robot)  # section 3
-    jump(robot)  # section 4
-    follow_the_curve(robot)  # section 5
-    follow_the_turn_right(robot)  # section 6
-    follow_the_curve(robot)  # section 7
-    follow_the_turn_right(robot)  # section 8
-    follow_the_curve(robot)  # section 9
+    # follow_the_curve(robot)  # section 3
+    # jump(robot)  # section 4
+    # follow_the_curve(robot)  # section 5
+    # follow_the_turn_right(robot)  # section 6
+    # follow_the_curve(robot)  # section 7
+    # follow_the_turn_right(robot)  # section 8
+    # follow_the_curve(robot)  # section 9
 
     robot.done()
 
