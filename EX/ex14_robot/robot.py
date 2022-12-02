@@ -142,12 +142,10 @@ def follow_the_line_for_last_function(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    # drives to a line on a white surface
     robot.set_wheels_speed(30)
     robot.sleep(1)
 
     turn = 0
-    # follows the black line with "u" pattern
     for i in range(5000):
         left_line_sensor = robot.get_left_line_sensor()
         right_line_sensor = robot.get_right_line_sensor()
@@ -165,11 +163,9 @@ def follow_the_line_for_last_function(robot: FollowerBot):
             robot.sleep(0.01)
             robot.set_right_wheel_speed(0)
         else:
-            # hardcode for "п" pattern with 2 turns. turn == 6 because robot does 2 turns in 6 rotations.
             if turn == 8:
                 break
             turn += 1
-            # for "п" pattern
             if not robot.get_third_line_sensor_from_left() and robot.get_third_line_sensor_from_right() > 0:
                 turn_left(robot)
             elif robot.get_third_line_sensor_from_left() > 0 and not robot.get_third_line_sensor_from_right():
@@ -186,7 +182,6 @@ def the_true_follower(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    drive_to_line_for_last_function(robot)
     follow_the_line_for_last_function(robot)
 
 
