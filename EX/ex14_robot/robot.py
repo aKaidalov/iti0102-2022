@@ -163,7 +163,7 @@ def follow_the_line_section_2(robot: FollowerBot):
     """
     robot.set_left_wheel_speed(-100)
     robot.set_right_wheel_speed(100)
-    robot.sleep(0.14)
+    robot.sleep(0.13)
     robot.set_wheels_speed(0)
     robot.set_wheels_speed(100)
     robot.sleep(0.2)
