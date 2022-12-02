@@ -163,15 +163,8 @@ def follow_the_line_for_last_function(robot: FollowerBot):
             robot.sleep(0.01)
             robot.set_right_wheel_speed(0)
         else:
-            if turn == 20:
-                break
-            turn += 1
-            if not robot.get_third_line_sensor_from_left() and robot.get_third_line_sensor_from_right() > 0 or turn == 1:
-                turn_left(robot)
-            elif robot.get_third_line_sensor_from_left() > 0 and not robot.get_third_line_sensor_from_right():
-                turn_right(robot)
-            # elif robot.get_second_line_sensor_from_left() and robot.get_second_line_sensor_from_right():
-            #     break
+            break
+
 
     robot.done()
 
