@@ -223,13 +223,13 @@ def the_true_follower(robot: FollowerBot):
     # finish -> start
     follow_the_curve(robot)  # section 1
     follow_the_turn_right(robot)  # section 2
-    # follow_the_curve(robot)  # section 3
-    # jump(robot)  # section 4
-    # follow_the_curve(robot)  # section 5
-    # follow_the_turn_right(robot)  # section 6
-    # follow_the_curve(robot)  # section 7
-    # follow_the_turn_right(robot)  # section 8
-    # follow_the_curve(robot)  # section 9
+    follow_the_curve(robot)  # section 3
+    follow_the_turn_right(robot)  # section 4
+    follow_the_curve(robot)  # section 5
+    jump(robot)  # section 6
+    follow_the_curve(robot)  # section 7
+    follow_the_turn_right(robot)  # section 8
+    follow_the_curve(robot)  # section 9
 
     robot.done()
 
