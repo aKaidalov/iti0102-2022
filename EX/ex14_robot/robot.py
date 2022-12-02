@@ -164,6 +164,20 @@ def follow_the_turn_left(robot: FollowerBot):
     robot.set_wheels_speed(0)
 
 
+def follow_the_turn_right(robot: FollowerBot):
+    """
+    Create a FollowerBot that will turn on a corner.
+
+    The robot's starting position will be just short of the start point of the line.
+
+    :param FollowerBot robot: instance of the robot that you need to make move
+    """
+    robot.set_right_wheel_speed(-100)
+    robot.set_left_wheel_speed(100)
+    robot.sleep(0.14)
+    robot.set_wheels_speed(0)
+
+
 def jump(robot: FollowerBot):
     """
     Create a FollowerBot that will jump through squares.
@@ -195,7 +209,7 @@ def the_true_follower(robot: FollowerBot):
     """
     # start -> finish
     follow_the_curve(robot)  # section 1
-    follow_the_turn_left(robot)
+    follow_the_turn_left(robot)  # section 2
     follow_the_curve(robot)  # section 3
     jump(robot)  # section 4
     follow_the_curve(robot)  # section 5
@@ -208,6 +222,14 @@ def the_true_follower(robot: FollowerBot):
 
     # finish -> start
     follow_the_curve(robot)  # section 1
+    follow_the_turn_right(robot)  # section 2
+    follow_the_curve(robot)  # section 3
+    jump(robot)  # section 4
+    follow_the_curve(robot)  # section 5
+    follow_the_turn_right(robot)  # section 6
+    follow_the_curve(robot)  # section 7
+    follow_the_turn_right(robot)  # section 8
+    follow_the_curve(robot)  # section 9
 
     robot.done()
 
