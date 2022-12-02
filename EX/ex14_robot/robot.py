@@ -79,7 +79,6 @@ def follow_the_line(robot: FollowerBot):
                 robot.set_right_wheel_speed(40)
                 robot.sleep(0.1)
                 robot.set_right_wheel_speed(0)
-                break
             if robot.get_third_line_sensor_from_right() and robot.get_third_line_sensor_from_left():
                 break
 
