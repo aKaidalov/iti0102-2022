@@ -14,6 +14,10 @@ def test_run(robot: FollowerBot):
     robot.done()
 
 
+# 2. osa
+# ----------------------------------------------------------------------------------------------------------------------
+
+
 def drive_to_line(robot: FollowerBot):
     """
     Drive the robot until it meets a perpendicular black line, then drive forward 25cm.
@@ -34,6 +38,10 @@ def drive_to_line(robot: FollowerBot):
     robot.sleep(1)
     robot.set_wheels_speed(0)
     robot.done()
+
+
+# 3. osa
+# ----------------------------------------------------------------------------------------------------------------------
 
 
 def turn_left(robot: FollowerBot):
@@ -106,14 +114,35 @@ def follow_the_line(robot: FollowerBot):
     robot.done()
 
 
+# 4. osa
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def drive_to_line_for_last_function(robot: FollowerBot):
+    """
+    Drive the robot until it meets a perpendicular black line, then drive forward 25cm.
+
+    There are 100 pixels in a meter.
+
+    :param FollowerBot robot: instance of the robot that you need to make move
+    """
+    color = robot.get_left_line_sensor()
+    while color != 0:
+        robot.set_wheels_speed(100)
+        robot.sleep(0.01)
+        robot.set_wheels_speed(0)
+        color = robot.get_left_line_sensor()
+
+
 def the_true_follower(robot: FollowerBot):
     """
     Create a FollowerBot that will follow the black line on the track and make it ignore all possible distractions.
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    pass
+    drive_to_line_for_last_function(robot)
+    follow_the_line(robot)
 
 
 if __name__ == "__main__":
-    follow_the_line(robot=FollowerBot())
+    the_true_follower(robot=FollowerBot())
