@@ -206,6 +206,9 @@ def the_true_follower(robot: FollowerBot):
     follow_the_curve(robot)  # section 7
     follow_the_turn_left(robot)  # section 8
     follow_the_curve(robot)  # section 9
+
+    reversal(robot)
+
     robot.done()
 
 
