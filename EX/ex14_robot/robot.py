@@ -37,7 +37,7 @@ def drive_to_line(robot: FollowerBot):
 
 
 def turn_left(robot: FollowerBot):
-    """FollowerBot turn left"""
+    """Follower bot turn left."""
     robot.set_left_wheel_speed(-50)
     robot.sleep(0.1)
     robot.set_left_wheel_speed(0)
@@ -49,7 +49,7 @@ def turn_left(robot: FollowerBot):
 
 
 def turn_right(robot: FollowerBot):
-    """FollowerBot turn right"""
+    """Follower bot turn right."""
     robot.set_right_wheel_speed(-50)
     robot.sleep(0.1)
     robot.set_right_wheel_speed(0)
