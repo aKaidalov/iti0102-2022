@@ -53,7 +53,7 @@ def follow_the_line(robot: FollowerBot):
         color1 = robot.get_left_line_sensor()
 
     # follows the black line with "u" pattern
-    for i in range(12000):
+    for i in range(10000):
         if robot.get_left_line_sensor() == 0 and robot.get_right_line_sensor() == 0:
             robot.set_wheels_speed(100)
             robot.sleep(0.01)
