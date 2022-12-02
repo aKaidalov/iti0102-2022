@@ -45,12 +45,12 @@ def follow_the_line(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     # drives to a line on a white surface
-    color1 = robot.get_left_line_sensor()
-    while color1 != 0:
+    for u in range(1000):
         robot.set_wheels_speed(100)
         robot.sleep(0.01)
         robot.set_wheels_speed(0)
-        color1 = robot.get_left_line_sensor()
+        if robot.get_left_line_sensor() == 0:
+            break
 
     # follows the black line with "u" pattern
     for i in range(12000):
@@ -77,7 +77,7 @@ def follow_the_line(robot: FollowerBot):
                     robot.sleep(0.1)
                     robot.set_right_wheel_speed(0)
                     break
-            if robot.get_third_line_sensor_from_right() != 0 and robot.get_third_line_sensor_from_left() != 0:
+            if robot.get_third_line_sensor_from_right() and robot.get_third_line_sensor_from_left():
                 break
 
     robot.done()
