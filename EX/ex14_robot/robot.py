@@ -171,7 +171,7 @@ def follow_the_line_section_4(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     robot.set_wheels_speed(100)
-    robot.sleep(0.3)
+    robot.sleep(0.8)
     robot.set_wheels_speed(0)
 
 
