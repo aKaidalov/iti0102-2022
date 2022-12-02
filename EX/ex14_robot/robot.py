@@ -70,12 +70,12 @@ def follow_the_line(robot: FollowerBot):
             # for "п" pattern
             for j in range(10000):
                 robot.set_right_wheel_speed(-50)
-                robot.sleep(0.01)
+                robot.sleep(0.1)
                 robot.set_right_wheel_speed(0)
                 color3 = robot.get_third_line_sensor_from_right()
                 if color3 == 1024:
                     robot.set_right_wheel_speed(50)
-                    robot.sleep(0.01)
+                    robot.sleep(0.1)
                     robot.set_right_wheel_speed(0)
                     break
             if robot.get_third_line_sensor_from_right() and robot.get_third_line_sensor_from_left():
