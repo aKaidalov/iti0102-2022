@@ -77,7 +77,7 @@ def follow_the_line(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     # drives to a line on a white surface
-    robot.set_wheels_speed(30)
+    robot.set_wheels_speed(20)
     robot.sleep(1)
 
     turn = 0
@@ -170,8 +170,6 @@ def follow_the_line_for_last_function(robot: FollowerBot):
                 turn_left(robot)
             elif robot.get_third_line_sensor_from_left() > 0 and not robot.get_third_line_sensor_from_right():
                 turn_right(robot)
-            elif robot.get_second_line_sensor_from_left() and robot.get_second_line_sensor_from_right():
-                break
 
     robot.done()
 
