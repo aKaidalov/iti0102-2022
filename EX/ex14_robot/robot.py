@@ -126,10 +126,10 @@ def follow_the_line_section_1_and_3(robot: FollowerBot):
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
+    # to get on the line
     robot.set_wheels_speed(30)
     robot.sleep(1)
 
-    turn = 0
     for i in range(5000):
         left_line_sensor = robot.get_left_line_sensor()
         right_line_sensor = robot.get_right_line_sensor()
@@ -150,9 +150,6 @@ def follow_the_line_section_1_and_3(robot: FollowerBot):
             break
 
 
-    robot.done()
-
-
 def follow_the_line_left_section_2(robot: FollowerBot):
     """
     Create a FollowerBot that will turn on a corner.
@@ -167,15 +164,27 @@ def follow_the_line_left_section_2(robot: FollowerBot):
     robot.set_wheels_speed(0)
 
 
+def follow_the_line_section_4(robot: FollowerBot):
+    """
+    Create a FollowerBot that will hop through a squares.
+
+    :param FollowerBot robot: instance of the robot that you need to make move
+    """
+    robot.set_wheels_speed(100)
+    robot.sleep(0.3)
+    robot.set_wheels_speed(0)
+
+
 def the_true_follower(robot: FollowerBot):
     """
     Create a FollowerBot that will follow the black line on the track and make it ignore all possible distractions.
 
     :param FollowerBot robot: instance of the robot that you need to make move
     """
-    follow_the_line_section_1_and_3(robot)
+    follow_the_line_section_1_and_3(robot)  # section 1
     follow_the_line_left_section_2(robot)
-    follow_the_line_section_1_and_3(robot)
+    follow_the_line_section_1_and_3(robot)  # section 3
+    follow_the_line_section_4(robot)
     robot.done()
 
 
