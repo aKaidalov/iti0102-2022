@@ -30,6 +30,7 @@ class Workshop:
         self.storage = {}
 
     def parse_nice_list(self, filename: str):
+        """Parse nice list."""
         response = requests.get(filename)
         children = response.text.rstrip("\n").split("\n")
         for child in children:
@@ -49,6 +50,7 @@ class Workshop:
     #     print(self.naughty_children)
 
     def parse_wishlist(self, filename: str):
+        """Parse wishlist."""
         response = requests.get(filename)
         wishlist = response.text.rstrip("\n").split("\n")
         for child_and_wishes in wishlist:
@@ -81,7 +83,6 @@ class Workshop:
 
         print("\n")
         print(self.storage)
-
 
 
 if __name__ == '__main__':
