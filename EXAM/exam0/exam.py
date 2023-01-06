@@ -82,12 +82,12 @@ def tic_tac_toe(game: list) -> int:
     :return: winning player id
     """
     for row in game:
-        if row[0] == row[1] == row[2]:
+        if row[0] == row[1] == row[2] and row[0] != 0:
             return row[0]
     for i in range(3):
-        if game[0][i] == game[1][i] == game[2][i]:
+        if game[0][i] == game[1][i] == game[2][i] and game[0][i] != 0:
             return game[0][i]
-    if game[0][0] == game[1][1] == game[2][2] or game[0][2] == game[1][1] == game[2][0]:
+    if (game[0][0] == game[1][1] == game[2][2] or game[0][2] == game[1][1] == game[2][0]) and game[1][1] != 0:
         return game[1][1]
     else:
         return 0
