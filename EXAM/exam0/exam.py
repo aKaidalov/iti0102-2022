@@ -61,7 +61,40 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
     return winners
 
 
+def tic_tac_toe(game: list) -> int:
+    """
+    Find game winner.
+
+    #4
+
+    The 3x3 table is represented as a list of 3 rows, each row has 3 element (ints).
+    The value can be 1 (player 1), 2 (player 2) or 0 (empty).
+    The winner is the player who gets 3 of her pieces in a row, column or diagonal.
+
+    There is only one winner or draw. You don't have to validate whether the game is in correct (possible) state.
+    I.e the game could have four 1s and one 0 etc.
+
+    tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]) => 1
+    tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]) => 0
+    tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]) => 2
+
+    :param game
+    :return: winning player id
+    """
+    for row in game:
+        if row[0] == row[1] == row[2]:
+            return row[0]
+    for i in range(3):
+        if game[0][i] == game[1][i] == game[2][i]:
+            return game[0][i]
+    if game[0][0] == game[1][1] == game[2][2] or game[0][2] == game[1][1] == game[2][0]:
+        return game[1][1]
+    else:
+        return 0
+
+
 if __name__ == '__main__':
     print(find_capital_letters("SasSHa"))
     print(close_far(1, 2, 3))
     print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11))
+    print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))
