@@ -284,11 +284,11 @@ class TravelItem:
 
     def get_location(self) -> str:
         """Return location."""
-        pass
+        return self.location
 
     def get_duration(self) -> int:
         """Return duration."""
-        pass
+        return self.duration
 
 
 class TravelPackage:
@@ -296,7 +296,8 @@ class TravelPackage:
 
     def __init__(self, name: str):
         """Initialize the package with the given name."""
-        pass
+        self.name = name
+        self.travel_package_items = []
 
     def create_duplicate(self, new_name: str) -> 'TravelPackage':
         """
@@ -305,19 +306,23 @@ class TravelPackage:
         The new package will be created with the new name.
         Also, all the items should be copied to the new package.
         """
-        pass
+        new_object = TravelPackage(new_name)
+        new_object.travel_package_items = self.travel_package_items.copy()
 
     def get_total_duration(self) -> int:
         """Return the total duration of travel items in the package."""
-        pass
+        total_duration = 0
+        for item in self.travel_package_items:
+            total_duration += item.duration
+        return total_duration
 
     def get_items(self) -> list[TravelItem]:
         """Return list of TravelItem objects."""
-        pass
+        return self.travel_package_items
 
     def get_name(self) -> str:
         """Return the name of the package."""
-        pass
+        return self.name
 
 
 class TravelAgency:
@@ -325,7 +330,7 @@ class TravelAgency:
 
     def __init__(self):
         """Initialize the agency."""
-        pass
+        self.agency = []
 
     def add_item_to_package(self, package_name: str, item: TravelItem) -> bool:
         """
@@ -339,7 +344,9 @@ class TravelAgency:
         The item is added to the package with the given name.
         The method returns True.
         """
-        pass
+        for package in self.agency:
+            if package.name == package_name:
+                for element in package.
 
     def get_packages(self) -> list[TravelPackage]:
         """Return list of packages in the insertion order."""
@@ -418,11 +425,11 @@ if __name__ == '__main__':
     # print(fuel_calculator(151) == 64)
     # print(fuel_calculator(-1) == 0)
     #
-    print(longest_alphabet("abc") == "abc")
-    print(longest_alphabet("abcklmn") == "klmn")
-    print(longest_alphabet("klmabcopq") == "abc")
-    print(longest_alphabet("a") == "a")
-    print(longest_alphabet("xyab") == "ab")
+    # print(longest_alphabet("abc") == "abc")
+    # print(longest_alphabet("abcklmn") == "klmn")
+    # print(longest_alphabet("klmabcopq") == "abc")
+    # print(longest_alphabet("a") == "a")
+    # print(longest_alphabet("xyab") == "ab")
     #
     # # donut examples
     #
