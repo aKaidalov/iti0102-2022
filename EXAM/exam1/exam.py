@@ -344,9 +344,10 @@ class TravelAgency:
         The item is added to the package with the given name.
         The method returns True.
         """
-        for package in self.agency:
-            if package.name == package_name:
-                for element in package.
+        # for package in self.agency:
+        #     if package.name == package_name:
+        #         for element in package.
+        pass
 
     def get_packages(self) -> list[TravelPackage]:
         """Return list of packages in the insertion order."""
@@ -402,6 +403,7 @@ class TravelAgency:
 
 
 if __name__ == '__main__':
+
     # print(count_digits("123")) #3
     # print(count_digits("a")) #0
     # print(count_digits("1aaasdsdd2dsdr45ktknt3"))
